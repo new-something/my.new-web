@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "my-new-web"
+    }
+  },
+  "defaultProject": "my-new-web",
+  "cli": {
+    "analytics": false
+  }
 }
