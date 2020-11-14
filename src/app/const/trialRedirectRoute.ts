@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
 import {Routes} from '@angular/router';
-import {RedirectGuardService} from './redirect-guard.service';
+import {RedirectLoadingComponent} from '../components/redirect-loading/redirect-loading.component';
+import {TrialRedirectGuardService} from '../services/routes/trial-redirect-guard.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TrialRouterService {
+export class TrialRedirectRoute {
+
+  private static instance: TrialRedirectRoute;
 
   private ROUTES: Routes = [
     {
       path: 'task',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://www.taskade.com/new',
         trial: true
@@ -19,8 +18,8 @@ export class TrialRouterService {
     },
     {
       path: 'mindmap',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://www.taskade.com/new/brainstorming?as=mindmap',
         trial: true
@@ -28,8 +27,8 @@ export class TrialRouterService {
     },
     {
       path: 'chart',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://live.amcharts.com/new',
         trial: true
@@ -37,8 +36,8 @@ export class TrialRouterService {
     },
     {
       path: 'note',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://quicknote.io/',
         trial: true
@@ -46,17 +45,17 @@ export class TrialRouterService {
     },
     {
       path: 'videocall',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
-        externalUrl: 'https://gotalk.to/' + TrialRouterService.uuid(),
+        externalUrl: 'https://gotalk.to/' + TrialRedirectRoute.uuid(),
         trial: true
       }
     },
     {
       path: 'videocall/:chatRoomId',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://gotalk.to/',
         trial: true
@@ -64,8 +63,8 @@ export class TrialRouterService {
     },
     {
       path: 'meeting',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://doodle.com/create',
         trial: true
@@ -73,8 +72,8 @@ export class TrialRouterService {
     },
     {
       path: 'poll',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://fast-poll.com/new',
         trial: true
@@ -82,8 +81,8 @@ export class TrialRouterService {
     },
     {
       path: 'banner',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://canva.new',
         trial: true
@@ -91,8 +90,8 @@ export class TrialRouterService {
     },
     {
       path: 'whiteboard',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://board.new',
         trial: true
@@ -100,8 +99,8 @@ export class TrialRouterService {
     },
     {
       path: 'html',
-      canActivate: [RedirectGuardService],
-      component: RedirectGuardService,
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://codesandbox.io/s/',
         trial: true
@@ -109,7 +108,14 @@ export class TrialRouterService {
     }
   ];
 
-  constructor() { }
+  private constructor() { }
+
+  public static get getInstance(): TrialRedirectRoute {
+    if (!TrialRedirectRoute.instance) {
+      TrialRedirectRoute.instance = new TrialRedirectRoute();
+    }
+    return this.instance;
+  }
 
   get trialRoutes(): Routes {
     return this.ROUTES;
