@@ -4,7 +4,8 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular
 @Injectable({
   providedIn: 'root'
 })
-export class RedirectGuardService implements CanActivate{
+export class TrialRedirectGuardService implements CanActivate{
+
   constructor() { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
