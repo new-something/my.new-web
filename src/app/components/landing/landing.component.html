@@ -1,1 +1,276 @@
-<p>landing works!</p>
+<div class="container">
+  <header class="page-header">
+    <div class="page-header-brand logo">
+      <img src="../../../assets/logo.svg" alt="logo"/><span class="logo-title"
+    >my.new</span
+    >
+    </div>
+    <div class="page-header-navi">
+      <div class="page-header-navi-items">
+        <button data-feedback-fish class="navi-item">
+          Give us feedbacks
+        </button>
+        <!-- 로그인 한 경우 data-feedback-fish-userid 를 attribute에 추가한다. -->
+        <!-- <button data-feedback-fish data-feedback-fish-userid="유저아이디" class="navi-item">
+          Give us feedbacks
+        </button> -->
+        <a href="" class="navi-item">Help</a>
+        <div id="buttonSignIn" class="btn">
+          <img
+            src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/key_1f511.png"
+            alt="sign in emoji"
+          />
+          <span>
+                Sign In
+              </span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="page-body">
+    <div class="section section-cta">
+      <h1>
+        .new
+        <span>,</span>
+        <br/>
+        <span>
+              but it’s a personalized <br/>
+              action-based URL for everyone.
+            </span>
+      </h1>
+      <p>
+        Now, You don't need to rummage the unorganized bookmarks menu <br/>
+        or try to remember long and unmemorizable URLs.
+      </p>
+      <div id="buttonCTA" class="btn btn-primary">
+        Create my own shortcuts <span>→</span>
+      </div>
+      <div class="img-hero">image</div>
+    </div>
+    <div class="section section-trial">
+      <h2>Try first.</h2>
+      <p>
+        Click the 'Open in new tab' button <span>or</span> Write the URL
+        below into your address bar.
+      </p>
+      <div class="try-shortcuts">
+        <div class="shortcut-url">
+          <div class="shortcut-url-host">
+            <img src="../../../assets/ico-lock.svg" alt="https"/>
+            <span>my.new/</span>
+          </div>
+          <div id="trialShortcutKeyword" class="shortcut-url-keyword">
+            <div id="sheetShortcut" class="shortcut-vars active">
+              <img src="../../../assets/ico-app-gsheet.svg" alt="spreadsheet"/>
+              <span>sheet</span>
+            </div>
+            <div id="pyShortcut" class="shortcut-vars">
+              <img src="../../../assets/ico-python.svg" alt="python"/>
+              <span>py</span>
+            </div>
+            <div id="boardShortcut" class="shortcut-vars">
+              <img src="./images/ico-crayon.png" alt="whiteboard"/>
+              <span>board</span>
+            </div>
+            <div id="videocallShortcut" class="shortcut-vars">
+              <img src="./images/ico-video.png" alt="video call"/>
+              <span>videocall</span>
+            </div>
+          </div>
+        </div>
+        <a
+          id="buttonOpenInNewTab"
+          href="https://my.new/sheet"
+          target="_blank"
+          class="btn btn-function"
+        >
+          Open in new tab
+        </a>
+      </div>
+      <form name="shortcutTrial" class="btn-group">
+        <input
+          id="buttonOpenGSheet"
+          type="radio"
+          value="sheet"
+          name="shortcutApp"
+          checked
+        />
+        <label for="buttonOpenGSheet">
+          <img
+            src="../../../assets/ico-app-gsheet.svg"
+            alt="spreadsheet"
+            width="24"
+          />
+          spreadsheet
+        </label>
+        <input
+          id="buttonOpenPython"
+          type="radio"
+          value="py"
+          name="shortcutApp"
+        />
+        <label for="buttonOpenPython">
+          <img src="../../../assets/ico-python.svg" alt="python" width="24"/>
+          python
+        </label>
+        <input
+          id="buttonOpenBoard"
+          type="radio"
+          value="board"
+          name="shortcutApp"
+        />
+        <label for="buttonOpenBoard">
+          <img src="./images/ico-crayon.png" alt="board" width="24"/>
+          whiteboard
+        </label>
+        <input
+          id="buttonOpenVideoCall"
+          type="radio"
+          value="videocall"
+          name="shortcutApp"
+        />
+        <label for="buttonOpenVideoCall">
+          <img src="./images/ico-video.png" alt="board" width="24"/>
+          videocall
+        </label>
+      </form>
+    </div>
+    <div class="section section-youcando">
+      <h2>You can do.</h2>
+      <div class="content-columns">
+        <div class="column-2 content-image">
+          <img
+            src="../../../assets/img-youcando.svg"
+            alt="your own shortcuts"
+            width="190"
+          />
+        </div>
+        <div class="column-2 content-text">
+          <h3>
+            Less clicking, more creating with your favorite apps.
+          </h3>
+          <p>
+            Write a note, book a meeting, edit pictures for instagram, and
+            talk with colleagues via a video call - Do your favorite actions
+            directly on this browser with your URL shortcuts.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="section section-howtouse">
+      <h2>How to use.</h2>
+      <div class="content-columns">
+        <div class="column-3">
+          <div class="badge-number">1</div>
+          <div class="img-frame">
+            <img
+              src="../../../assets/img-howto01.svg"
+              alt="connect an app"
+              width="167"
+            />
+          </div>
+          <h4>
+            Connect an app
+          </h4>
+          <p>
+            Connect your favorite app. You can add the creating action of
+            the app to your dashboard.
+          </p>
+        </div>
+        <div class="column-3">
+          <div class="badge-number">2</div>
+          <div class="img-frame">
+            <img
+              src="../../../assets/img-howto02.svg"
+              alt="set a shorcut"
+              width="75"
+            />
+          </div>
+          <h4>
+            Set a shortcut
+          </h4>
+          <p>
+            Set a simple word for calling the action of the app you
+            connected by URL shortcut.
+          </p>
+        </div>
+        <div class="column-3">
+          <div class="badge-number">3</div>
+          <div class="img-frame">
+            <img
+              src="../../../assets/img-howto03.svg"
+              alt="run a shortcut"
+              width="180"
+            />
+          </div>
+          <h4>
+            Run your shortcut
+          </h4>
+          <p>
+            Type the URL shortcut (my.new/...) into the address bar of your
+            web browser.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="section section-whywebuilt">
+      <h2>Why we built.</h2>
+      <div class="img-frame">
+        <img
+          src="./images/img-googlenew.png"
+          alt="google .new"
+          width="230"
+        />
+      </div>
+      <a href="https://whats.new" target="_blank" class="link-outer"
+      >Go to Google's whats.new website
+        <span><img src="../../../assets/logo.svg" alt="outlink" width="12"/></span
+        ></a>
+      <p>
+        <strong>.new</strong> is google's brand new domain extension, which
+        focuses on creating something new online.<br/><br/>
+        We love the idea of expanding the value of the web, also expecting
+        more great products will join it.<br/><br/>
+        However, due to the domain name system's structural restriction,
+        this .new extension has a limitation in which the name's owner can
+        easily monopolize user-favorite actions like play, create, note,
+        etc.<br/><br/>
+        It's a useful corporate branding tool. But we wanted to develop this
+        idea in more user-centric and practical ways, even while keeping its
+        original philosophy.
+      </p>
+    </div>
+  </div>
+  <footer class="page-footer">
+    <div class="page-footer-brand logo">
+      <img src="../../../assets/logo.svg" alt="logo"/><span class="logo-title"
+    >my.new</span
+    >
+    </div>
+    <ul>
+      <li><a href="">Terms of Service</a></li>
+      <li><a href="">Privacy Policy</a></li>
+      <li><a href="">Contact Us</a></li>
+    </ul>
+  </footer>
+</div>
+<script>
+  // 라디오 버튼 누를 시 인터랙션 샘플 코드
+  const radios = document.shortcutTrial.shortcutApp;
+  var prev = radios[0];
+  for (var i = 0; i < radios.length; i++) {
+    radios[i].addEventListener("change", function () {
+      let removalTarget = document.getElementById(prev.value + "Shortcut");
+      removalTarget.classList.remove("active");
+      if (this !== prev) {
+        prev = this;
+      }
+      let addableTarget = document.getElementById(this.value + "Shortcut");
+      addableTarget.classList.add("active");
+      var link = document.getElementById("buttonOpenInNewTab");
+      link.href = "https://my.new/" + this.value;
+    });
+  }
+</script>
+<!-- 피드백 수집 툴 샘플 -->
+<script defer src="https://feedback.fish/ff.js?pid=7540e1b055cb6a"></script>
