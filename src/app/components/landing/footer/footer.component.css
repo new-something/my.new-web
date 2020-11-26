@@ -1,0 +1,55 @@
+/** Page Footer **/
+.page-footer {
+  width: 680px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 120px;
+  color: #bbb;
+  margin: 0 auto;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.page-footer .page-footer-brand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page-footer-brand img {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+
+.page-footer-brand .logo-title {
+  font-size: 1.33rem;
+  line-height: 1.77rem;
+}
+
+.page-footer ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.88rem;
+  list-style: none;
+}
+
+.page-footer li {
+  margin-left: 20px;
+}
+
+.page-footer a:active {
+  color: #aaa;
+}

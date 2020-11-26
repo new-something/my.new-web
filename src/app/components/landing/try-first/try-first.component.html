@@ -1,0 +1,92 @@
+<div class="section section-trial">
+  <h2>Try first.</h2>
+  <p>
+    Click the 'Open in new tab' button <span>or</span> Write the URL
+    below into your address bar.
+  </p>
+  <div class="try-shortcuts">
+    <div class="shortcut-url">
+      <div class="shortcut-url-host">
+        <img src="../../../../assets/ico-lock.svg" alt="https"/>
+        <span>my.new/</span>
+      </div>
+      <div id="trialShortcutKeyword" class="shortcut-url-keyword">
+        <div id="sheetShortcut" class="shortcut-vars active" >
+          <img src="../../../../assets/ico-app-gsheet.svg" alt="spreadsheet"/>
+          <span>sheet</span>
+        </div>
+        <div id="pyShortcut" class="shortcut-vars">
+          <img src="../../../../assets/ico-python.svg" alt="python"/>
+          <span>py</span>
+        </div>
+        <div id="boardShortcut" class="shortcut-vars">
+          <img src="../../../../assets/ico-crayon.png" alt="whiteboard"/>
+          <span>board</span>
+        </div>
+        <div id="videocallShortcut" class="shortcut-vars">
+          <img src="../../../../assets/ico-video.png" alt="video call"/>
+          <span>videocall</span>
+        </div>
+      </div>
+    </div>
+    <a
+      id="buttonOpenInNewTab"
+      href="https://my.new/sheet"
+      target="_blank"
+      class="btn btn-function"
+    >
+      Open in new tab
+    </a>
+  </div>
+  <form name="shortcutTrial" class="btn-group">
+    <input
+      id="buttonOpenGSheet"
+      type="radio"
+      value="sheet"
+      name="shortcutApp"
+      checked
+      (click)="changeTryTarget($event, 'sheetShortcut')"
+    />
+    <label for="buttonOpenGSheet">
+      <img
+        src="../../../../assets/ico-app-gsheet.svg"
+        alt="spreadsheet"
+        width="24"
+      />
+      spreadsheet
+    </label>
+    <input
+      id="buttonOpenPython"
+      type="radio"
+      value="py"
+      name="shortcutApp"
+      (click)="changeTryTarget($event, 'pyShortcut')"
+    />
+    <label for="buttonOpenPython">
+      <img src="../../../../assets/ico-python.svg" alt="python" width="24"/>
+      python
+    </label>
+    <input
+      id="buttonOpenBoard"
+      type="radio"
+      value="board"
+      name="shortcutApp"
+      (click)="changeTryTarget($event, 'boardShortcut')"
+    />
+    <label for="buttonOpenBoard">
+      <img src="../../../../assets/ico-crayon.png" alt="board" width="24"/>
+      whiteboard
+    </label>
+    <input
+      id="buttonOpenVideoCall"
+      type="radio"
+      value="videocall"
+      name="shortcutApp"
+      (click)="changeTryTarget($event, 'videocallShortcut')"
+    />
+    <label for="buttonOpenVideoCall">
+      <img src="../../../../assets/ico-video.png" alt="board" width="24"/>
+      videocall
+    </label>
+  </form>
+</div>
