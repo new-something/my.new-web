@@ -16,7 +16,7 @@ export class TryFirstComponent implements OnInit {
     const value = $event.target.value;
 
     const link = document.getElementById('buttonOpenInNewTab');
-    link.setAttribute('href', 'https://my.new/' + value);
+    link.setAttribute('href', '/' + value);
     const childNodes = Array.from(document.getElementById('trialShortcutKeyword').children);
     for (const child of childNodes) {
       if (child.id === addClassTargetId) {

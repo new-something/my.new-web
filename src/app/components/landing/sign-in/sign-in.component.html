@@ -9,21 +9,22 @@
         />
         &nbsp;Sign In
       </div>
-      <div class="btn btn-close" onclick="togglePopup(signinPopup)">
-        <img src="../../../assets/ico-close.svg" alt="close" width="16" />
+      <div class="btn btn-close" (click)="showLogin()">
+        <img src="../../../../assets/ico-close.svg" alt="close" width="16" />
       </div>
     </div>
     <div class="popup-body">
       <div class="signin-banner"></div>
       <div class="signin-buttons">
-        <div class="btn btn-signin-github">
-          <img src="../../../assets/ico-app-github.svg" alt="github" width="32" />
+        <div class="btn btn-signin-github" (click)="signInByGithub()">
+          <img src="../../../../assets/ico-app-github.svg" alt="github" width="32" />
           Sign in with Github Account
         </div>
-        <div class="btn btn-signin-google">
+        <!--   구글 로그인은 도메인 연동 후에 작업한다.     -->
+        <!--<div class="btn btn-signin-google">
           <img src="../../../assets/ico-app-google.svg" alt="google" width="32" />
           Sign in with Google Account
-        </div>
+        </div>-->
       </div>
       <div class="signin-policies">
         By signing in, you agree to our <a href="">terms of service</a> and
