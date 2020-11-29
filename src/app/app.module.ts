@@ -28,16 +28,16 @@ const routes: Routes = [
     component: LandingComponent
   },
   {
-    path: '/s/github',
+    path: 's/github',
     component: GithubSignInComponent
   },
   {
-    path: '/u/list',
+    path: 'u/list',
     canActivate: [AuthGuardService],
     component: MyCommandListComponent
   },
   {
-    path: '/u/dashboard',
+    path: 'u/dashboard',
     canActivate: [AuthGuardService],
     component: DashboardComponent
   },
