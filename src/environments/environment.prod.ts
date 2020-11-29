@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  userService: ''
+  userService: 'http://13.125.238.130:8080'
 };
