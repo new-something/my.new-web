@@ -76,7 +76,8 @@
   color: #666;
 }
 
-.page-header-navi div#buttonSignIn {
+.page-header-navi div#buttonSignIn,
+.page-header-navi div#buttonLogOut{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,12 +87,14 @@
   padding: 0 15px;
 }
 
-.page-header-navi div#buttonSignIn img {
+.page-header-navi div#buttonSignIn img,
+.page-header-navi div#buttonLogOut img{
   width: 16px;
   height: 16px;
   margin-right: 8px;
 }
 
-.page-header-navi div#buttonSignIn span {
+.page-header-navi div#buttonSignIn span,
+.page-header-navi div#buttonLogOut span{
   line-height: 42px;
 }

@@ -12,10 +12,15 @@
         Give us feedbacks
       </button> -->
       <a href="" class="navi-item">Help</a>
-      <div id="buttonSignIn" class="btn">
+      <div id="buttonSignIn" class="btn" (click)="showLogin()" *ngIf="!isLogin">
         <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/key_1f511.png"
              alt="sign in emoji"/>
         <span>Sign In</span>
+      </div>
+      <div id="buttonLogOut" class="btn" (click)="logout()" *ngIf="isLogin">
+        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/key_1f511.png"
+             alt="sign in emoji"/>
+        <span>Log out</span>
       </div>
     </div>
   </div>

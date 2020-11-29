@@ -89,7 +89,7 @@ export class TrialRedirectRoute {
       }
     },
     {
-      path: 'whiteboard',
+      path: 'board',
       canActivate: [TrialRedirectGuardService],
       component: RedirectLoadingComponent,
       data: {
@@ -103,6 +103,24 @@ export class TrialRedirectRoute {
       component: RedirectLoadingComponent,
       data: {
         externalUrl: 'https://codesandbox.io/s/',
+        trial: true
+      }
+    },
+    {
+      path: 'sheet',
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
+      data: {
+        externalUrl: 'https://docs.google.com/spreadsheets',
+        trial: true
+      }
+    },
+    {
+      path: 'py',
+      canActivate: [TrialRedirectGuardService],
+      component: RedirectLoadingComponent,
+      data: {
+        externalUrl: 'https://repl.it/repls/BountifulNeatPackagedsoftware#main.py',
         trial: true
       }
     }
