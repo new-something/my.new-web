@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+import {JwtModule} from '@auth0/angular-jwt';
 
 import {AppComponent} from './app.component';
 import {TrialRedirectRoute} from './const/trialRedirectRoute';
@@ -28,16 +28,16 @@ const routes: Routes = [
     component: LandingComponent
   },
   {
-    path: 's/github',
+    path: '/s/github',
     component: GithubSignInComponent
   },
   {
-    path: 'u/list',
+    path: '/u/list',
     canActivate: [AuthGuardService],
     component: MyCommandListComponent
   },
   {
-    path: 'u/dashboard',
+    path: '/u/dashboard',
     canActivate: [AuthGuardService],
     component: DashboardComponent
   },
