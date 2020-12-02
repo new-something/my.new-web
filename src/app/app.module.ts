@@ -21,6 +21,7 @@ import {WhyWeBuiltComponent} from './components/landing/why-we-built/why-we-buil
 import {FooterComponent} from './components/global/footer/footer.component';
 import {SignInComponent} from './components/landing/sign-in/sign-in.component';
 import {GithubSignInComponent} from './components/global/github-sign-in/github-sign-in.component';
+import { ShortcutComponent } from './components/dashboard/shortcut/shortcut.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,7 @@ const routes: Routes = [
     WhyWeBuiltComponent,
     FooterComponent,
     GithubSignInComponent,
+    ShortcutComponent,
   ],
   imports: [
     BrowserModule,
