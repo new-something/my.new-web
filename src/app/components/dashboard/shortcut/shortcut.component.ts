@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ConnectedApplication} from './ConnectedApplication';
 
 @Component({
   selector: 'app-shortcut',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shortcut.component.css']
 })
 export class ShortcutComponent implements OnInit {
+
+  connectedApplications: ConnectedApplication[] = [];
 
   constructor() { }
 

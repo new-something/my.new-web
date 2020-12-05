@@ -22,6 +22,8 @@ import {FooterComponent} from './components/global/footer/footer.component';
 import {SignInComponent} from './components/landing/sign-in/sign-in.component';
 import {GithubSignInComponent} from './components/global/github-sign-in/github-sign-in.component';
 import { ShortcutComponent } from './components/dashboard/shortcut/shortcut.component';
+import { ConnectedAppComponent } from './components/dashboard/shortcut/connected-app/connected-app.component';
+import { MyShortcutComponent } from './components/dashboard/shortcut/my-shortcut/my-shortcut.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,8 @@ const routes: Routes = [
     FooterComponent,
     GithubSignInComponent,
     ShortcutComponent,
+    ConnectedAppComponent,
+    MyShortcutComponent,
   ],
   imports: [
     BrowserModule,
