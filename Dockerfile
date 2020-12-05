@@ -10,4 +10,4 @@ RUN ng build --prod
 
 # Stage 2
 FROM nginx:1.19.2-alpine
-COPY --from=build-step /app/dist/angular-docker-aws /usr/share/nginx/html
+COPY --from=build-step /app/dist/my-new-web /usr/share/nginx/html
