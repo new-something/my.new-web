@@ -17,6 +17,6 @@ export class SignInComponent implements OnInit {
   }
 
   signInByGithub(): void{
-    window.open('https://github.com/login/oauth/authorize?scope=read:user&client_id=2a433252e03305352ce2', '_parent');
+    window.open('https://github.com/login/oauth/authorize?scope=read:user&client_id=6d91f0584d549619c938', '_parent');
   }
 }
