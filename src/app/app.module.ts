@@ -6,7 +6,6 @@ import {CookieService} from 'ngx-cookie-service';
 import {JwtModule} from '@auth0/angular-jwt';
 
 import {AppComponent} from './app.component';
-import {TrialRedirectRoute} from './const/trialRedirectRoute';
 import {RedirectLoadingComponent} from './components/redirect-loading/redirect-loading.component';
 import {LandingComponent} from './components/landing/landing.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
@@ -21,9 +20,9 @@ import {WhyWeBuiltComponent} from './components/landing/why-we-built/why-we-buil
 import {FooterComponent} from './components/global/footer/footer.component';
 import {SignInComponent} from './components/landing/sign-in/sign-in.component';
 import {GithubSignInComponent} from './components/global/github-sign-in/github-sign-in.component';
-import { ShortcutComponent } from './components/dashboard/shortcut/shortcut.component';
-import { ConnectedAppComponent } from './components/dashboard/shortcut/connected-app/connected-app.component';
-import { MyShortcutComponent } from './components/dashboard/shortcut/my-shortcut/my-shortcut.component';
+import {ShortcutComponent} from './components/dashboard/shortcut/shortcut.component';
+import {ConnectedAppComponent} from './components/dashboard/shortcut/connected-app/connected-app.component';
+import {MyShortcutComponent} from './components/dashboard/shortcut/my-shortcut/my-shortcut.component';
 
 const routes: Routes = [
   {
@@ -43,8 +42,7 @@ const routes: Routes = [
     path: 'u/dashboard',
     canActivate: [AuthGuardService],
     component: DashboardComponent
-  },
-  ...TrialRedirectRoute.getInstance.trialRoutes
+  }
 ];
 
 @NgModule({
