@@ -7,18 +7,12 @@ import {JwtModule} from '@auth0/angular-jwt';
 
 import {AppComponent} from './app.component';
 import {RedirectLoadingComponent} from './components/redirect-loading/redirect-loading.component';
-import {LandingComponent} from './components/landing/landing.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {HowToUseComponent} from './components/dashboard/how-to-use/how-to-use.component';
 import {MyCommandListComponent} from './components/my-command-list/my-command-list.component';
 import {AuthGuardService} from './services/auth/auth-guard.service';
-import {TryFirstComponent} from './components/landing/try-first/try-first.component';
 import {HeaderComponent} from './components/global/header/header.component';
-import {CtaComponent} from './components/landing/cta/cta.component';
-import {YouCanDoComponent} from './components/landing/you-can-do/you-can-do.component';
-import {HowToUseComponent} from './components/landing/how-to-use/how-to-use.component';
-import {WhyWeBuiltComponent} from './components/landing/why-we-built/why-we-built.component';
 import {FooterComponent} from './components/global/footer/footer.component';
-import {SignInComponent} from './components/landing/sign-in/sign-in.component';
 import {GithubSignInComponent} from './components/global/github-sign-in/github-sign-in.component';
 import {ShortcutComponent} from './components/dashboard/shortcut/shortcut.component';
 import {ConnectedAppComponent} from './components/dashboard/shortcut/connected-app/connected-app.component';
@@ -27,7 +21,7 @@ import {MyShortcutComponent} from './components/dashboard/shortcut/my-shortcut/m
 const routes: Routes = [
   {
     path: '',
-    component: LandingComponent
+    component: RedirectLoadingComponent
   },
   {
     path: 's/github',
@@ -49,16 +43,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     RedirectLoadingComponent,
-    SignInComponent,
-    LandingComponent,
     DashboardComponent,
-    MyCommandListComponent,
-    TryFirstComponent,
-    HeaderComponent,
-    CtaComponent,
-    YouCanDoComponent,
     HowToUseComponent,
-    WhyWeBuiltComponent,
+    MyCommandListComponent,
+    HeaderComponent,
     FooterComponent,
     GithubSignInComponent,
     ShortcutComponent,
