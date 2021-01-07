@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   isLogin: boolean;
+  routerUrl = environment.router;
 
   constructor(public authService: AuthService, private router: Router) { }
 
@@ -22,8 +24,8 @@ export class HeaderComponent implements OnInit {
 
   logout(): void{
     localStorage.removeItem('my-new-a');
-    this.router.navigate(['']).catch(err => console.log(err));
     this.isLogin = false;
+    window.location.href = this.routerUrl;
   }
 
   checkLoginStatus(): void {

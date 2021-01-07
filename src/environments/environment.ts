@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  router: 'http://localhost:4200',
   userService: 'http://localhost:8080',
   appService: 'http://localhost:9090'
 };

@@ -9,13 +9,16 @@ import {Router} from '@angular/router';
 })
 export class RedirectLoadingComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
+    console.log('what');
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['u/dashboard']).catch(e => console.log(e));
-    } else {
-      window.location.href = 'https://github.com/login/oauth/authorize?scope=read:user&client_id=6d91f0584d549619c938';
     }
+
+    window.location.href = 'https://github.com/login/oauth/authorize?scope=read:user&client_id=6d91f0584d549619c938';
+
   }
 }

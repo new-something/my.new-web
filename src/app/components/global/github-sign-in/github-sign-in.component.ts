@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {environment} from '../../../../environments/environment';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-github-sign-in',
@@ -14,7 +15,8 @@ export class GithubSignInComponent implements OnInit {
   private userService: string = environment.userService;
 
   constructor(private httpClient: HttpClient, private route: ActivatedRoute,
-              private jwtHelperService: JwtHelperService, private router: Router) {
+              private jwtHelperService: JwtHelperService, private router: Router,
+              private cookieService: CookieService) {
   }
 
   ngOnInit(): void {
@@ -31,6 +33,8 @@ export class GithubSignInComponent implements OnInit {
   getJwt(accessToken: string): void {
     this.httpClient.get<LoginCompleteResponse>(this.userService + '/github/login/complete?accessToken=' + accessToken).toPromise()
       .then(resp => {
+        console.log(resp.jwt);
+        this.cookieService.set('my-new-a', 'testvalue', {domain: 'localhost:4300'});
         localStorage.setItem('my-new-a', resp.jwt);
         this.router.navigate(['u/dashboard']).catch(err => console.log(err));
       })
