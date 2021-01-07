@@ -11,7 +11,6 @@ import {CookieService} from 'ngx-cookie-service';
   styleUrls: ['./github-sign-in.component.css']
 })
 export class GithubSignInComponent implements OnInit {
-  private code: string;
   private userService: string = environment.userService;
 
   constructor(private httpClient: HttpClient, private route: ActivatedRoute,
@@ -20,10 +19,19 @@ export class GithubSignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let code = '';
+    let error = '';
     this.route.queryParams.subscribe(params => {
-      this.code = '' + params.code;
+      code = '' + params.code;
+      error = params.error;
     });
-    this.httpClient.get<GithubAccessToken>(this.userService + '/github/access-token?code=' + this.code).toPromise()
+
+    if (error !== '') {
+      this.router.navigate(['']).catch(e => console.log(e));
+      return;
+    }
+
+    this.httpClient.get<GithubAccessToken>(this.userService + '/github/access-token?code=' + code).toPromise()
       .then(resp => {
         this.getJwt(resp.access_token);
       })

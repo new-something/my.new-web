@@ -19,6 +19,5 @@ export class RedirectLoadingComponent implements OnInit {
     }
 
     window.location.href = 'https://github.com/login/oauth/authorize?scope=read:user&client_id=6d91f0584d549619c938';
-
   }
 }
