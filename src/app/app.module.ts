@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
 import {JwtModule} from '@auth0/angular-jwt';
 
 import {AppComponent} from './app.component';
@@ -65,7 +64,7 @@ const routes: Routes = [
       },
     })
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

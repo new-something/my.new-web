@@ -14,7 +14,12 @@ export class RedirectLoadingComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('what');
-    if (this.authService.isAuthenticated()) {
+    let authenticated = false;
+    this.authService.isAuthenticated().subscribe(auth => {
+      authenticated = auth;
+    });
+
+    if (authenticated) {
       this.router.navigate(['u/dashboard']).catch(e => console.log(e));
     }
 
