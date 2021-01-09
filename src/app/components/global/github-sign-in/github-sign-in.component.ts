@@ -25,16 +25,11 @@ export class GithubSignInComponent implements OnInit {
       error = params.error;
     });
 
-    // if (error !== '') {
-    //   window.location.href = this.routerUrl;
-    //   return;
-    // }
-
     this.httpClient.get<LoginCompleteResponse>(this.userService + '/github/login/complete?code=' + code).toPromise()
       .then(resp => {
         console.log(resp.jwt);
         localStorage.setItem('my-new-a', resp.jwt);
-        document.cookie = 'my-new-a=' + resp.jwt + ';domain=amplifyapp.com';
+        document.cookie = 'my-new-a=' + resp.jwt + ';domain=amazonaws.com';
         console.log('cookie 가 set 되어야 된다구...');
         this.router.navigate(['u/dashboard']).catch(err => console.log(err));
       })
