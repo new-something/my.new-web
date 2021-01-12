@@ -29,7 +29,7 @@ export class GithubSignInComponent implements OnInit {
       .then(resp => {
         console.log(resp.jwt);
         localStorage.setItem('my-new-a', resp.jwt);
-        document.cookie = 'my-new-a=' + resp.jwt + ';domain=amazonaws.com';
+        document.cookie = 'my-new-a=' + resp.jwt;
         console.log('cookie 가 set 되어야 된다구...');
         this.router.navigate(['u/dashboard']).catch(err => console.log(err));
       })
