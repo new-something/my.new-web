@@ -59,7 +59,7 @@ const routes: Routes = [
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem('token');
+          return localStorage.getItem('my-new-a');
         }
       },
     })
