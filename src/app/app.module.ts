@@ -12,7 +12,6 @@ import {MyCommandListComponent} from './components/my-command-list/my-command-li
 import {AuthGuardService} from './services/auth/auth-guard.service';
 import {HeaderComponent} from './components/global/header/header.component';
 import {FooterComponent} from './components/global/footer/footer.component';
-import {GithubSignInComponent} from './components/global/github-sign-in/github-sign-in.component';
 import {ShortcutComponent} from './components/dashboard/shortcut/shortcut.component';
 import {ConnectedAppComponent} from './components/dashboard/shortcut/connected-app/connected-app.component';
 import {MyShortcutComponent} from './components/dashboard/shortcut/my-shortcut/my-shortcut.component';
@@ -21,10 +20,6 @@ const routes: Routes = [
   {
     path: '',
     component: RedirectLoadingComponent
-  },
-  {
-    path: 's/github',
-    component: GithubSignInComponent
   },
   {
     path: 'u/list',
@@ -47,7 +42,6 @@ const routes: Routes = [
     MyCommandListComponent,
     HeaderComponent,
     FooterComponent,
-    GithubSignInComponent,
     ShortcutComponent,
     ConnectedAppComponent,
     MyShortcutComponent,
