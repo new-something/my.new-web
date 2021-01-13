@@ -13,7 +13,6 @@ export class RedirectLoadingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('what');
     let authenticated = false;
     this.authService.isAuthenticated().subscribe(auth => {
       authenticated = auth;
