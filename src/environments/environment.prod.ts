@@ -4,5 +4,5 @@ export const environment = {
   router: 'https://my.new',
   singleSignOut: 'http://my.new/s/logout',
   userService: 'https://user.my.new',
-  appService: 'http://13.125.238.130:9090'
+  appService: 'https://app.my.new'
 };
