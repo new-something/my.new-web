@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 
 import {AppComponent} from './app.component';
@@ -15,6 +15,7 @@ import {FooterComponent} from './components/global/footer/footer.component';
 import {ShortcutComponent} from './components/dashboard/shortcut/shortcut.component';
 import {ConnectedAppComponent} from './components/dashboard/shortcut/connected-app/connected-app.component';
 import {MyShortcutComponent} from './components/dashboard/shortcut/my-shortcut/my-shortcut.component';
+import {AuthInterceptor} from './interceptors/auth/auth.interceptor';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     component: DashboardComponent
   }
+];
+
+/** Http interceptor providers in outside-in order */
+export const httpInterceptorProviders = [
+  {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
 ];
 
 @NgModule({
@@ -58,7 +64,7 @@ const routes: Routes = [
       },
     })
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
