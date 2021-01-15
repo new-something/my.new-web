@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ConnectedApplication} from '../ConnectedApplication';
+import {ConnectedApp} from '../../../../models/connected-app';
 
 @Component({
   selector: 'app-connected-app',
@@ -8,11 +8,13 @@ import {ConnectedApplication} from '../ConnectedApplication';
 })
 export class ConnectedAppComponent implements OnInit {
   @Input()
-  connectedApplication: ConnectedApplication;
+  connectedApp: ConnectedApp;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log('ConnectedAppComponent! Init!');
+    console.log(this.connectedApp);
   }
 
 }

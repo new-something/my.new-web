@@ -1,7 +1,9 @@
 <div class="container">
   <app-header></app-header>
   <div class="page-body">
-    <app-shortcut></app-shortcut>
+    <app-shortcut [connectedApps]="myInfo.connectedApps"
+                  [shortcuts]="myInfo.shortcuts"
+                  [urlRedirections]="myInfo.urlRedirections"></app-shortcut>
     <app-how-to-use></app-how-to-use>
   </div>
   <app-footer></app-footer>
