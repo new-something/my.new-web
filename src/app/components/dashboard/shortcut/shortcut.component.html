@@ -5,11 +5,10 @@
 <div class="section section-apps">
   <h2>Connected Apps</h2>
   <section class="list-apps">
-    <div class="ico-app">
-      <img *ngFor="let ca of connectedApps"
-           src="/assets/{{ca.appIcon}}" width="48"
-           title="{{ca.appName}}"
-           alt="{{ca.appName}}"/>
+    <div class="ico-app is-connected" *ngFor="let ca of connectedApps">
+      <img src="/assets/{{ca?.appIcon}}" width="48"
+           title="{{ca?.appName}}"
+           alt="{{ca?.appName}}"/>
     </div>
     <div class="btn ico-app add-new">
       <img src="../../../../assets/ico-plus.svg" alt="add" width="16" />
