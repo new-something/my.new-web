@@ -5,9 +5,12 @@
 <div class="section section-apps">
   <h2>Connected Apps</h2>
   <section class="list-apps">
-    <app-connected-app *ngFor="let ca of connectedApps"
-                       [connectedApp]="ca">
-    </app-connected-app>
+    <div class="ico-app">
+      <img *ngFor="let ca of connectedApps"
+           src="/assets/{{ca.appIcon}}" width="48"
+           title="{{ca.appName}}"
+           alt="{{ca.appName}}"/>
+    </div>
     <div class="btn ico-app add-new">
       <img src="../../../../assets/ico-plus.svg" alt="add" width="16" />
     </div>
@@ -19,7 +22,7 @@
   <h2>My Shortcuts</h2>
   <!-- Shortcuts List -->
   <div class="list-shortcuts">
-    <app-my-shortcut></app-my-shortcut>
+
   </div>
   <!-- Shortcuts List 상태: Empty -->
   <div class="list-shortcuts-empty">

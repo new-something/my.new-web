@@ -13,8 +13,6 @@ import {AuthGuardService} from './services/auth/auth-guard.service';
 import {HeaderComponent} from './components/global/header/header.component';
 import {FooterComponent} from './components/global/footer/footer.component';
 import {ShortcutComponent} from './components/dashboard/shortcut/shortcut.component';
-import {ConnectedAppComponent} from './components/dashboard/shortcut/connected-app/connected-app.component';
-import {MyShortcutComponent} from './components/dashboard/shortcut/my-shortcut/my-shortcut.component';
 import {AuthInterceptor} from './interceptors/auth/auth.interceptor';
 
 const routes: Routes = [
@@ -49,8 +47,6 @@ export const httpInterceptorProviders = [
     HeaderComponent,
     FooterComponent,
     ShortcutComponent,
-    ConnectedAppComponent,
-    MyShortcutComponent,
   ],
   imports: [
     BrowserModule,
