@@ -1,18 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
 html {
-  font-size: 16px;
+  font-size: 18px;
 }
 
-@media screen and (min-width: 320px) {
-  html {
-    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  html {
-    font-size: 18px;
-  }
+bohtml {
+  font-size: 18px;
 }
 
 body * {
@@ -62,8 +53,22 @@ p {
 }
 
 a {
+  text-decoration: underline;
+  color: #000000;
+}
+a.btn,
+a .btn {
   text-decoration: none;
-  color: inherit;
+}
+
+[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: #bbb;
+}
+
+[data-placeholder]:focus:empty:before {
+  content: attr(data-placeholder);
+  color: #aaa;
 }
 
 .container {
@@ -79,34 +84,13 @@ a {
   margin: 0 auto;
 }
 
-.section h2,
+.section h2 {
+  margin-bottom: 20px;
+}
+
 .section h3,
 .section h4 {
   margin-bottom: 6px;
-}
-
-.btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn:active {
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  background-color: #f8f8f8;
 }
 
 .content-columns {
@@ -134,13 +118,81 @@ a {
   margin-bottom: 10px;
 }
 
-.btn-primary {
-  color: white;
-  background-color: #0066ff;
+.btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.btn-primary:active {
-  background-color: #0056d6;
+.btn:active {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #f8f8f8;
+  -webkit-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.15);
+}
+
+.btn.is-disabled {
+  color: #eee;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn-primary,
+.btn-save {
+  color: white;
+  background-color: #000000;
+}
+
+.btn-save svg {
+  fill: white;
+}
+
+.btn-primary:active,
+.btn-save:active {
+  background-color: #000000;
+}
+
+.btn-save.is-disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.btn-save.is-disabled svg {
+  fill: black;
+  opacity: 0.4;
+}
+
+.btn-save.is-disabled:active {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.btn-save.is-disabled svg {
+  fill: black;
+  opacity: 0.2;
+}
+
+.btn-delete {
+  color: white;
+  background-color: #f95353;
+}
+
+.btn-delete:active {
+  background-color: #d13a3a;
 }
 
 .badge-number {
@@ -180,4 +232,62 @@ a {
   background-color: #f8f8f8;
   margin: 15px 0;
   padding: 8%;
+}
+
+a.link-outer {
+  font-family: "poppins", sans-serif;
+  font-weight: bold;
+  font-size: 0.88rem;
+  color: #000000;
+}
+
+a.link-outer:active {
+  color: #111111;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 팝업 공통 */
+
+.popup-overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+}
+
+.popup-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-family: "poppins", sans-serif;
+  font-size: 1.33rem;
+  font-weight: bold;
+  line-height: 70px;
+  padding: 0 20px;
+}
+
+.popup-header .btn-close {
+  width: 42px;
+  height: 42px;
 }
