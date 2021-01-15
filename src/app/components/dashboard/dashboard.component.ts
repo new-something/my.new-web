@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.myInfoService.myInfo().subscribe((data) => {
       console.log(data);
+      this.myInfo = data;
     });
   }
 
