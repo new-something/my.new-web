@@ -1,3 +1,46 @@
+/* 팝업 공통 */
+
+.popup-overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+}
+
+.popup-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-family: "poppins", sans-serif;
+  font-size: 1.33rem;
+  font-weight: bold;
+  line-height: 70px;
+  padding: 0 20px;
+}
+
+.popup-header .btn-close {
+  width: 42px;
+  height: 42px;
+}
+
 .page-title {
   padding: 30px 0;
 }
