@@ -1,0 +1,63 @@
+<!-- IS CONNECTED 클래스 유무로 상태에 따른 화면 확인 가능 -->
+<div id="app-detail-modal" class="popup-overlay">
+  <div class="modal-popup">
+    <div class="popup-header">
+      <div class="popup-navigation">
+        <div id="app-detail-modal-back-btn" class="btn btn-back">
+          <img src="/assets/ico-chevron-left.svg" alt="close" height="16"/>
+        </div>
+        <div class="popup-title">Connect App</div>
+      </div>
+      <div id="app-detail-modal-close-btn" class="btn btn-close">
+        <img src="/assets/ico-close.svg" alt="close" width="16"/>
+      </div>
+    </div>
+    <div class="popup-body">
+      <div class="app-header">
+        <div class="app-icon">
+          <img id="app-icon-in-detail-modal" src="/assets/ico-app-asana.svg" width="60" alt="">
+        </div>
+        <div class="app-information">
+          <div class="app-name">
+            <h2 id="app-name-in-detail-modal" class="app-name-text">Asana</h2>
+            <div class="app-status-icon">
+              <svg viewBox="0 0 32 24" width="10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.8686 23.5286L0.46861 13.0688C-0.156203 12.4404 -0.156203 11.4215 0.46861 10.7931L2.7313 8.51731C3.35611 7.88884 4.36924 7.88884 4.99405 8.51731L12 15.5635L27.0059 0.471304C27.6308 -0.157101 28.6439 -0.157101 29.2687 0.471304L31.5314 2.74707C32.1562 3.37547 32.1562 4.39436 31.5314 5.02283L13.1314 23.5287C12.5065 24.1571 11.4934 24.1571 10.8686 23.5286Z"/>
+              </svg>
+            </div>
+          </div>
+          <p id="app-description-in-detail-modal" class="app-description">Asana is a collaborative information
+            manager for workspace. It helps you
+            organize people and tasks effectively.</p>
+          <a id="app-domain-in-detail-modal" href="https://www.asana.com" target="_blank" class="app-website">https://www.asana.com</a>
+        </div>
+        <div class="app-connection">
+          <!-- 앱이 연동되지 않았을 때 -->
+          <div id="app-connect-btn" class="btn btn-primary btn-connect">Connect</div>
+          <!-- 앱이 연동 되었을 때 -->
+          <div id="app-disconnect-btn" class="btn btn-delete btn-disconnect">
+            Disconnect
+          </div>
+        </div>
+      </div>
+      <div id="app-action-items" class="list-actions">
+        <h3>Actions</h3>
+        <div class="action-list">
+          <div class="item-action">
+            <div class="connected-app">
+              <div class="app-icon">
+                <img src="/assets/ico-app-asana.svg" width="32" alt=""/>
+              </div>
+              <div class="app-name">A New Task</div>
+            </div>
+            <div class="buttons">
+              <div class="btn btn-add-shortcut">
+                Add to shortcut
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

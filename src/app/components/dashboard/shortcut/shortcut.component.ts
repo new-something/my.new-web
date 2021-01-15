@@ -11,11 +11,11 @@ import {UrlRedirection} from '../../../models/url-redirection';
 export class ShortcutComponent implements OnInit {
 
   @Input()
-  connectedApps: ConnectedApp[];
+  connectedApps: ConnectedApp[] = [];
   @Input()
-  shortcuts: Shortcut[];
+  shortcuts: Shortcut[] = [];
   @Input()
-  urlRedirections: UrlRedirection[];
+  urlRedirections: UrlRedirection[] = [];
 
   constructor() { }
 
@@ -27,4 +27,7 @@ export class ShortcutComponent implements OnInit {
     console.log(this.urlRedirections);
   }
 
+  showAppListModal(): void{
+    document.querySelector('#app-list-modal').classList.add('is-active');
+  }
 }

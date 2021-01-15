@@ -1,3 +1,6 @@
+<app-app-list></app-app-list>
+<app-app-detail></app-app-detail>
+
 <div class="section page-title">
   <h1>Shortcuts</h1>
 </div>
@@ -6,12 +9,12 @@
   <h2>Connected Apps</h2>
   <section class="list-apps">
     <div class="ico-app is-connected" *ngFor="let ca of connectedApps">
-      <img src="/assets/{{ca?.appIcon}}" width="48"
-           title="{{ca?.appName}}"
-           alt="{{ca?.appName}}"/>
+      <img src="/assets/{{ca.appIcon}}" width="48"
+           title="{{ca.appName}}"
+           alt="{{ca.appName}}"/>
     </div>
-    <div class="btn ico-app add-new">
-      <img src="../../../../assets/ico-plus.svg" alt="add" width="16" />
+    <div class="btn ico-app add-new" (click)="showAppListModal()">
+      <img src="/assets/ico-plus.svg" alt="add" width="16" />
     </div>
   </section>
 </div>
@@ -25,7 +28,7 @@
   </div>
   <!-- Shortcuts List 상태: Empty -->
   <div class="list-shortcuts-empty">
-    <img src="../../../../assets/img-twinkle.png" />
+    <img src="/assets/img-twinkle.png" alt="twinkle" />
     <p>
       There are no shortcuts you added.<br />Let’s try to
       <a href="#">create your first shortcut</a> now.

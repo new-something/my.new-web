@@ -14,6 +14,8 @@ import {HeaderComponent} from './components/global/header/header.component';
 import {FooterComponent} from './components/global/footer/footer.component';
 import {ShortcutComponent} from './components/dashboard/shortcut/shortcut.component';
 import {AuthInterceptor} from './interceptors/auth/auth.interceptor';
+import { AppListComponent } from './components/dashboard/shortcut/modal/app-list/app-list.component';
+import { AppDetailComponent } from './components/dashboard/shortcut/modal/app-detail/app-detail.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,8 @@ export const httpInterceptorProviders = [
     HeaderComponent,
     FooterComponent,
     ShortcutComponent,
+    AppListComponent,
+    AppDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,130 @@
+<div id="app-list-modal" class="popup-overlay">
+  <div class="modal-popup">
+    <div class="popup-header">
+      <div>
+        <img
+          src="/assets/img-connect.png"
+          alt="connect apps"
+          style="width: 20px"
+        />
+        &nbsp;Apps
+      </div>
+      <div id="app-list-modal-close-btn" class="btn btn-close" (click)="hideAppListModal()">
+        <img src="/assets/ico-close.svg" alt="close" width="16"/>
+      </div>
+    </div>
+    <div class="popup-body">
+
+      <!-- 앱 카테고리 필터 -->
+      <div class="app-tag">
+        <form name="appListCategoryItems" class="btn-group">
+          <input
+            id="tag-all"
+            type="radio"
+            value="ALL"
+            name="app-list-tag"
+            checked
+          />
+          <label for="tag-all">
+            All
+          </label>
+          <input
+            id="tag-production"
+            type="radio"
+            value="PRODUCTION"
+            name="app-list-tag"
+          />
+          <label for="tag-production">
+            Production
+          </label>
+          <input
+            id="tag-communication"
+            type="radio"
+            value="COMMUNICATION"
+            name="app-list-tag"
+          />
+          <label for="tag-communication">
+            Communication
+          </label>
+          <input
+            id="tag-management"
+            type="radio"
+            value="MANAGEMENT"
+            name="app-list-tag"
+          />
+          <label for="tag-management">
+            Management
+          </label>
+          <input
+            id="tag-documentation"
+            type="radio"
+            value="DOCUMENTATION"
+            name="app-list-tag"
+          />
+          <label for="tag-documentation">
+            Documentation
+          </label>
+          <input
+            id="tag-presentation"
+            type="radio"
+            value="PRESENTATION"
+            name="app-list-tag"
+          />
+          <label for="tag-presentation">
+            Presentation
+          </label>
+          <input
+            id="tag-handy-tools"
+            type="radio"
+            value="HANDY_TOOLS"
+            name="app-list-tag"
+          />
+          <label for="tag-handy-tools">
+            Handy Tools
+          </label>
+        </form>
+      </div>
+      <div class="app-list">
+        <!-- APP URL ITEM: URL Redirection 은 다른 앱과 별개의 방식으로 동작 -> 버튼을 누르면 My Shortcuts 목록에 바로 URL Redirection Item 을 추가한다. -->
+        <div class="btn app-url-item">
+          <div class="app-icon">
+            <img src="/assets/ico-link.svg" width="42" alt=""/>
+          </div>
+          <div class="app-name">
+            <div class="app-name-text">URL Redirection</div>
+          </div>
+        </div>
+        <!-- APP ITEM: 연결되지 않은 상태, 앱의 설정 페이지로 이동. -->
+        <div id="asanaInAppList" class="btn app-item">
+          <div class="app-icon">
+            <img src="/assets/ico-app-asana.svg" width="42" alt=""/>
+          </div>
+          <div class="app-name">
+            <div class="app-name-text">Asana</div>
+            <div class="app-status-text">Is connected</div>
+            <div class="app-status-icon">
+              <svg viewBox="0 0 32 24" width="10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.8686 23.5286L0.46861 13.0688C-0.156203 12.4404 -0.156203 11.4215 0.46861 10.7931L2.7313 8.51731C3.35611 7.88884 4.36924 7.88884 4.99405 8.51731L12 15.5635L27.0059 0.471304C27.6308 -0.157101 28.6439 -0.157101 29.2687 0.471304L31.5314 2.74707C32.1562 3.37547 32.1562 4.39436 31.5314 5.02283L13.1314 23.5287C12.5065 24.1571 11.4934 24.1571 10.8686 23.5286Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- APP ITEM IS CONNECTED: 연결된 상태. 각 앱의 설정 페이지로 이동. -->
+        <div id="githubInAppList" class="btn app-item is-connected">
+          <div class="app-icon">
+            <img src="/assets/ico-app-github.svg" width="42" alt=""/>
+          </div>
+          <div class="app-name">
+            <div class="app-name-text">Github</div>
+            <div class="app-status-text">Is connected</div>
+            <div class="app-status-icon">
+              <svg viewBox="0 0 32 24" width="10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.8686 23.5286L0.46861 13.0688C-0.156203 12.4404 -0.156203 11.4215 0.46861 10.7931L2.7313 8.51731C3.35611 7.88884 4.36924 7.88884 4.99405 8.51731L12 15.5635L27.0059 0.471304C27.6308 -0.157101 28.6439 -0.157101 29.2687 0.471304L31.5314 2.74707C32.1562 3.37547 32.1562 4.39436 31.5314 5.02283L13.1314 23.5287C12.5065 24.1571 11.4934 24.1571 10.8686 23.5286Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
