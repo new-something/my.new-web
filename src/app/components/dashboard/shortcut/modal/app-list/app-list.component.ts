@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProvidedApp} from '../../../../../models/provided-app';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
+import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
+import {OpenAddDetailModal} from '../../../../../commands/open-add-detail-modal';
 
 @Component({
   selector: 'app-app-list',
@@ -10,7 +12,7 @@ import {ProvidedAppService} from '../../../../../services/app/provided-app.servi
 export class AppListComponent implements OnInit {
   providedApps: ProvidedApp[] = [];
 
-  constructor(private providedAppService: ProvidedAppService) { }
+  constructor(private providedAppService: ProvidedAppService, private modalVisibleService: ModalVisibleService) { }
 
   ngOnInit(): void {
     this.providedAppService.findAllByTag('ALL').subscribe(providedApps => this.providedApps = providedApps);
@@ -29,6 +31,6 @@ export class AppListComponent implements OnInit {
   }
 
   showAppDetailModal(appCode: number): void {
-    document.querySelector('#app-detail-modal').classList.add('is-active');
+    this.modalVisibleService.updateMessage(new OpenAddDetailModal(appCode));
   }
 }
