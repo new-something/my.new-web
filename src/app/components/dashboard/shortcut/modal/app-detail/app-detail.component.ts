@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
 import {Subscription} from 'rxjs';
-import {OpenAppDetailModal} from '../../../../../commands/open-app-detail-modal';
+import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
-import {OpenAppListModal} from '../../../../../commands/open-app-list-modal';
+import {CommandAppListModal} from '../../../../../commands/command-app-list-modal';
 
 @Component({
   selector: 'app-app-detail',
@@ -14,7 +14,7 @@ import {OpenAppListModal} from '../../../../../commands/open-app-list-modal';
 export class AppDetailComponent implements OnInit, OnDestroy {
   public showDetailModal = false;
   public hasBackModalStep = false;
-  public openCommand: OpenAppDetailModal;
+  public openCommand: CommandAppDetailModal;
   public subscription: Subscription;
 
   public providedAppDetail: ProvidedAppDetail;
@@ -40,10 +40,15 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  hideAppDetailModal(): void {
+  public hideAppDetailModal(): void {
     this.showDetailModal = false;
     if (this.hasBackModalStep) {
-      this.modalVisibleService.updateOpenAppListModal(new OpenAppListModal('ALL'));
+      this.modalVisibleService.updateOpenAppListModal(new CommandAppListModal('ALL', true));
     }
+  }
+
+  public hideAllModal(): void {
+    this.showDetailModal = false;
+    this.modalVisibleService.updateOpenAppListModal(new CommandAppListModal('ALL', false));
   }
 }

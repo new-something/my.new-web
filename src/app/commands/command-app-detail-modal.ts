@@ -1,4 +1,4 @@
-export class OpenAppDetailModal {
+export class CommandAppDetailModal {
   appCode: number;
   hasBackModalStep: boolean;
 

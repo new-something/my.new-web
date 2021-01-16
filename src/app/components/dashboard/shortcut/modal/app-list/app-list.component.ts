@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProvidedApp} from '../../../../../models/provided-app';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
-import {OpenAppDetailModal} from '../../../../../commands/open-app-detail-modal';
+import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.modalVisibleService.getOpenAppListModal().subscribe(openCommand => {
-      this.showListModal = true;
+      this.showListModal = openCommand.visible;
       this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => this.providedApps = providedApps);
     });
   }
@@ -42,6 +42,6 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   showAppDetailModal(appCode: number): void {
     this.showListModal = false;
-    this.modalVisibleService.updateOpenAppDetailModal(new OpenAppDetailModal(appCode, true));
+    this.modalVisibleService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, true));
   }
 }
