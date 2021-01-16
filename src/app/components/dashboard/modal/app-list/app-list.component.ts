@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {ProvidedApp} from '../../../../models/provided-app';
+import {ProvidedAppService} from '../../../../services/app/provided-app.service';
 
 @Component({
   selector: 'app-app-list',
@@ -8,11 +8,12 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./app-list.component.css']
 })
 export class AppListComponent implements OnInit {
-  private appService: string = environment.appService;
+  providedApps: ProvidedApp[] = [];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private providedAppService: ProvidedAppService) { }
 
   ngOnInit(): void {
+    this.providedAppService.findAllByTag('ALL').subscribe(providedApps => this.providedApps = providedApps);
   }
 
   hideAppListModal(): void {
@@ -23,21 +24,7 @@ export class AppListComponent implements OnInit {
     console.log($event);
     console.log($event.target);
     console.log($event.target.value);
-    const url = this.appService + '/a/apps?tag=' + $event.target.value;
-    console.log(url);
-    this.httpClient.get<ProvidedAppResponse>(url).subscribe(data => {
-      console.log(data);
-    });
+    const tag = $event.target.value;
+    this.providedAppService.findAllByTag(tag).subscribe(providedApps => this.providedApps = providedApps);
   }
-}
-
-interface ProvidedAppResponse {
-  appCode: number;
-  appName: string;
-  appIcon: string;
-  domain: string;
-  description: string;
-
-  connected: boolean;
-  connectedId: number;
 }
