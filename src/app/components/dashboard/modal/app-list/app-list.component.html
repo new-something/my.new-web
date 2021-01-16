@@ -17,13 +17,14 @@
 
       <!-- 앱 카테고리 필터 -->
       <div class="app-tag">
-        <form name="appListCategoryItems" class="btn-group">
+        <form name="appListTagItems" class="btn-group">
           <input
             id="tag-all"
             type="radio"
             value="ALL"
             name="app-list-tag"
             checked
+            (change)="changeAppTag($event)"
           />
           <label for="tag-all">
             All
@@ -33,6 +34,7 @@
             type="radio"
             value="PRODUCTION"
             name="app-list-tag"
+            (change)="changeAppTag($event)"
           />
           <label for="tag-production">
             Production
@@ -42,6 +44,7 @@
             type="radio"
             value="COMMUNICATION"
             name="app-list-tag"
+            (change)="changeAppTag($event)"
           />
           <label for="tag-communication">
             Communication
@@ -51,6 +54,7 @@
             type="radio"
             value="MANAGEMENT"
             name="app-list-tag"
+            (change)="changeAppTag($event)"
           />
           <label for="tag-management">
             Management
@@ -60,6 +64,7 @@
             type="radio"
             value="DOCUMENTATION"
             name="app-list-tag"
+            (change)="changeAppTag($event)"
           />
           <label for="tag-documentation">
             Documentation
@@ -69,6 +74,7 @@
             type="radio"
             value="PRESENTATION"
             name="app-list-tag"
+            (change)="changeAppTag($event)"
           />
           <label for="tag-presentation">
             Presentation
@@ -78,6 +84,7 @@
             type="radio"
             value="HANDY_TOOLS"
             name="app-list-tag"
+            (change)="changeAppTag($event)"
           />
           <label for="tag-handy-tools">
             Handy Tools
