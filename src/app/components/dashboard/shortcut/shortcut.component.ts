@@ -3,6 +3,8 @@ import {ConnectedApp} from '../../../models/connected-app';
 import {Shortcut} from '../../../models/shortcut';
 import {UrlRedirection} from '../../../models/url-redirection';
 import {ConnectedAppService} from '../../../services/app/connected-app.service';
+import {ModalVisibleService} from '../../../services/modal/modal-visible.service';
+import {OpenAddDetailModal} from '../../../commands/open-add-detail-modal';
 
 @Component({
   selector: 'app-shortcut',
@@ -18,7 +20,7 @@ export class ShortcutComponent implements OnInit {
   @Input()
   urlRedirections: UrlRedirection[] = [];
 
-  constructor(private connectedAppService: ConnectedAppService) { }
+  constructor(private connectedAppService: ConnectedAppService, private modalVisibleService: ModalVisibleService) { }
 
   ngOnInit(): void {
     console.log('ShortcutComponent init!');
@@ -34,7 +36,8 @@ export class ShortcutComponent implements OnInit {
 
   cAppClicked(appCode: number): void {
     console.log(appCode);
-    document.querySelector('#app-detail-modal').classList.add('is-active');
-    this.connectedAppService.findByAppCode(appCode).subscribe(data => console.log(data));
+    this.modalVisibleService.updateMessage(new OpenAddDetailModal(appCode));
+    // document.querySelector('#app-detail-modal').classList.add('is-active');
+    // this.connectedAppService.findByAppCode(appCode).subscribe(data => console.log(data));
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ProvidedApp} from '../../../../models/provided-app';
-import {ProvidedAppService} from '../../../../services/app/provided-app.service';
+import {ProvidedApp} from '../../../../../models/provided-app';
+import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 
 @Component({
   selector: 'app-app-list',
