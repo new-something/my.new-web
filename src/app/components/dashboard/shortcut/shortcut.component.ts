@@ -30,4 +30,9 @@ export class ShortcutComponent implements OnInit {
   showAppListModal(): void{
     document.querySelector('#app-list-modal').classList.add('is-active');
   }
+
+  openDetailModal(appCode: number): void {
+    console.log(appCode);
+    document.querySelector('#app-detail-modal').classList.add('is-active');
+  }
 }

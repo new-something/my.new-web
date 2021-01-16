@@ -27,4 +27,8 @@ export class AppListComponent implements OnInit {
     const tag = $event.target.value;
     this.providedAppService.findAllByTag(tag).subscribe(providedApps => this.providedApps = providedApps);
   }
+
+  showAppDetailModal(appCode: number): void {
+    document.querySelector('#app-detail-modal').classList.add('is-active');
+  }
 }
