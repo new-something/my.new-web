@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
 import {Subscription} from 'rxjs';
-import {OpenAddDetailModal} from '../../../../../commands/open-add-detail-modal';
+import {OpenAppDetailModal} from '../../../../../commands/open-app-detail-modal';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
+import {OpenAppListModal} from '../../../../../commands/open-app-list-modal';
 
 @Component({
   selector: 'app-app-detail',
@@ -12,7 +13,8 @@ import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
 })
 export class AppDetailComponent implements OnInit, OnDestroy {
   public showDetailModal = false;
-  public openCommand: OpenAddDetailModal;
+  public hasBackModalStep = false;
+  public openCommand: OpenAppDetailModal;
   public subscription: Subscription;
 
   public providedAppDetail: ProvidedAppDetail;
@@ -24,9 +26,10 @@ export class AppDetailComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     // set subscribe to message service
-    this.subscription = this.modalVisibleService.getMessage().subscribe(openCommand => {
+    this.subscription = this.modalVisibleService.getOpenAppDetailModal().subscribe(openCommand => {
       console.log('app detail modal open command app code : ' + openCommand.appCode);
       this.showDetailModal = true;
+      this.hasBackModalStep = openCommand.hasBackModalStep;
       this.openCommand = openCommand;
       this.providedAppService.findById(openCommand.appCode).subscribe(data => {
         this.providedAppDetail = data;
@@ -37,4 +40,10 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  hideAppDetailModal(): void {
+    this.showDetailModal = false;
+    if (this.hasBackModalStep) {
+      this.modalVisibleService.updateOpenAppListModal(new OpenAppListModal('ALL'));
+    }
+  }
 }

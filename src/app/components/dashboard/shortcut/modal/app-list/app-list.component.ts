@@ -1,25 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProvidedApp} from '../../../../../models/provided-app';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
-import {OpenAddDetailModal} from '../../../../../commands/open-add-detail-modal';
+import {OpenAppDetailModal} from '../../../../../commands/open-app-detail-modal';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-app-list',
   templateUrl: './app-list.component.html',
   styleUrls: ['./app-list.component.css']
 })
-export class AppListComponent implements OnInit {
-  providedApps: ProvidedApp[] = [];
+export class AppListComponent implements OnInit, OnDestroy {
+  public showListModal = false;
+  public providedApps: ProvidedApp[] = [];
+  public subscription: Subscription;
 
   constructor(private providedAppService: ProvidedAppService, private modalVisibleService: ModalVisibleService) { }
 
   ngOnInit(): void {
-    this.providedAppService.findAllByTag('ALL').subscribe(providedApps => this.providedApps = providedApps);
+    this.subscription = this.modalVisibleService.getOpenAppListModal().subscribe(openCommand => {
+      this.showListModal = true;
+      this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => this.providedApps = providedApps);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); // onDestroy cancels the subscribe request
   }
 
   hideAppListModal(): void {
-    document.querySelector('#app-list-modal').classList.remove('is-active');
+    this.showListModal = false;
   }
 
   changeAppTag($event): void {
@@ -31,6 +41,7 @@ export class AppListComponent implements OnInit {
   }
 
   showAppDetailModal(appCode: number): void {
-    this.modalVisibleService.updateMessage(new OpenAddDetailModal(appCode));
+    this.showListModal = false;
+    this.modalVisibleService.updateOpenAppDetailModal(new OpenAppDetailModal(appCode, true));
   }
 }

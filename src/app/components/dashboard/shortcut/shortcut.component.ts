@@ -3,7 +3,8 @@ import {ConnectedApp} from '../../../models/connected-app';
 import {Shortcut} from '../../../models/shortcut';
 import {UrlRedirection} from '../../../models/url-redirection';
 import {ModalVisibleService} from '../../../services/modal/modal-visible.service';
-import {OpenAddDetailModal} from '../../../commands/open-add-detail-modal';
+import {OpenAppDetailModal} from '../../../commands/open-app-detail-modal';
+import {OpenAppListModal} from '../../../commands/open-app-list-modal';
 
 @Component({
   selector: 'app-shortcut',
@@ -30,11 +31,11 @@ export class ShortcutComponent implements OnInit {
   }
 
   showAppListModal(): void{
-    document.querySelector('#app-list-modal').classList.add('is-active');
+    this.modalVisibleService.updateOpenAppListModal(new OpenAppListModal('ALL'));
   }
 
   cAppClicked(appCode: number): void {
     console.log(appCode);
-    this.modalVisibleService.updateMessage(new OpenAddDetailModal(appCode));
+    this.modalVisibleService.updateOpenAppDetailModal(new OpenAppDetailModal(appCode, false));
   }
 }
