@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <ng-template *ngFor="let pa of providedApps">
+        <ng-container *ngFor="let pa of providedApps">
         <div class="btn app-item" [class.is-connected]="pa.connected">
           <div class="app-icon">
             <img src="/assets/{{pa.appIcon}}" width="42" alt="{{pa.appName}}"/>
@@ -117,7 +117,7 @@
             </div>
           </div>
         </div>
-        </ng-template>
+        </ng-container>
 
         <!-- APP ITEM: 연결되지 않은 상태, 앱의 설정 페이지로 이동. -->
 <!--        <div id="asanaInAppList" class="btn app-item">-->
