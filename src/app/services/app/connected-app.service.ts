@@ -12,7 +12,7 @@ export class ConnectedAppService {
   constructor(private httpClient: HttpClient) { }
 
   findByAppCode(connectedId: number): Observable<any> {
-    const url = this.appService + '/a/apps/' + connectedId;
+    const url = this.appService + '/apis/connected-apps/' + connectedId;
     return this.httpClient.get<any>(url).pipe();
   }
 }

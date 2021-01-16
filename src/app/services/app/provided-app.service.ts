@@ -15,7 +15,7 @@ export class ProvidedAppService {
   }
 
   findAllByTag(tag: string): Observable<ProvidedApp[]> {
-    const url = this.appService + '/a/apps?tag=' + tag;
+    const url = this.appService + '/apis/provided-apps?tag=' + tag;
     return this.httpClient.get<ProvidedAppResponse[]>(url).pipe(
       map(data => data.map((row, idx, rows) =>
           new ProvidedApp(row.appCode, row.appName, row.appIcon, row.domain,
