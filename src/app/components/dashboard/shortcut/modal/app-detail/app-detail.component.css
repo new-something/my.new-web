@@ -25,6 +25,9 @@
 #app-detail-modal .popup-body .app-header {
   display: flex;
 }
+#app-detail-popup .app-header .app-icon {
+  padding: 0 10px;
+}
 #app-detail-modal .app-header .app-information {
   margin: 0 24px;
 }
@@ -107,6 +110,9 @@
 }
 #app-detail-modal.is-connected .list-actions .item-action {
   opacity: 1;
+}
+#app-detail-modal.list-actions .item-action .app-icon {
+  margin-right: 10px;
 }
 #app-detail-modal .list-actions .item-action .app-name {
   -o-text-overflow: ellipsis;
