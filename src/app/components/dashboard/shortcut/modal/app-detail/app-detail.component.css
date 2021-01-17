@@ -166,3 +166,7 @@
   display: -ms-flexbox;
   display: flex;
 }
+
+#app-detail-modal .list-actions .item-action .action {
+  margin-bottom: 15px;
+}
