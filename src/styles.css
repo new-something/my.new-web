@@ -485,7 +485,7 @@ input[name="app-list-tag"]:checked
 }
 
 #app-list-modal .app-list .app-item,
-#app-list-modal .app-list .app-url-ltem {
+#app-list-modal .app-list .app-list-item {
   -ms-flex-pack: start;
   -webkit-box-pack: start;
   border-radius: 12px;
@@ -497,11 +497,11 @@ input[name="app-list-tag"]:checked
   width: 200px;
 }
 
-#app-list-modal .app-list .app-url-ltem {
+#app-list-modal .app-list .app-list-item {
   background-color: #f0f6ff;
 }
 
-#app-list-modal .app-list .app-url-ltem:active {
+#app-list-modal .app-list .app-list-item:active {
   background-color: #e7edf7;
 }
 
