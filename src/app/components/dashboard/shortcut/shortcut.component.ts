@@ -36,6 +36,6 @@ export class ShortcutComponent implements OnInit {
 
   cAppClicked(appCode: number): void {
     console.log(appCode);
-    this.modalVisibleService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false));
+    this.modalVisibleService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, true));
   }
 }

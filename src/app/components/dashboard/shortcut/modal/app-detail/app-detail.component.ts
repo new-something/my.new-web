@@ -12,6 +12,7 @@ import {CommandAppListModal} from '../../../../../commands/command-app-list-moda
   styleUrls: ['./app-detail.component.css']
 })
 export class AppDetailComponent implements OnInit, OnDestroy {
+  public connected = false;
   public showDetailModal = false;
   public hasBackModalStep = false;
   public openCommand: CommandAppDetailModal;
@@ -28,6 +29,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     // set subscribe to message service
     this.subscription = this.modalVisibleService.getOpenAppDetailModal().subscribe(openCommand => {
       console.log('app detail modal open command app code : ' + openCommand.appCode);
+      this.connected = openCommand.connected;
       this.showDetailModal = true;
       this.hasBackModalStep = openCommand.hasBackModalStep;
       this.openCommand = openCommand;

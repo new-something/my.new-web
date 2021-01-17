@@ -1,5 +1,5 @@
 <!-- IS CONNECTED 클래스 유무로 상태에 따른 화면 확인 가능 -->
-<div id="app-detail-modal" class="popup-overlay" [class.is-active]="showDetailModal">
+<div id="app-detail-modal" class="popup-overlay" [class.is-active]="showDetailModal" [class.is-connected]="connected">
   <div class="modal-popup">
     <div class="popup-header">
       <div class="popup-navigation">
@@ -43,12 +43,13 @@
       <div id="app-action-items" class="list-actions">
         <h3>Actions</h3>
         <div class="action-list">
+          <ng-container *ngFor="let providedAction of providedAppDetail.providedActions">
           <div class="item-action">
             <div class="connected-app">
               <div class="app-icon">
-                <img src="/assets/ico-app-asana.svg" width="32" alt=""/>
+                <img src="/assets/{{providedAppDetail.appIcon}}" width="32" alt=""/>
               </div>
-              <div class="app-name">A New Task</div>
+              <div class="app-name">{{providedAction.description}}</div>
             </div>
             <div class="buttons">
               <div class="btn btn-add-shortcut">
@@ -56,6 +57,7 @@
               </div>
             </div>
           </div>
+          </ng-container>
         </div>
       </div>
     </div>
