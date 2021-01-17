@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ModalEventService} from '../../../../../services/modal/modal-event.service';
 import {Subscription} from 'rxjs';
 import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
@@ -12,7 +12,8 @@ import {ConnectedAppService} from '../../../../../services/app/connected-app.ser
   templateUrl: './app-detail.component.html',
   styleUrls: ['./app-detail.component.css']
 })
-export class AppDetailComponent implements OnInit, OnDestroy {
+export class AppDetailComponent implements OnInit, OnChanges, OnDestroy {
+  @Input()
   public connected = false;
   public showDetailModal = false;
   public hasBackModalStep = false;
@@ -20,11 +21,17 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
 
   public providedAppDetail: ProvidedAppDetail;
+
   constructor(private modalEventService: ModalEventService, private providedAppService: ProvidedAppService,
-              private connectedAppService: ConnectedAppService) { }
+              private connectedAppService: ConnectedAppService) {
+  }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe(); // onDestroy cancels the subscribe request
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   public ngOnInit(): void {
