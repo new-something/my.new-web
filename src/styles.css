@@ -430,7 +430,7 @@ a.link-outer:active {
   display: flex;
 }
 
-#app-list-modal .modal-popup .app-category {
+#app-list-modal .modal-popup .app-tag {
   -ms-flex-direction: column;
   -webkit-box-direction: normal;
   -webkit-box-orient: vertical;
@@ -442,11 +442,11 @@ a.link-outer:active {
   width: 30%;
 }
 
-#app-list-modal .modal-popup .app-category input[name="appListCatrgory"] {
+#app-list-modal .modal-popup .app-tag input[name="appListCatrgory"] {
   display: none;
 }
 
-#app-list-modal .modal-popup .app-category label {
+#app-list-modal .modal-popup .app-tag label {
   border-radius: 8px;
   color: #666;
   cursor: pointer;
@@ -460,7 +460,7 @@ a.link-outer:active {
 
 #app-list-modal
 .modal-popup
-.app-category
+.app-tag
 input[name="appListCatrgory"]:checked
 + label {
   background-color: #000;
@@ -1488,7 +1488,7 @@ input[name="appListCatrgory"]:checked
     height: 80vh;
   }
 
-  #app-list-modal .modal-popup .app-category {
+  #app-list-modal .modal-popup .app-tag {
     display: none;
   }
 
