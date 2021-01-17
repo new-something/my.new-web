@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProvidedApp} from '../../../../../models/provided-app';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
-import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
+import {ModalEventService} from '../../../../../services/modal/modal-event.service';
 import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
 import {Subscription} from 'rxjs';
 
@@ -15,7 +15,7 @@ export class AppListComponent implements OnInit, OnDestroy {
   public providedApps: ProvidedApp[] = [];
   public subscription: Subscription;
 
-  constructor(private providedAppService: ProvidedAppService, private modalVisibleService: ModalVisibleService) { }
+  constructor(private providedAppService: ProvidedAppService, private modalVisibleService: ModalEventService) { }
 
   ngOnInit(): void {
     this.subscription = this.modalVisibleService.getOpenAppListModal().subscribe(openCommand => {

@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ModalVisibleService} from '../../../../../services/modal/modal-visible.service';
+import {ModalEventService} from '../../../../../services/modal/modal-event.service';
 import {Subscription} from 'rxjs';
 import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
 import {CommandAppListModal} from '../../../../../commands/command-app-list-modal';
+import {ConnectedAppService} from '../../../../../services/app/connected-app.service';
 
 @Component({
   selector: 'app-app-detail',
@@ -19,7 +20,8 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
 
   public providedAppDetail: ProvidedAppDetail;
-  constructor(private modalVisibleService: ModalVisibleService, private providedAppService: ProvidedAppService) { }
+  constructor(private modalEventService: ModalEventService, private providedAppService: ProvidedAppService,
+              private connectedAppService: ConnectedAppService) { }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe(); // onDestroy cancels the subscribe request
@@ -27,7 +29,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     // set subscribe to message service
-    this.subscription = this.modalVisibleService.getOpenAppDetailModal().subscribe(openCommand => {
+    this.subscription = this.modalEventService.getOpenAppDetailModal().subscribe(openCommand => {
       console.log('app detail modal open command app code : ' + openCommand.appCode);
       this.connected = openCommand.connected;
       this.showDetailModal = true;
@@ -45,12 +47,26 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public hideAppDetailModal(): void {
     this.showDetailModal = false;
     if (this.hasBackModalStep) {
-      this.modalVisibleService.updateOpenAppListModal(new CommandAppListModal('ALL', true));
+      this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', true));
     }
   }
 
   public hideAllModal(): void {
     this.showDetailModal = false;
-    this.modalVisibleService.updateOpenAppListModal(new CommandAppListModal('ALL', false));
+    this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', false));
+  }
+
+  public connectApp(appCode: number): void {
+    this.connectedAppService.connect(appCode).subscribe(resp => {
+      console.log(resp);
+      this.connected = false;
+    });
+  }
+
+  public disconnectApp(appCode: number): void {
+    this.connectedAppService.disconnect(appCode).subscribe(resp => {
+      console.log(resp);
+      this.connected = true;
+    });
   }
 }

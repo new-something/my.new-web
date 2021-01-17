@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ConnectedApp} from '../../../models/connected-app';
 import {Shortcut} from '../../../models/shortcut';
 import {UrlRedirection} from '../../../models/url-redirection';
-import {ModalVisibleService} from '../../../services/modal/modal-visible.service';
+import {ModalEventService} from '../../../services/modal/modal-event.service';
 import {CommandAppDetailModal} from '../../../commands/command-app-detail-modal';
 import {CommandAppListModal} from '../../../commands/command-app-list-modal';
 
@@ -20,7 +20,7 @@ export class ShortcutComponent implements OnInit {
   @Input()
   urlRedirections: UrlRedirection[] = [];
 
-  constructor(private modalVisibleService: ModalVisibleService) { }
+  constructor(private modalVisibleService: ModalEventService) { }
 
   ngOnInit(): void {
     console.log('ShortcutComponent init!');

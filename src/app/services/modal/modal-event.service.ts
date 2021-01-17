@@ -6,7 +6,7 @@ import {CommandAppListModal} from '../../commands/command-app-list-modal';
 @Injectable({
   providedIn: 'root'
 })
-export class ModalVisibleService {
+export class ModalEventService {
 
   private openAppDetailModal = new Subject<CommandAppDetailModal>();
   private openAppListModal = new Subject<CommandAppListModal>();

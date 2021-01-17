@@ -33,9 +33,9 @@
         </div>
         <div class="app-connection">
           <!-- 앱이 연동되지 않았을 때 -->
-          <div id="app-connect-btn" class="btn btn-primary btn-connect">Connect</div>
+          <div id="app-connect-btn" class="btn btn-primary btn-connect" (click)="connectApp(providedAppDetail.appCode)">Connect</div>
           <!-- 앱이 연동 되었을 때 -->
-          <div id="app-disconnect-btn" class="btn btn-delete btn-disconnect">
+          <div id="app-disconnect-btn" class="btn btn-delete btn-disconnect" (click)="disconnectApp(providedAppDetail.appCode)">
             Disconnect
           </div>
         </div>
