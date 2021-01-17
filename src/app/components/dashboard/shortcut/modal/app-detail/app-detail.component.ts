@@ -12,8 +12,7 @@ import {ConnectedAppService} from '../../../../../services/app/connected-app.ser
   templateUrl: './app-detail.component.html',
   styleUrls: ['./app-detail.component.css']
 })
-export class AppDetailComponent implements OnInit, OnChanges, OnDestroy {
-  @Input()
+export class AppDetailComponent implements OnInit, OnDestroy {
   public connected = false;
   public showDetailModal = false;
   public hasBackModalStep = false;
@@ -28,10 +27,6 @@ export class AppDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe(); // onDestroy cancels the subscribe request
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
   }
 
   public ngOnInit(): void {
@@ -63,6 +58,9 @@ export class AppDetailComponent implements OnInit, OnChanges, OnDestroy {
     this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', false));
   }
 
+  // TODO : update connected app list update
+  // TODO : update app list modal update
+  // TODO : update app detail modal update
   public connectApp(appCode: number): void {
     this.connectedAppService.connect(appCode).subscribe(resp => {
       console.log(resp);
@@ -70,6 +68,9 @@ export class AppDetailComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
+  // TODO : update connected app list update
+  // TODO : update app list modal update
+  // TODO : update app detail modal update
   public disconnectApp(appCode: number): void {
     this.connectedAppService.disconnect(appCode).subscribe(resp => {
       console.log(resp);
