@@ -398,74 +398,18 @@ a.link-outer:active {
   width: 42px;
 }
 
-#signinPopup {
+#app-list-popup {
   display: none;
 }
 
-#signinPopup.is-active {
+#app-list-popup.is-active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#signinPopup .modal-popup {
-  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  width: 440px;
-  z-index: 999;
-}
-
-#signinPopup .popup-body .signin-banner {
-  background-color: #000;
-  background-image: url(/assets/img-signin.jpg);
-  background-position: center center;
-  background-size: 120%;
-  height: 160px;
-  width: 100%;
-}
-
-#signinPopup .popup-body .signin-buttons {
-  margin: 30px 40px;
-}
-
-#signinPopup .signin-buttons > a {
-  text-decoration: none;
-}
-
-#signinPopup .signin-buttons > a > div {
-  color: #000;
-  margin: 10px 0;
-  padding: 10px;
-}
-
-#signinPopup .signin-buttons img {
-  margin-right: 15px;
-}
-
-#signinPopup .signin-policies {
-  font-size: 0.8rem;
-  margin: 20px 40px;
-  text-align: center;
-}
-
-#signinPopup .signin-policies a {
-  color: #000;
-}
-
-#appListPopup {
-  display: none;
-}
-
-#appListPopup.is-active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-#appListPopup .modal-popup,
-#appDetailPopup .modal-popup {
+#app-list-popup .modal-popup,
+#app-detail-popup .modal-popup {
   -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   background-color: #fff;
   border-radius: 12px;
@@ -476,18 +420,18 @@ a.link-outer:active {
   z-index: 999;
 }
 
-#appListPopup .modal-popup .popup-header,
-#appDetailPopup .modal-popup .popup-header {
+#app-list-popup .modal-popup .popup-header,
+#app-detail-popup .modal-popup .popup-header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-#appListPopup .modal-popup .popup-body {
+#app-list-popup .modal-popup .popup-body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#appListPopup .modal-popup .app-category {
+#app-list-popup .modal-popup .app-category {
   -ms-flex-direction: column;
   -webkit-box-direction: normal;
   -webkit-box-orient: vertical;
@@ -499,11 +443,11 @@ a.link-outer:active {
   width: 30%;
 }
 
-#appListPopup .modal-popup .app-category input[name="appListCatrgory"] {
+#app-list-popup .modal-popup .app-category input[name="appListCatrgory"] {
   display: none;
 }
 
-#appListPopup .modal-popup .app-category label {
+#app-list-popup .modal-popup .app-category label {
   border-radius: 8px;
   color: #666;
   cursor: pointer;
@@ -515,7 +459,7 @@ a.link-outer:active {
   padding: 8px 16px;
 }
 
-#appListPopup
+#app-list-popup
 .modal-popup
 .app-category
 input[name="appListCatrgory"]:checked
@@ -524,7 +468,7 @@ input[name="appListCatrgory"]:checked
   color: #fff;
 }
 
-#appListPopup .modal-popup .app-list {
+#app-list-popup .modal-popup .app-list {
   -ms-flex-align: start;
   -ms-flex-line-pack: start;
   -ms-flex-wrap: wrap;
@@ -541,8 +485,8 @@ input[name="appListCatrgory"]:checked
   width: 70%;
 }
 
-#appListPopup .app-list .app-item,
-#appListPopup .app-list .app-url-ltem {
+#app-list-popup .app-list .app-item,
+#app-list-popup .app-list .app-url-ltem {
   -ms-flex-pack: start;
   -webkit-box-pack: start;
   border-radius: 12px;
@@ -554,19 +498,19 @@ input[name="appListCatrgory"]:checked
   width: 200px;
 }
 
-#appListPopup .app-list .app-url-ltem {
+#app-list-popup .app-list .app-url-ltem {
   background-color: #f0f6ff;
 }
 
-#appListPopup .app-list .app-url-ltem:active {
+#app-list-popup .app-list .app-url-ltem:active {
   background-color: #e7edf7;
 }
 
-#appListPopup .app-list .app-name {
+#app-list-popup .app-list .app-name {
   margin-left: 15px;
 }
 
-#appListPopup .app-list .app-item .app-name .app-name-text {
+#app-list-popup .app-list .app-item .app-name .app-name-text {
   -o-text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -577,7 +521,7 @@ input[name="appListCatrgory"]:checked
   text-overflow: ellipsis;
 }
 
-#appListPopup .app-list .app-item.is-connected .app-name .app-name-text {
+#app-list-popup .app-list .app-item.is-connected .app-name .app-name-text {
   -o-text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -588,19 +532,19 @@ input[name="appListCatrgory"]:checked
   text-overflow: ellipsis;
 }
 
-#appListPopup .app-list .app-status-text {
+#app-list-popup .app-list .app-status-text {
   color: #666;
   display: none;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
 }
 
-#appListPopup .is-connected .app-status-text {
+#app-list-popup .is-connected .app-status-text {
   display: block;
 }
 
-#appListPopup .app-list .app-status-icon,
-#appDetailPopup .app-status-icon {
+#app-list-popup .app-list .app-status-icon,
+#app-detail-popup .app-status-icon {
   -ms-flex-align: center;
   -ms-flex-pack: center;
   -webkit-box-align: center;
@@ -614,35 +558,35 @@ input[name="appListCatrgory"]:checked
   width: 20px;
 }
 
-#appListPopup .app-list .app-status-icon {
+#app-list-popup .app-list .app-status-icon {
   padding-top: 1px;
   position: absolute;
   right: 8px;
   top: 8px;
 }
 
-#appListPopup .is-connected .app-status-icon,
-#appDetailPopup.is-connected .app-status-icon {
+#app-list-popup .is-connected .app-status-icon,
+#app-detail-popup.is-connected .app-status-icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#appListPopup .app-status-icon svg {
+#app-list-popup .app-status-icon svg {
   fill: #fff;
 }
 
-#appDetailPopup {
+#app-detail-popup {
   display: none;
 }
 
-#appDetailPopup.is-active {
+#app-detail-popup.is-active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#appDetailPopup .popup-navigation {
+#app-detail-popup .popup-navigation {
   -ms-flex-align: center;
   -webkit-box-align: center;
   align-items: center;
@@ -651,30 +595,30 @@ input[name="appListCatrgory"]:checked
   display: flex;
 }
 
-#appDetailPopup .popup-navigation .btn-back {
+#app-detail-popup .popup-navigation .btn-back {
   height: 42px;
   margin-right: 15px;
   padding-right: 2px;
   width: 42px;
 }
 
-#appDetailPopup .popup-body {
+#app-detail-popup .popup-body {
   max-height: 450px;
   overflow-y: auto;
   padding: 30px 40px;
 }
 
-#appDetailPopup .popup-body .app-header {
+#app-detail-popup .popup-body .app-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#appDetailPopup .app-header .app-information {
+#app-detail-popup .app-header .app-information {
   margin: 0 24px;
 }
 
-#appDetailPopup .app-header .app-information .app-name {
+#app-detail-popup .app-header .app-information .app-name {
   -ms-flex-align: center;
   -webkit-box-align: center;
   align-items: center;
@@ -684,7 +628,7 @@ input[name="appListCatrgory"]:checked
   position: relative;
 }
 
-#appDetailPopup .app-header .app-information .app-name .app-name-text {
+#app-detail-popup .app-header .app-information .app-name .app-name-text {
   -o-text-overflow: ellipsis;
   display: inline-block;
   max-width: 340px;
@@ -693,22 +637,22 @@ input[name="appListCatrgory"]:checked
   white-space: nowrap;
 }
 
-#appDetailPopup .app-header .app-information .app-name .app-status-icon {
+#app-detail-popup .app-header .app-information .app-name .app-status-icon {
   display: none;
   margin-left: 8px;
 }
 
-#appDetailPopup.is-connected .app-information .app-name .app-status-icon {
+#app-detail-popup.is-connected .app-information .app-name .app-status-icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#appDetailPopup .app-name .app-status-icon svg {
+#app-detail-popup .app-name .app-status-icon svg {
   fill: #fff;
 }
 
-#appDetailPopup .app-header .app-information .app-description {
+#app-detail-popup .app-header .app-information .app-description {
   -o-text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -720,7 +664,7 @@ input[name="appListCatrgory"]:checked
   text-overflow: ellipsis;
 }
 
-#appDetailPopup .app-header .app-connection .btn-connect {
+#app-detail-popup .app-header .app-connection .btn-connect {
   -ms-flex-pack: center;
   -webkit-box-pack: center;
   border-radius: 12px;
@@ -730,11 +674,11 @@ input[name="appListCatrgory"]:checked
   width: 120px;
 }
 
-#appDetailPopup.is-connected .app-connection .btn-connect {
+#app-detail-popup.is-connected .app-connection .btn-connect {
   display: none;
 }
 
-#appDetailPopup .app-header .app-connection .btn-disconnect {
+#app-detail-popup .app-header .app-connection .btn-disconnect {
   -ms-flex-pack: center;
   -webkit-box-pack: center;
   border-radius: 12px;
@@ -745,13 +689,13 @@ input[name="appListCatrgory"]:checked
   width: 130px;
 }
 
-#appDetailPopup.is-connected .app-connection .btn-disconnect {
+#app-detail-popup.is-connected .app-connection .btn-disconnect {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#appDetailPopup .list-actions {
+#app-detail-popup .list-actions {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   font-family: "poppins", sans-serif;
   font-weight: 700;
@@ -759,12 +703,12 @@ input[name="appListCatrgory"]:checked
   padding-top: 20px;
 }
 
-#appDetailPopup .list-actions h3 {
+#app-detail-popup .list-actions h3 {
   margin-bottom: 15px;
 }
 
-#appDetailPopup .list-actions .item-action,
-#appDetailPopup .list-actions .item-action * {
+#app-detail-popup .list-actions .item-action,
+#app-detail-popup .list-actions .item-action * {
   -ms-flex-align: center;
   -webkit-box-align: center;
   align-items: center;
@@ -773,7 +717,7 @@ input[name="appListCatrgory"]:checked
   display: flex;
 }
 
-#appDetailPopup .list-actions .item-action {
+#app-detail-popup .list-actions .item-action {
   -ms-flex-pack: justify;
   -webkit-box-pack: justify;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -784,11 +728,11 @@ input[name="appListCatrgory"]:checked
   padding: 20px;
 }
 
-#appDetailPopup.is-connected .list-actions .item-action {
+#app-detail-popup.is-connected .list-actions .item-action {
   opacity: 1;
 }
 
-#appDetailPopup .list-actions .item-action .app-name {
+#app-detail-popup .list-actions .item-action .app-name {
   -o-text-overflow: ellipsis;
   display: inline-block;
   max-width: 320px;
@@ -797,7 +741,7 @@ input[name="appListCatrgory"]:checked
   white-space: nowrap;
 }
 
-#appDetailPopup .list-actions .item-action .btn-add-shortcut {
+#app-detail-popup .list-actions .item-action .btn-add-shortcut {
   -webkit-box-shadow: none;
   box-shadow: none;
   cursor: not-allowed;
@@ -805,7 +749,7 @@ input[name="appListCatrgory"]:checked
   width: 180px;
 }
 
-#appDetailPopup.is-connected .list-actions .item-action .btn-add-shortcut {
+#app-detail-popup.is-connected .list-actions .item-action .btn-add-shortcut {
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   cursor: pointer;
@@ -974,177 +918,6 @@ input[name="appListCatrgory"]:checked
   display: flex;
   justify-content: center;
   margin-top: 60px;
-}
-
-.section-trial h2 {
-  margin-bottom: 5px;
-}
-
-.section-trial p span {
-  color: #666;
-}
-
-.section-trial .try-shortcuts {
-  -ms-flex-align: center;
-  -ms-flex-pack: justify;
-  -webkit-box-align: center;
-  -webkit-box-pack: justify;
-  align-items: center;
-  background-color: #f6f6f6;
-  border-radius: 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 1.8rem;
-  justify-content: space-between;
-  padding: 15px 20px;
-}
-
-.try-shortcuts a {
-  text-decoration: none;
-}
-
-.section-trial .try-shortcuts #buttonOpenInNewTab {
-  color: #000;
-}
-
-.section-trial .shortcut-url {
-  -ms-flex-align: center;
-  -webkit-box-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-family: "poppins", sans-serif;
-  text-decoration: none;
-}
-
-.section-trial .shortcut-url .shortcut-url-host,
-.section-trial .shortcut-url .shortcut-vars {
-  -ms-flex-align: center;
-  -webkit-box-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.section-trial .shortcut-url .shortcut-url-host img {
-  height: 28px;
-  margin: 0 10px;
-  width: 24px;
-}
-
-.section-trial .shortcut-url .shortcut-url-host {
-  opacity: 0.4;
-}
-
-.section-trial .shortcut-url .shortcut-url-keyword img {
-  height: 32px;
-  margin-left: 6px;
-  margin-right: 6px;
-  width: 32px;
-}
-
-.section-trial .shortcut-url .shortcut-vars {
-  -o-transition: all 0.15s ease-in;
-  -webkit-transition: all 0.15s ease-in;
-  height: 0;
-  opacity: 0;
-  transition: all 0.15s ease-in;
-  visibility: hidden;
-}
-
-.section-trial .shortcut-url .shortcut-vars.active {
-  height: 32px;
-  margin-top: 0;
-  opacity: 1;
-  visibility: visible;
-}
-
-.section-trial .try-shortcuts .btn {
-  font-size: 0.88rem;
-  height: 42px;
-  padding: 0 16px;
-}
-
-.section-trial .btn-group {
-  -ms-flex-align: center;
-  -ms-flex-pack: justify;
-  -webkit-box-align: center;
-  -webkit-box-pack: justify;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.section-trial .btn-group label {
-  -ms-flex-align: center;
-  -webkit-box-align: center;
-  align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  color: #ddd;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  padding: 15px;
-}
-
-.section-trial .btn-group label img {
-  margin-right: 10px;
-  opacity: 0.4;
-}
-
-.section-trial .btn-group label:active {
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  color: #bbb;
-}
-
-.section-trial .btn-group label:active img {
-  opacity: 0.6;
-}
-
-.section-trial input[name="shortcutApp"] {
-  display: none;
-}
-
-.section-trial input[name="shortcutApp"]:checked + label {
-  border: 1px solid #000;
-  color: #000;
-}
-
-.section-trial input[name="shortcutApp"]:checked + label img {
-  opacity: 1;
-}
-
-.section-youcando h2 {
-  margin-bottom: 30px;
-}
-
-.section-youcando .content-text {
-  -ms-flex-order: 1;
-  -webkit-box-ordinal-group: 2;
-  order: 1;
-  padding-right: 15px;
-}
-
-.section-youcando .content-image {
-  -ms-flex-order: 2;
-  -webkit-box-ordinal-group: 3;
-  order: 2;
-  text-align: center;
-}
-
-.section-whywebuilt a {
-  display: block;
-  margin: 20px 0 15px;
 }
 
 .section-apps {
@@ -1614,39 +1387,6 @@ input[name="appListCatrgory"]:checked
 
   /* Index */
 
-  .section-trial .btn-group {
-    -ms-flex-pack: space-evenly;
-    -webkit-box-pack: space-evenly;
-    justify-content: space-evenly;
-  }
-
-  .section-trial .btn-group label {
-    padding: 20px;
-  }
-
-  .section-trial .btn-group label img {
-    margin-right: 0;
-  }
-
-  .section-trial .btn-group label span {
-    display: none;
-  }
-
-  .section-youcando .content-columns {
-    display: block;
-  }
-
-  .section-youcando .content-columns div {
-    text-align: left;
-    width: initial;
-  }
-
-  .section-youcando .content-columns img {
-    margin-bottom: 30px;
-    max-width: 360px;
-    width: 70%;
-  }
-
   .section-howtouse .content-columns,
   .list-shortcuts-empty .content-columns {
     -ms-flex-direction: column;
@@ -1663,18 +1403,6 @@ input[name="appListCatrgory"]:checked
   .section-howtouse .content-columns > div,
   .list-shortcuts-empty .content-columns > div {
     width: initial;
-  }
-
-  .section-whywebuilt .img-frame img {
-    width: 60%;
-  }
-
-  #signinPopup .popup-body .signin-buttons {
-    margin: 30px 20px;
-  }
-
-  #signinPopup .btn {
-    font-size: 16px;
   }
 
   /* Dashboard */
@@ -1754,55 +1482,55 @@ input[name="appListCatrgory"]:checked
     transform: rotate(90deg);
   }
 
-  #appListPopup .popup-overlay,
-  #appDetailPopup .popup-overlay,
-  #appListPopup .modal-popup,
-  #appDetailPopup .modal-popup {
+  #app-list-popup .popup-overlay,
+  #app-detail-popup .popup-overlay,
+  #app-list-popup .modal-popup,
+  #app-detail-popup .modal-popup {
     height: 80vh;
   }
 
-  #appListPopup .modal-popup .app-category {
+  #app-list-popup .modal-popup .app-category {
     display: none;
   }
 
-  #appListPopup .app-list > .btn {
+  #app-list-popup .app-list > .btn {
     width: 100%;
   }
 
-  #appListPopup .modal-popup .popup-body,
-  #appListPopup .modal-popup .app-list,
-  #appDetailPopup .modal-popup .popup-body {
+  #app-list-popup .modal-popup .popup-body,
+  #app-list-popup .modal-popup .app-list,
+  #app-detail-popup .modal-popup .popup-body {
     max-height: calc(80vh - 70px);
     overflow-y: auto;
     width: 100%;
   }
 
-  #appDetailPopup .popup-body {
+  #app-detail-popup .popup-body {
     padding: 30px 20px;
   }
 
-  #appDetailPopup .popup-body .app-header {
+  #app-detail-popup .popup-body .app-header {
     -ms-flex-direction: column;
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
     flex-direction: column;
   }
 
-  #appDetailPopup .app-header .app-icon {
+  #app-detail-popup .app-header .app-icon {
     padding: 0 10px;
   }
 
-  #appDetailPopup .app-header .app-information {
+  #app-detail-popup .app-header .app-information {
     margin: 0 0 15px;
     padding: 10px;
   }
 
-  #appDetailPopup .app-header .app-connection .btn-connect,
-  #appDetailPopup .app-header .app-connection .btn-disconnect {
+  #app-detail-popup .app-header .app-connection .btn-connect,
+  #app-detail-popup .app-header .app-connection .btn-disconnect {
     width: 100%;
   }
 
-  #appDetailPopup .list-actions .item-action {
+  #app-detail-popup .list-actions .item-action {
     -ms-flex-direction: column;
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
@@ -1811,12 +1539,12 @@ input[name="appListCatrgory"]:checked
     margin-bottom: 15px;
   }
 
-  #appDetailPopup .list-actions .item-action .action {
+  #app-detail-popup .list-actions .item-action .action {
     margin-bottom: 15px;
   }
 
-  #appDetailPopup .list-actions .item-action .buttons,
-  #appDetailPopup .list-actions .item-action .btn-add-shortcut {
+  #app-detail-popup .list-actions .item-action .buttons,
+  #app-detail-popup .list-actions .item-action .btn-add-shortcut {
     width: 100%;
   }
 }
