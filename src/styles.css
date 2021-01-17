@@ -485,7 +485,7 @@ input[name="app-list-tag"]:checked
 }
 
 #app-list-modal .app-list .app-item,
-#app-list-modal .app-list .app-list-item {
+#app-list-modal .app-list .app-url-item {
   -ms-flex-pack: start;
   -webkit-box-pack: start;
   border-radius: 12px;
