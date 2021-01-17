@@ -109,12 +109,12 @@
   opacity: 1;
 }
 #app-detail-modal .list-actions .item-action .app-name {
+  -o-text-overflow: ellipsis;
   display: inline-block;
   max-width: 320px;
-  white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #app-detail-modal .list-actions .item-action .btn-add-shortcut {
   width: 180px;
@@ -156,5 +156,7 @@
 }
 
 #app-detail-modal.is-connected .app-status-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
