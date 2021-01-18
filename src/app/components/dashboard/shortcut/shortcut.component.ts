@@ -81,10 +81,31 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, true));
   }
 
+  public saveShortcut(): void {
+    console.log('save shortcut btn clicked!');
+  }
+
   public makeEditable(sf: ShortcutForm): void {
     sf.editable = true;
     sf.contentEditable = true;
     this.hideAddNewBtn = true;
     this.disableConnectedAppClick = true;
+  }
+
+  public deleteForm(sf: ShortcutForm): void {
+    let removeTargetIdx = 0;
+    // tslint:disable-next-line:prefer-for-of
+    for (let idx = 0; idx < this.shortcutForms.length; idx++) {
+      if (sf.providedActionId === this.shortcutForms[idx].providedActionId){
+        removeTargetIdx = idx;
+        break;
+      }
+    }
+    this.shortcutForms.splice(removeTargetIdx, 1);
+    const editingFormCount = this.shortcutForms.filter(f => f.editable && f.contentEditable).length;
+    if (editingFormCount === 0) {
+      this.hideAddNewBtn = false;
+      this.disableConnectedAppClick = false;
+    }
   }
 }
