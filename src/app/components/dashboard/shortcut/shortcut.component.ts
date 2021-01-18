@@ -34,9 +34,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log(this.urlRedirections);
 
     this.appConnectionSubscription = this.modalEventService.getAppConnectionEventPipe().subscribe(evt => {
-      this.connectedApps.push(new ConnectedApp(evt.appCode, evt.connectedId, evt.appName, evt.appIcon, evt.domain, evt.description));
+      this.connectedApps.push(new ConnectedApp(evt.connectedId, evt.appCode, evt.appName, evt.appIcon, evt.domain, evt.description));
     });
     this.appDisconnectionSubscription = this.modalEventService.getAppDisconnectionEventPipe().subscribe(evt => {
+      console.log(evt.appCode);
       this.connectedApps.filter(c => c.appCode === evt.appCode).pop();
     });
   }

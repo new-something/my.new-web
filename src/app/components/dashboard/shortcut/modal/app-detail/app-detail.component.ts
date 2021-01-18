@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalEventService} from '../../../../../services/modal/modal-event.service';
 import {Subscription} from 'rxjs';
 import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
