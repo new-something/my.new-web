@@ -86,7 +86,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public shortcutKeywordInput(event: any, sf: ShortcutForm): void {
     const input = event.target.textContent;
     console.log(input);
-    if (input.match('/[a-z]{2,}(\\/[a-z]+)?(\\/[a-z]+)?/gm')) {
+    if (input.match('/[a-z]{2,}(\/[a-z]+)?(\/[a-z]+)?/gm')) {
       console.log('패턴 통과');
       sf.enableSaveBtn = true;
       return;
