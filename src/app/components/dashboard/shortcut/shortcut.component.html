@@ -12,9 +12,10 @@
            title="{{ca.appName}}"
            alt="{{ca.appName}}"
            (click)="cAppClicked(ca.appCode)"
+           [style.pointer-events]="disableConnectedAppClick ? 'none' : 'auto'"
       />
     </div>
-    <div class="btn add-new" (click)="showAppListModal()">
+    <div class="btn add-new" [class.hidden]="hideAddNewBtn" (click)="showAppListModal()">
       <img src="/assets/ico-plus.svg" alt="add" width="16" />
     </div>
   </section>
@@ -26,9 +27,9 @@
   <!-- Shortcuts List -->
   <div class="list-shortcuts" [class.hidden]="shortcuts?.length === 0 && urlRedirections?.length === 0">
     <ng-container *ngFor="let sf of shortcutForms">
-      <div class="item-shortcut">
+      <div class="item-shortcut" [class.is-editing]="sf.editable">
         <div class="shortcut">
-          <div class="shortcut-keyword" contenteditable="true" data-placeholder="New shortcut here..."></div>
+          <div class="shortcut-keyword" [attr.contenteditable]="sf.contentEditable" data-placeholder="New shortcut here..."></div>
           <div class="shortcut-url">
             <a href="https://my.new/" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
@@ -56,7 +57,7 @@
             <div class="btn btn-delete">
               <img src="/assets/ico-trash.svg" width="16" alt="trash">
             </div>
-            <div class="btn btn-edit"><img src="/assets/ico-pencil.svg" width="16" alt="pencil"></div>
+            <div class="btn btn-edit" (click)="makeEditable(sf)"><img src="/assets/ico-pencil.svg" width="16" alt="pencil"></div>
           </div>
         </div>
       </div>

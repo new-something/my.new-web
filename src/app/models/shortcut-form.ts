@@ -4,12 +4,18 @@ export class ShortcutForm {
   url: string;
   description: string;
   appIcon: string;
+  editable: boolean;
+  contentEditable: boolean;
 
-  constructor(providedActionId: number, type: string, url: string, description: string, appIcon: string) {
+  constructor(providedActionId: number, type: string, url: string,
+              description: string, appIcon: string, editable: boolean,
+              contentEditable: boolean) {
     this.providedActionId = providedActionId;
     this.type = type;
     this.url = url;
     this.description = description;
     this.appIcon = appIcon;
+    this.editable = editable;
+    this.contentEditable = contentEditable;
   }
 }

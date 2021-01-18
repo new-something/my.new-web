@@ -21,6 +21,9 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   @Input()
   public urlRedirections: UrlRedirection[] = [];
 
+  public hideAddNewBtn = false;
+  public disableConnectedAppClick = false;
+
   public shortcutForms: ShortcutForm[] = [];
 
   public appConnectionSubscription: Subscription;
@@ -31,7 +34,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   constructor(private modalEventService: ModalEventService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     console.log('ShortcutComponent init!');
 
     console.log(this.connectedApps);
@@ -56,22 +59,32 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
       console.log(evt);
-      this.shortcutForms.push(new ShortcutForm(evt.providedActionId, evt.type, evt.url, evt.description, evt.appIcon));
+      this.shortcutForms.push(new ShortcutForm(evt.providedActionId, evt.type, evt.url, evt.description, evt.appIcon, false, false));
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.appConnectionSubscription.unsubscribe();
     this.appDisconnectionSubscription.unsubscribe();
     this.addToShortcutSubscription.unsubscribe();
   }
 
-  showAppListModal(): void {
+  public showAppListModal(): void {
     this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', true));
   }
 
-  cAppClicked(appCode: number): void {
+  public cAppClicked(appCode: number): void {
+    if (this.disableConnectedAppClick) {
+      return;
+    }
     console.log(appCode);
     this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, true));
+  }
+
+  public makeEditable(sf: ShortcutForm): void {
+    sf.editable = true;
+    sf.contentEditable = true;
+    this.hideAddNewBtn = true;
+    this.disableConnectedAppClick = true;
   }
 }
