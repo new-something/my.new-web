@@ -6,6 +6,8 @@ import {ProvidedAppService} from '../../../../../services/app/provided-app.servi
 import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
 import {CommandAppListModal} from '../../../../../commands/command-app-list-modal';
 import {ConnectedAppService} from '../../../../../services/app/connected-app.service';
+import {AppConnectedEvent} from '../../../../../commands/app-connected-event';
+import {AppDisconnectedEvent} from '../../../../../commands/app-disconnected-event';
 
 @Component({
   selector: 'app-app-detail',
@@ -64,6 +66,14 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public connectApp(appCode: number): void {
     this.connectedAppService.connect(appCode).subscribe(resp => {
       console.log(resp);
+      this.modalEventService.publishAppConnectionEvent(new AppConnectedEvent(
+        resp.appCode,
+        resp.connectedId,
+        resp.appName,
+        resp.appIcon,
+        resp.domain,
+        resp.description)
+      );
       this.connected = false;
     });
   }
@@ -74,6 +84,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public disconnectApp(appCode: number): void {
     this.connectedAppService.disconnect(appCode).subscribe(resp => {
       console.log(resp);
+      this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
       this.connected = true;
     });
   }
