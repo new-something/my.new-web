@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {CommandAppDetailModal} from '../../commands/command-app-detail-modal';
 import {CommandAppListModal} from '../../commands/command-app-list-modal';
-import {AppConnectedEvent} from '../../commands/app-connected-event';
-import {AppDisconnectedEvent} from '../../commands/app-disconnected-event';
+import {AppConnectedEvent} from '../../events/app-connected-event';
+import {AppDisconnectedEvent} from '../../events/app-disconnected-event';
+import {AddToShortcutEvent} from '../../events/add-to-shortcut-event';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class ModalEventService {
 
   private appConnectionEventPipe = new Subject<AppConnectedEvent>();
   private appDisconnectionEventPipe = new Subject<AppDisconnectedEvent>();
+
+  private addToShortcutEventPipe = new Subject<AddToShortcutEvent>();
 
   constructor() { }
 
@@ -48,5 +51,13 @@ export class ModalEventService {
 
   public publishAppDisconnectionEvent(event: AppDisconnectedEvent): void {
     this.appDisconnectionEventPipe.next(event);
+  }
+
+  public getAddToShortcutEventPipe(): Observable<AddToShortcutEvent> {
+    return this.addToShortcutEventPipe.asObservable();
+  }
+
+  public publishAddToShortcutEvent(event: AddToShortcutEvent): void {
+    this.addToShortcutEventPipe.next(event);
   }
 }

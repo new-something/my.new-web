@@ -52,7 +52,7 @@
                 <div class="app-name">{{providedAction.description}}</div>
               </div>
               <div class="buttons">
-                <div class="btn btn-add-shortcut">
+                <div class="btn btn-add-shortcut" (click)="addToShortcut(providedAction, providedAppDetail.appIcon)">
                   Add to shortcut
                 </div>
               </div>

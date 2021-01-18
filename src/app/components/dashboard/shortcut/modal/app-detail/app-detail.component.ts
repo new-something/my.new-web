@@ -6,8 +6,10 @@ import {ProvidedAppService} from '../../../../../services/app/provided-app.servi
 import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
 import {CommandAppListModal} from '../../../../../commands/command-app-list-modal';
 import {ConnectedAppService} from '../../../../../services/app/connected-app.service';
-import {AppConnectedEvent} from '../../../../../commands/app-connected-event';
-import {AppDisconnectedEvent} from '../../../../../commands/app-disconnected-event';
+import {AppConnectedEvent} from '../../../../../events/app-connected-event';
+import {AppDisconnectedEvent} from '../../../../../events/app-disconnected-event';
+import {AddToShortcutEvent} from '../../../../../events/add-to-shortcut-event';
+import {ProvidedAction} from '../../../../../models/provided-action';
 
 @Component({
   selector: 'app-app-detail',
@@ -60,7 +62,6 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', false));
   }
 
-  // TODO : update app detail modal update
   public connectApp(appCode: number): void {
     this.connectedAppService.connect(appCode).subscribe(resp => {
       console.log(resp);
@@ -76,12 +77,25 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  // TODO : update app detail modal update
   public disconnectApp(appCode: number): void {
     this.connectedAppService.disconnect(appCode).subscribe(resp => {
       console.log(resp);
       this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
       this.connected = false;
     });
+  }
+
+  public addToShortcut(providedAction: ProvidedAction, appIcon: string): void {
+    if (!this.connected) {
+      return;
+    }
+
+    this.modalEventService.publishAddToShortcutEvent(new AddToShortcutEvent(
+      providedAction.providedActionId,
+      providedAction.type,
+      providedAction.url,
+      providedAction.description,
+      appIcon
+    ));
   }
 }

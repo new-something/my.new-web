@@ -6,6 +6,7 @@ import {ModalEventService} from '../../../services/modal/modal-event.service';
 import {CommandAppDetailModal} from '../../../commands/command-app-detail-modal';
 import {CommandAppListModal} from '../../../commands/command-app-list-modal';
 import {Subscription} from 'rxjs';
+import {ShortcutForm} from '../../../models/shortcut-form';
 
 @Component({
   selector: 'app-shortcut',
@@ -14,14 +15,18 @@ import {Subscription} from 'rxjs';
 })
 export class ShortcutComponent implements OnInit, OnDestroy {
   @Input()
-  connectedApps: ConnectedApp[] = [];
+  public connectedApps: ConnectedApp[] = [];
   @Input()
-  shortcuts: Shortcut[] = [];
+  public shortcuts: Shortcut[] = [];
   @Input()
-  urlRedirections: UrlRedirection[] = [];
+  public urlRedirections: UrlRedirection[] = [];
+
+  public shortcutForms: ShortcutForm[] = [];
 
   public appConnectionSubscription: Subscription;
   public appDisconnectionSubscription: Subscription;
+
+  public addToShortcutSubscription: Subscription;
 
   constructor(private modalEventService: ModalEventService) {
   }
@@ -36,6 +41,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.appConnectionSubscription = this.modalEventService.getAppConnectionEventPipe().subscribe(evt => {
       this.connectedApps.push(new ConnectedApp(evt.connectedId, evt.appCode, evt.appName, evt.appIcon, evt.domain, evt.description));
     });
+
     this.appDisconnectionSubscription = this.modalEventService.getAppDisconnectionEventPipe().subscribe(evt => {
       // tslint:disable-next-line:prefer-for-of
       let removeTargetIdx = 0;
@@ -47,11 +53,17 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       }
       this.connectedApps.splice(removeTargetIdx, 1);
     });
+
+    this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
+      console.log(evt);
+      this.shortcutForms.push(new ShortcutForm(evt.providedActionId, evt.type, evt.url, evt.description, evt.appIcon));
+    });
   }
 
   ngOnDestroy(): void {
     this.appConnectionSubscription.unsubscribe();
     this.appDisconnectionSubscription.unsubscribe();
+    this.addToShortcutSubscription.unsubscribe();
   }
 
   showAppListModal(): void {
