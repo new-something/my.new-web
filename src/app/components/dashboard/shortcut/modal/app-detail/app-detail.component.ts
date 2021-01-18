@@ -60,8 +60,6 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', false));
   }
 
-  // TODO : update connected app list update
-  // TODO : update app list modal update
   // TODO : update app detail modal update
   public connectApp(appCode: number): void {
     this.connectedAppService.connect(appCode).subscribe(resp => {
@@ -74,18 +72,16 @@ export class AppDetailComponent implements OnInit, OnDestroy {
         resp.domain,
         resp.description)
       );
-      this.connected = false;
+      this.connected = true;
     });
   }
 
-  // TODO : update connected app list update
-  // TODO : update app list modal update
   // TODO : update app detail modal update
   public disconnectApp(appCode: number): void {
     this.connectedAppService.disconnect(appCode).subscribe(resp => {
       console.log(resp);
       this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
-      this.connected = true;
+      this.connected = false;
     });
   }
 }
