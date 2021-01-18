@@ -59,7 +59,9 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
       console.log(evt);
-      this.shortcutForms.push(new ShortcutForm(evt.providedActionId, evt.type, evt.url, evt.description, evt.appIcon, false, false));
+      this.shortcutForms.push(new ShortcutForm(
+        evt.providedActionId, evt.type, evt.url, evt.description,
+        evt.appIcon, false, false, false));
     });
   }
 
@@ -79,6 +81,19 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
     console.log(appCode);
     this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, true));
+  }
+
+  public shortcutKeywordInput(event: any, sf: ShortcutForm): void {
+    const input = event.target.textContent;
+    console.log(input);
+    if (input.match('/[a-z]{2,}(\\/[a-z]+)?(\\/[a-z]+)?/gm')) {
+      console.log('패턴 통과');
+      sf.enableSaveBtn = true;
+      return;
+    }
+
+    sf.enableSaveBtn = false;
+    console.log('패턴 불통과!');
   }
 
   public saveShortcut(): void {
