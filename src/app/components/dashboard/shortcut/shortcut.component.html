@@ -24,7 +24,7 @@
 <div class="section section-shortcuts">
   <h2>My Shortcuts</h2>
   <!-- Shortcuts List -->
-  <div class="list-shortcuts" [class.hidden]="shortcuts.length === 0 && urlRedirections.length === 0">
+  <div class="list-shortcuts" [class.hidden]="shortcuts?.length === 0 && urlRedirections?.length === 0">
     <ng-container *ngFor="let sf of shortcutForms">
       <div class="item-shortcut">
         <div class="shortcut">

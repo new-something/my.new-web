@@ -90,6 +90,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.hideAllModal();
     this.modalEventService.publishAddToShortcutEvent(new AddToShortcutEvent(
       providedAction.providedActionId,
       providedAction.type,

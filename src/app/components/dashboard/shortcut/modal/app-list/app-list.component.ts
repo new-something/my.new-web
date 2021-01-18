@@ -20,7 +20,9 @@ export class AppListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.modalVisibleService.getOpenAppListModal().subscribe(openCommand => {
       this.showListModal = openCommand.visible;
-      this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => this.providedApps = providedApps);
+      if (this.showListModal) {
+        this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => this.providedApps = providedApps);
+      }
     });
   }
 
