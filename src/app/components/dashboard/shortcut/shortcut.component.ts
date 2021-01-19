@@ -197,10 +197,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         this.shortcuts.splice(removeTargetIdx, 1);
         const editingForms = this.shortcutForms.filter(f => f.editable).length;
         const editingShortcuts = this.shortcuts.filter(shortcut => shortcut.editable).length;
-        console.log(this.shortcutForms);
-        console.log(this.shortcuts);
-        console.log(editingForms);
-        console.log(editingShortcuts);
         // TODO : url redirection editing length;
         if (editingForms === 0 && editingShortcuts === 0) {
           this.hideAddNewBtn = false;
