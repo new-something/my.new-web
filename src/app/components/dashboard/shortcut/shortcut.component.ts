@@ -7,6 +7,7 @@ import {CommandAppDetailModal} from '../../../commands/command-app-detail-modal'
 import {CommandAppListModal} from '../../../commands/command-app-list-modal';
 import {Subscription} from 'rxjs';
 import {ShortcutForm} from '../../../models/shortcut-form';
+import {ShortcutService} from '../../../services/shortcut/shortcut.service';
 
 @Component({
   selector: 'app-shortcut',
@@ -31,7 +32,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public addToShortcutSubscription: Subscription;
 
-  constructor(private modalEventService: ModalEventService) {
+  constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
   }
 
   public ngOnInit(): void {
@@ -61,7 +62,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       console.log(evt);
       this.shortcutForms.push(new ShortcutForm(
         evt.providedActionId, evt.type, evt.url, evt.description,
-        evt.appIcon, false, false, false));
+        evt.appIcon, false, false, false, '', evt.connectedId));
     });
   }
 
@@ -75,17 +76,18 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.modalEventService.updateOpenAppListModal(new CommandAppListModal('ALL', true));
   }
 
-  public cAppClicked(appCode: number): void {
+  public cAppClicked(appCode: number, connectedId: number): void {
     if (this.disableConnectedAppClick) {
       return;
     }
     console.log(appCode);
-    this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, true));
+    this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, connectedId, true));
   }
 
   public shortcutKeywordInput(event: any, sf: ShortcutForm): void {
     const re = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
     const input = event.target.textContent;
+    sf.shortcutKeyword = input;
     console.log(input);
     if (re.test(input)) {
       console.log('패턴 통과');
@@ -97,8 +99,19 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('패턴 불통과!');
   }
 
-  public saveShortcut(): void {
+  public saveShortcut(sf: ShortcutForm): void {
     console.log('save shortcut btn clicked!');
+    if (sf.enableSaveBtn) {
+      this.shortcutService.saveShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(s => {
+        console.log(s);
+        console.log(this.shortcuts);
+        this.shortcuts.push(s);
+        console.log(this.shortcuts);
+      });
+      return;
+    }
+
+    console.log('비활성화 되어있음.');
   }
 
   public makeEditable(sf: ShortcutForm): void {

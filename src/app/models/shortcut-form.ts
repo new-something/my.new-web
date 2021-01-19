@@ -7,10 +7,13 @@ export class ShortcutForm {
   editable: boolean;
   contentEditable: boolean;
   enableSaveBtn: boolean;
+  shortcutKeyword: string;
+  connectedId: number;
 
   constructor(providedActionId: number, type: string, url: string,
               description: string, appIcon: string, editable: boolean,
-              contentEditable: boolean, enableSaveBtn: boolean) {
+              contentEditable: boolean, enableSaveBtn: boolean, shortcutKeyword: string,
+              connectedId: number) {
     this.providedActionId = providedActionId;
     this.type = type;
     this.url = url;
@@ -19,5 +22,7 @@ export class ShortcutForm {
     this.editable = editable;
     this.contentEditable = contentEditable;
     this.enableSaveBtn = enableSaveBtn;
+    this.shortcutKeyword = shortcutKeyword;
+    this.connectedId = connectedId;
   }
 }

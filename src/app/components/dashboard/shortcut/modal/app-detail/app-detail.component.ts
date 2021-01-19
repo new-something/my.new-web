@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalEventService} from '../../../../../services/modal/modal-event.service';
 import {Subscription} from 'rxjs';
-import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
 import {ProvidedAppService} from '../../../../../services/app/provided-app.service';
 import {ProvidedAppDetail} from '../../../../../models/provided-app-detail';
 import {CommandAppListModal} from '../../../../../commands/command-app-list-modal';
@@ -17,10 +16,10 @@ import {ProvidedAction} from '../../../../../models/provided-action';
   styleUrls: ['./app-detail.component.css']
 })
 export class AppDetailComponent implements OnInit, OnDestroy {
+  public connectedId = null;
   public connected = false;
   public showDetailModal = false;
   public hasBackModalStep = false;
-  public openCommand: CommandAppDetailModal;
   public subscription: Subscription;
 
   public providedAppDetail: ProvidedAppDetail;
@@ -37,10 +36,10 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     // set subscribe to message service
     this.subscription = this.modalEventService.getOpenAppDetailModal().subscribe(openCommand => {
       console.log('app detail modal open command app code : ' + openCommand.appCode);
+      this.connectedId = openCommand.connectedId;
       this.connected = openCommand.connected;
       this.showDetailModal = true;
       this.hasBackModalStep = openCommand.hasBackModalStep;
-      this.openCommand = openCommand;
       this.providedAppService.findById(openCommand.appCode).subscribe(data => {
         this.providedAppDetail = data;
         console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@');
@@ -74,6 +73,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
         resp.description)
       );
       this.connected = true;
+      this.connectedId = resp.connectedId;
     });
   }
 
@@ -82,6 +82,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       console.log(resp);
       this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
       this.connected = false;
+      this.connectedId = null;
     });
   }
 
@@ -96,7 +97,8 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       providedAction.type,
       providedAction.url,
       providedAction.description,
-      appIcon
+      appIcon,
+      this.connectedId
     ));
   }
 }

@@ -20,7 +20,7 @@ export class ProvidedAppService {
     return this.httpClient.get<ProvidedAppResponse[]>(url).pipe(
       map(data => data.map((row, idx, rows) =>
           new ProvidedApp(row.appCode, row.appName, row.appIcon, row.domain,
-            row.description, row.connected, row.connectedId)
+            row.description, row.connected, row.connectedId === 0  ? null : row.connectedId)
         )
       ));
   }

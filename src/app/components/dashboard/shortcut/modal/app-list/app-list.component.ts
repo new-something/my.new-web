@@ -44,7 +44,9 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   showAppDetailModal(appCode: number): void {
     this.showListModal = false;
-    const connected = this.providedApps.filter((pa) => pa.appCode === appCode).pop().connected;
-    this.modalVisibleService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, true, connected));
+    const providedApp = this.providedApps.filter((pa) => pa.appCode === appCode).pop();
+    this.modalVisibleService.updateOpenAppDetailModal(
+      new CommandAppDetailModal(appCode, true, providedApp.connectedId, providedApp.connected)
+    );
   }
 }
