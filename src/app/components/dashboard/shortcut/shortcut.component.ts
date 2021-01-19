@@ -134,6 +134,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         }
 
         this.shortcutForms.splice(removeTargetIdx, 1);
+        this.disableConnectedAppClick = false;
+        this.hideAddNewBtn = false;
       });
       return;
     }
