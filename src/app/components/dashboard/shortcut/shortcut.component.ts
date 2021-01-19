@@ -195,6 +195,13 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         }
 
         this.shortcuts.splice(removeTargetIdx, 1);
+        const editingForms = this.shortcutForms.filter(f => f.editable).length;
+        const editingShortcuts = this.shortcuts.filter(shortcut => shortcut.editable).length;
+        // TODO : url redirection editing length;
+        if (editingForms === 0 && editingShortcuts === 0) {
+          this.hideAddNewBtn = false;
+          this.disableConnectedAppClick = false;
+        }
       },
       err => {
         console.log(err);
