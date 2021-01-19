@@ -218,7 +218,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('update shortcut');
     console.log(s);
     if (s.enableSaveBtn) {
-      this.shortcutService.updateShortcut(s.shortcutId, s.path).subscribe(
+      this.shortcutService.updateShortcut(s.shortcutId, s.newPath).subscribe(
         resp => {
           console.log(resp);
           this.disableConnectedAppClick = false;
@@ -238,7 +238,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public shortcutKeywordCheck(event: any, s: Shortcut): void {
     const input = event.target.textContent;
-    s.path = input;
+    s.newPath = input;
     console.log(input);
     if (this.pathRegExp.test(input)) {
       console.log('패턴 통과');
