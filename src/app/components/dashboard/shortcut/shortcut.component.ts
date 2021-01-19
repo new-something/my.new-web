@@ -149,7 +149,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('비활성화 되어있음.');
   }
 
-  public makeEditable(sf: ShortcutForm): void {
+  public makeFormEditable(sf: ShortcutForm): void {
     sf.editable = true;
     sf.contentEditable = true;
     this.hideAddNewBtn = true;
@@ -171,5 +171,22 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
     }
+  }
+
+  public makeShortcutEditable(s: Shortcut): void {
+    s.editable = true;
+    s.contentEditable = true;
+    this.hideAddNewBtn = true;
+    this.disableConnectedAppClick = true;
+  }
+
+  public deleteShortcut(s: Shortcut): void {
+    console.log('delete shortcut');
+    console.log(s);
+  }
+
+  public updateShortcut(s: Shortcut): void {
+    console.log('update shortcut');
+    console.log(s);
   }
 }

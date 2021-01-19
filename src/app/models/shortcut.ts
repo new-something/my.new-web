@@ -8,6 +8,9 @@ export class Shortcut {
 
   connectedId: number;
 
+  editable = false;
+  contentEditable = false;
+
   constructor(shortcutId: number, path: string, destinationUrl: string, type: string, description: string,
               appIcon: string, connectedId: number) {
     this.shortcutId = shortcutId;
