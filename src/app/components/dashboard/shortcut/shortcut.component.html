@@ -71,7 +71,7 @@
             <a href="https://my.new/" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
-              <span class="shortcut-url-with-keyword"></span>
+              <span class="shortcut-url-with-keyword">{{s.path}}</span>
             </a>
           </div>
         </div>
@@ -102,7 +102,7 @@
     <ng-container *ngFor="let ur of urlRedirections">
       <div class="item-url-shortcut" [id]="ur.urlRedirectionId">
         <div class="shortcut">
-          <div class="shortcut-keyword" contenteditable="true" data-placeholder="New shortcut here..."></div>
+          <div class="shortcut-keyword" contenteditable="true" data-placeholder="New shortcut here...">{{ur.path}}</div>
           <div class="shortcut-url">
             <a href="#" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
