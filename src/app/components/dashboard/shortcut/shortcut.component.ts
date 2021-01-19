@@ -15,6 +15,9 @@ import {ShortcutService} from '../../../services/shortcut/shortcut.service';
   styleUrls: ['./shortcut.component.css']
 })
 export class ShortcutComponent implements OnInit, OnDestroy {
+
+  constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
+  }
   @Input()
   public connectedApps: ConnectedApp[] = [];
   @Input()
@@ -32,7 +35,21 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public addToShortcutSubscription: Subscription;
 
-  constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
+  private static generateShortcutFormId(): string {
+    let uuidValue = '';
+    let k;
+    let randomValue;
+    for (k = 0; k < 32; k++) {
+      // tslint:disable-next-line:no-bitwise
+      randomValue = Math.random() * 16 | 0;
+
+      if (k === 8 || k === 12 || k === 16 || k === 20) {
+        uuidValue += '-';
+      }
+      // tslint:disable-next-line:no-bitwise
+      uuidValue += (k === 12 ? 4 : (k === 16 ? (randomValue & 3 | 8) : randomValue)).toString(16);
+    }
+    return uuidValue;
   }
 
   public ngOnInit(): void {
@@ -60,7 +77,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
       console.log(evt);
-      this.shortcutForms.push(new ShortcutForm(
+      this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateShortcutFormId(),
         evt.providedActionId, evt.type, evt.url, evt.description,
         evt.appIcon, false, false, false, '', evt.connectedId));
     });
@@ -99,14 +116,24 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('패턴 불통과!');
   }
 
-  public createShortcutForm(sf: ShortcutForm): void {
+  public createShortcut(sf: ShortcutForm): void {
     console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
       this.shortcutService.saveShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(s => {
         console.log(s);
         console.log(this.shortcuts);
-        this.shortcuts.push(s);
+        this.shortcuts = [s, ...this.shortcuts];
         console.log(this.shortcuts);
+        let removeTargetIdx;
+        // tslint:disable-next-line:prefer-for-of
+        for (let idx = 0; idx < this.shortcutForms.length; idx++) {
+          if (sf.id === this.shortcutForms[idx].id) {
+            removeTargetIdx = idx;
+            break;
+          }
+        }
+
+        this.shortcutForms.splice(removeTargetIdx, 1);
       });
       return;
     }

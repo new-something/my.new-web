@@ -1,4 +1,5 @@
 export class ShortcutForm {
+  id: string;
   providedActionId: number;
   type: string;
   url: string;
@@ -10,10 +11,11 @@ export class ShortcutForm {
   shortcutKeyword: string;
   connectedId: number;
 
-  constructor(providedActionId: number, type: string, url: string,
+  constructor(id: string, providedActionId: number, type: string, url: string,
               description: string, appIcon: string, editable: boolean,
               contentEditable: boolean, enableSaveBtn: boolean, shortcutKeyword: string,
               connectedId: number) {
+    this.id = id;
     this.providedActionId = providedActionId;
     this.type = type;
     this.url = url;
