@@ -99,7 +99,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('패턴 불통과!');
   }
 
-  public saveShortcut(sf: ShortcutForm): void {
+  public createShortcutForm(sf: ShortcutForm): void {
     console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
       this.shortcutService.saveShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(s => {
