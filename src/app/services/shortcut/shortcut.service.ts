@@ -31,6 +31,11 @@ export class ShortcutService {
     const url = this.appService + '/apis/shortcuts';
     return this.httpClient.put<void>(url, {shortcutId, path}).pipe();
   }
+
+  public deleteShortcut(shortcutId: number): Observable<void> {
+    const url = this.appService + '/apis/shortcuts/' + shortcutId;
+    return this.httpClient.delete<void>(url).pipe();
+  }
 }
 
 interface ShortcutCreateResponse {

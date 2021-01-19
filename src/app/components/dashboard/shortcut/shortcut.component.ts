@@ -175,6 +175,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public makeShortcutEditable(s: Shortcut): void {
     s.editable = true;
     s.contentEditable = true;
+    s.enableSaveBtn = true;
     this.hideAddNewBtn = true;
     this.disableConnectedAppClick = true;
   }
@@ -182,6 +183,24 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public deleteShortcut(s: Shortcut): void {
     console.log('delete shortcut');
     console.log(s);
+    this.shortcutService.deleteShortcut(s.shortcutId).subscribe(
+      resp => {
+        console.log(resp);
+        let removeTargetIdx = 0;
+        for (let idx = 0; idx < this.shortcuts.length; idx++) {
+          if (s.shortcutId === this.shortcuts[idx].shortcutId) {
+            removeTargetIdx = idx;
+            break;
+          }
+        }
+
+        this.shortcuts.splice(removeTargetIdx, 1);
+      },
+      err => {
+        console.log(err);
+        alert(err.error.message);
+      }
+    );
   }
 
   public updateShortcut(s: Shortcut): void {
@@ -191,6 +210,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.shortcutService.updateShortcut(s.shortcutId, s.path).subscribe(
         resp => {
           console.log(resp);
+          this.disableConnectedAppClick = false;
+          this.hideAddNewBtn = false;
+          s.contentEditable = false;
+          s.editable = false;
         },
         err => {
           console.log(err);
