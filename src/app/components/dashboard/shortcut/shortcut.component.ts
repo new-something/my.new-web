@@ -18,6 +18,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
   }
+
   @Input()
   public connectedApps: ConnectedApp[] = [];
   @Input()
@@ -119,24 +120,29 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public createShortcut(sf: ShortcutForm): void {
     console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
-      this.shortcutService.saveShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(s => {
-        console.log(s);
-        console.log(this.shortcuts);
-        this.shortcuts = [s, ...this.shortcuts];
-        console.log(this.shortcuts);
-        let removeTargetIdx;
-        // tslint:disable-next-line:prefer-for-of
-        for (let idx = 0; idx < this.shortcutForms.length; idx++) {
-          if (sf.id === this.shortcutForms[idx].id) {
-            removeTargetIdx = idx;
-            break;
+      this.shortcutService.saveShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(
+        s => {
+          console.log(s);
+          console.log(this.shortcuts);
+          this.shortcuts = [s, ...this.shortcuts];
+          console.log(this.shortcuts);
+          let removeTargetIdx;
+          // tslint:disable-next-line:prefer-for-of
+          for (let idx = 0; idx < this.shortcutForms.length; idx++) {
+            if (sf.id === this.shortcutForms[idx].id) {
+              removeTargetIdx = idx;
+              break;
+            }
           }
-        }
 
-        this.shortcutForms.splice(removeTargetIdx, 1);
-        this.disableConnectedAppClick = false;
-        this.hideAddNewBtn = false;
-      });
+          this.shortcutForms.splice(removeTargetIdx, 1);
+          this.disableConnectedAppClick = false;
+          this.hideAddNewBtn = false;
+        },
+        err => {
+          console.log(err);
+          alert(err.error.message);
+        });
       return;
     }
 
@@ -154,7 +160,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     let removeTargetIdx = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let idx = 0; idx < this.shortcutForms.length; idx++) {
-      if (sf.providedActionId === this.shortcutForms[idx].providedActionId){
+      if (sf.providedActionId === this.shortcutForms[idx].providedActionId) {
         removeTargetIdx = idx;
         break;
       }
