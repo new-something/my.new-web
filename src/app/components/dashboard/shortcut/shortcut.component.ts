@@ -135,8 +135,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           }
 
           this.shortcutForms.splice(removeTargetIdx, 1);
-          this.disableConnectedAppClick = false;
-          this.hideAddNewBtn = false;
+          this.makeTouchableAppList();
         },
         err => {
           console.log(err);
@@ -195,13 +194,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         }
 
         this.shortcuts.splice(removeTargetIdx, 1);
-        const editingForms = this.shortcutForms.filter(f => f.editable).length;
-        const editingShortcuts = this.shortcuts.filter(shortcut => shortcut.editable).length;
-        // TODO : url redirection editing length;
-        if (editingForms === 0 && editingShortcuts === 0) {
-          this.hideAddNewBtn = false;
-          this.disableConnectedAppClick = false;
-        }
+        this.makeTouchableAppList();
       },
       err => {
         console.log(err);
@@ -217,10 +210,9 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.shortcutService.updateShortcut(s.shortcutId, s.newPath).subscribe(
         resp => {
           console.log(resp);
-          this.disableConnectedAppClick = false;
-          this.hideAddNewBtn = false;
           s.contentEditable = false;
           s.editable = false;
+          this.makeTouchableAppList();
         },
         err => {
           console.log(err);
@@ -244,5 +236,15 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     s.enableSaveBtn = false;
     console.log('패턴 불통과!');
+  }
+
+  private makeTouchableAppList(): void{
+    const editingForms = this.shortcutForms.filter(f => f.editable).length;
+    const editingShortcuts = this.shortcuts.filter(shortcut => shortcut.editable).length;
+    // TODO : url redirection editing length;
+    if (editingForms === 0 && editingShortcuts === 0) {
+      this.hideAddNewBtn = false;
+      this.disableConnectedAppClick = false;
+    }
   }
 }
