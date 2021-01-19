@@ -30,7 +30,7 @@
       <div class="item-shortcut" [class.is-editing]="sf.editable">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="sf.contentEditable" data-placeholder="New shortcut here..."
-               (input)="shortcutKeywordInput($event, sf)"></div>
+               (input)="shortcutFormKeywordCheck($event, sf)"></div>
           <div class="shortcut-url">
             <a href="https://my.new/" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
@@ -66,7 +66,8 @@
     <ng-container *ngFor="let s of shortcuts">
       <div class="item-shortcut" [id]="s.shortcutId" [class.is-editing]="s.editable">
         <div class="shortcut">
-          <div class="shortcut-keyword" [attr.contenteditable]="s.contentEditable" data-placeholder="New shortcut here...">{{s.path}}</div>
+          <div class="shortcut-keyword" [attr.contenteditable]="s.contentEditable" data-placeholder="New shortcut here..."
+               (input)="shortcutKeywordCheck($event, s)">{{s.path}}</div>
           <div class="shortcut-url">
             <a href="https://my.new/" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
@@ -86,7 +87,7 @@
             <div class="action-name">{{s.description}}</div>
           </div>
           <div class="buttons">
-            <div class="btn btn-save" (click)="updateShortcut(s)">
+            <div class="btn btn-save" [class.is-disabled]="!s.enableSaveBtn" (click)="updateShortcut(s)">
               <svg viewBox="0 0 32 24" width="16" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.8686 23.5286L0.46861 13.0688C-0.156203 12.4404 -0.156203 11.4215 0.46861 10.7931L2.7313 8.51731C3.35611 7.88884 4.36924 7.88884 4.99405 8.51731L12 15.5635L27.0059 0.471304C27.6308 -0.157101 28.6439 -0.157101 29.2687 0.471304L31.5314 2.74707C32.1562 3.37547 32.1562 4.39436 31.5314 5.02283L13.1314 23.5287C12.5065 24.1571 11.4934 24.1571 10.8686 23.5286Z" />
               </svg>

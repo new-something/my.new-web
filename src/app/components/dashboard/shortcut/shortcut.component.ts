@@ -15,7 +15,7 @@ import {ShortcutService} from '../../../services/shortcut/shortcut.service';
   styleUrls: ['./shortcut.component.css']
 })
 export class ShortcutComponent implements OnInit, OnDestroy {
-
+  private pathRegExp = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
   }
 
@@ -102,12 +102,11 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, connectedId, true));
   }
 
-  public shortcutKeywordInput(event: any, sf: ShortcutForm): void {
-    const re = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
+  public shortcutFormKeywordCheck(event: any, sf: ShortcutForm): void {
     const input = event.target.textContent;
     sf.shortcutKeyword = input;
     console.log(input);
-    if (re.test(input)) {
+    if (this.pathRegExp.test(input)) {
       console.log('패턴 통과');
       sf.enableSaveBtn = true;
       return;
@@ -120,7 +119,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public createShortcut(sf: ShortcutForm): void {
     console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
-      this.shortcutService.saveShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(
+      this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(
         s => {
           console.log(s);
           console.log(this.shortcuts);
@@ -188,5 +187,32 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public updateShortcut(s: Shortcut): void {
     console.log('update shortcut');
     console.log(s);
+    if (s.enableSaveBtn) {
+      this.shortcutService.updateShortcut(s.shortcutId, s.path).subscribe(
+        resp => {
+          console.log(resp);
+        },
+        err => {
+          console.log(err);
+          alert(err.error.message);
+        }
+      );
+    }
+
+    console.log('update button disabled.');
+  }
+
+  public shortcutKeywordCheck(event: any, s: Shortcut): void {
+    const input = event.target.textContent;
+    s.path = input;
+    console.log(input);
+    if (this.pathRegExp.test(input)) {
+      console.log('패턴 통과');
+      s.enableSaveBtn = true;
+      return;
+    }
+
+    s.enableSaveBtn = false;
+    console.log('패턴 불통과!');
   }
 }

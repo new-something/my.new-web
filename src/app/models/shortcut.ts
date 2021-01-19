@@ -8,8 +8,9 @@ export class Shortcut {
 
   connectedId: number;
 
-  editable = false;
-  contentEditable = false;
+  editable: boolean;
+  contentEditable: boolean;
+  enableSaveBtn: boolean;
 
   constructor(shortcutId: number, path: string, destinationUrl: string, type: string, description: string,
               appIcon: string, connectedId: number) {
@@ -20,5 +21,9 @@ export class Shortcut {
     this.description = description;
     this.appIcon = appIcon;
     this.connectedId = connectedId;
+
+    this.editable = false;
+    this.contentEditable = false;
+    this.enableSaveBtn = false;
   }
 }

@@ -13,7 +13,7 @@ export class ShortcutService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public saveShortcut(connectedId: number, providedActionId: number, shortcutKeyword: string): Observable<Shortcut> {
+  public createShortcut(connectedId: number, providedActionId: number, shortcutKeyword: string): Observable<Shortcut> {
     const url = this.appService + '/apis/shortcuts';
     return this.httpClient.post<ShortcutCreateResponse>(url, {connectedId, providedActionId, shortcutKeyword}).pipe(
       map(resp => new Shortcut(resp.shortcutId,
@@ -25,6 +25,11 @@ export class ShortcutService {
         resp.connectedId
       ))
     );
+  }
+
+  public updateShortcut(shortcutId: number, path: string): Observable<void> {
+    const url = this.appService + '/apis/shortcuts';
+    return this.httpClient.put<void>(url, {shortcutId, path}).pipe();
   }
 }
 
