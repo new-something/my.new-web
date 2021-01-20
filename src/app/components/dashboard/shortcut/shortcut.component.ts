@@ -411,9 +411,56 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public deleteUrlRedirection(ur: UrlRedirection): void {
     console.log(ur);
+    this.urlRedirectionService.delete(ur.urlRedirectionId).subscribe(
+      resp => {
+        let removeTargetIdx = 0;
+        for (let idx = 0; idx < this.urlRedirections.length; idx++) {
+          if (ur.urlRedirectionId === this.urlRedirections[idx].urlRedirectionId) {
+            removeTargetIdx = idx;
+            break;
+          }
+        }
+        this.urlRedirections.splice(removeTargetIdx, 1);
+        this.makeTouchableAppList();
+      },
+      err => {
+        console.log(err);
+        alert(err.error.message);
+      }
+    );
   }
 
   public updateUrlRedirection(ur: UrlRedirection): void {
+    if (!ur.pathChange && !ur.destinationUrlChange) {
+      ur.contentEditable = false;
+      ur.editable = false;
+      this.makeTouchableAppList();
+      return;
+    }
+
+    let path = ur.path;
+    let destinationUrl = ur.destinationUrl;
+    if (ur.pathChange) {
+      path = ur.newPath;
+    }
+
+    if (ur.destinationUrlChange) {
+      destinationUrl = ur.newDestinationUrl;
+    }
+
+    this.urlRedirectionService.update(ur.urlRedirectionId, path, destinationUrl).subscribe(
+      resp => {
+        ur.path = path;
+        ur.destinationUrl = destinationUrl;
+        ur.editable = false;
+        ur.contentEditable = false;
+        this.makeTouchableAppList();
+      },
+      err => {
+        console.log(err);
+        alert(err.error.message);
+      }
+    );
     console.log(ur);
   }
 

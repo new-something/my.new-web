@@ -19,6 +19,16 @@ export class UrlRedirectionService {
       map(resp => new UrlRedirection(resp.urlRedirectionId, resp.path, resp.destinationUrl))
     );
   }
+
+  public update(urlRedirectionId: number, path: string, destinationUrl: string): Observable<void> {
+    const url = this.appService + '/apis/url-redirections';
+    return this.httpClient.put<void>(url, {urlRedirectionId, path, destinationUrl}).pipe();
+  }
+
+  public delete(urlRedirectionId: number): Observable<void> {
+    const url = this.appService + '/apis/url-redirections/' + urlRedirectionId;
+    return this.httpClient.delete<void>(url).pipe();
+  }
 }
 
 interface UrlRedirectionResponse {
