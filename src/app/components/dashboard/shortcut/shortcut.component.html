@@ -72,8 +72,7 @@
             <a href="#" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
-              <span class="shortcut-url-with-keyword"
-                (keyup)="urlRedirectionDestinationUrlCheck($event, uf)">{{uf.path}}</span>
+              <span class="shortcut-url-with-keyword">{{uf.path}}</span>
             </a>
           </div>
         </div>
@@ -87,7 +86,8 @@
             </div>
             <div class="app-url">
               <div class="action-name">A New URL Redirection</div>
-              <div class="destination-url" contenteditable="true" data-placeholder="Your URL here...">{{uf.destinationUrl}}</div>
+              <div class="destination-url" [attr.contenteditable]="uf.contentEditable" data-placeholder="Your URL here..."
+                   (keyup)="urlRedirectionDestinationUrlCheck($event, uf)"></div>
             </div>
           </div>
           <div class="buttons">
