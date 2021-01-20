@@ -67,7 +67,7 @@
       <div class="item-url-shortcut" [class.is-editing]="uf.editable">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="uf.contentEditable" data-placeholder="New shortcut here..."
-              (keyup)="urlRedirectionPathCheck($event, uf)"></div>
+              (keyup)="urlRedirectionFormPathCheck($event, uf)"></div>
           <div class="shortcut-url">
             <a href="#" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
@@ -87,7 +87,7 @@
             <div class="app-url">
               <div class="action-name">A New URL Redirection</div>
               <div class="destination-url" [attr.contenteditable]="uf.contentEditable" data-placeholder="Your URL here..."
-                   (keyup)="urlRedirectionDestinationUrlCheck($event, uf)"></div>
+                   (keyup)="urlRedirectionFormDestinationUrlCheck($event, uf)"></div>
             </div>
           </div>
           <div class="buttons">
@@ -108,7 +108,7 @@
       <div class="item-shortcut" [id]="s.shortcutId" [class.is-editing]="s.editable">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="s.contentEditable" data-placeholder="New shortcut here..."
-               (input)="shortcutPathCheck($event, s)">{{s.path}}</div>
+               (keyup)="shortcutPathCheck($event, s)">{{s.path}}</div>
           <div class="shortcut-url">
             <a href="https://my.new/" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
@@ -142,9 +142,10 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let ur of urlRedirections">
-      <div class="item-url-shortcut" [id]="ur.urlRedirectionId">
+      <div class="item-url-shortcut" [class.is-editing]="ur.editable" [id]="ur.urlRedirectionId">
         <div class="shortcut">
-          <div class="shortcut-keyword" contenteditable="true" data-placeholder="New shortcut here...">{{ur.path}}</div>
+          <div class="shortcut-keyword" [attr.contenteditable]="ur.contentEditable" data-placeholder="New shortcut here..."
+            (keyup)="urlRedirectionPathCheck($event, ur)">{{ur.path}}</div>
           <div class="shortcut-url">
             <a href="#" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
@@ -163,16 +164,17 @@
             </div>
             <div class="app-url">
               <div class="action-name">A New URL Redirection</div>
-              <div class="destination-url" contenteditable="true" data-placeholder="Your URL here...">{{ur.destinationUrl}}</div>
+              <div class="destination-url" contenteditable="true" data-placeholder="Your URL here..."
+                (keyup)="urlRedirectionDestinationUrlCheck($event, ur)">{{ur.destinationUrl}}</div>
             </div>
           </div>
           <div class="buttons">
-            <div class="btn btn-save is-disabled">
+            <div class="btn btn-save" [class.is-disabled]="!ur.enableSaveBtn" (click)="updateUrlRedirection(ur)">
               <svg viewBox="0 0 32 24" width="16" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.8686 23.5286L0.46861 13.0688C-0.156203 12.4404 -0.156203 11.4215 0.46861 10.7931L2.7313 8.51731C3.35611 7.88884 4.36924 7.88884 4.99405 8.51731L12 15.5635L27.0059 0.471304C27.6308 -0.157101 28.6439 -0.157101 29.2687 0.471304L31.5314 2.74707C32.1562 3.37547 32.1562 4.39436 31.5314 5.02283L13.1314 23.5287C12.5065 24.1571 11.4934 24.1571 10.8686 23.5286Z" />
               </svg>
             </div>
-            <div class="btn btn-delete">
+            <div class="btn btn-delete" (click)="deleteUrlRedirection(ur)">
               <img src="/assets/ico-trash.svg" width="16" alt="trash">
             </div>
             <div class="btn btn-edit" (click)="makeUrlRedirectionEditable(ur)"><img src="/assets/ico-pencil.svg" width="16" alt="pencil"></div>

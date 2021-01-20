@@ -276,7 +276,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.makeTouchableAppList();
   }
 
-  public urlRedirectionPathCheck(event: any, uf: UrlRedirectionForm): void {
+  public urlRedirectionFormPathCheck(event: any, uf: UrlRedirectionForm): void {
     const input = event.target.textContent;
     uf.path = input;
     console.log(input);
@@ -289,7 +289,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('패턴 불통과!');
   }
 
-  public urlRedirectionDestinationUrlCheck(event: any, uf: UrlRedirectionForm): void {
+  public urlRedirectionFormDestinationUrlCheck(event: any, uf: UrlRedirectionForm): void {
     const input = event.target.textContent;
     uf.destinationUrl = input;
     console.log(input);
@@ -317,12 +317,111 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     );
   }
 
+  public urlRedirectionPathCheck(event: any, ur: UrlRedirection): void {
+    const input = event.target.textContent;
+    console.log(input);
+    ur.newPath = input;
+    ur.pathChange = true;
+    // path 만 변경하고 destination 은 변경하지 않은 경우.
+    if (ur.pathChange && !ur.destinationUrlChange) {
+      if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.destinationUrl)) {
+        console.log('url 패턴 통과, path 패턴 통과');
+        ur.enableSaveBtn = true;
+        return;
+      }
+      console.log('불통과~');
+      ur.enableSaveBtn = false;
+      return;
+    }
+
+    // path 는 변경하지 않고 destination 만 변경한 경우.
+    if (!ur.pathChange && ur.destinationUrlChange) {
+      if (this.pathRegExp.test(ur.path) && this.urlRegExp.test(ur.newDestinationUrl)) {
+        console.log('url 패턴 통과, path 패턴 통과');
+        ur.enableSaveBtn = true;
+        return;
+      }
+
+      console.log('불통과~');
+      ur.enableSaveBtn = false;
+      return;
+    }
+
+    // path 와 destination url 모두 변경한 경우.
+    if (ur.pathChange && ur.destinationUrlChange) {
+      if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.newDestinationUrl)) {
+        console.log('url 패턴 통과, path 패턴 통과');
+        ur.enableSaveBtn = true;
+        return;
+      }
+
+      console.log('불통과~');
+      ur.enableSaveBtn = false;
+      return;
+    }
+
+    // path 와 destination url 모두 변경하지 않은 경우는 해당 function 을 사용하지 않는다.
+  }
+
+  public urlRedirectionDestinationUrlCheck(event: any, ur: UrlRedirection): void{
+    const input = event.target.textContent;
+    console.log(input);
+    ur.newDestinationUrl = input;
+    ur.destinationUrlChange = true;
+    // path 만 변경하고 destination 은 변경하지 않은 경우.
+    if (ur.pathChange && !ur.destinationUrlChange) {
+      if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.destinationUrl)) {
+        console.log('url 패턴 통과, path 패턴 통과');
+        ur.enableSaveBtn = true;
+        return;
+      }
+      console.log('불통과~');
+      ur.enableSaveBtn = false;
+      return;
+    }
+
+    // path 는 변경하지 않고 destination 만 변경한 경우.
+    if (!ur.pathChange && ur.destinationUrlChange) {
+      if (this.pathRegExp.test(ur.path) && this.urlRegExp.test(ur.newDestinationUrl)) {
+        console.log('url 패턴 통과, path 패턴 통과');
+        ur.enableSaveBtn = true;
+        return;
+      }
+
+      console.log('불통과~');
+      ur.enableSaveBtn = false;
+      return;
+    }
+
+    // path 와 destination url 모두 변경한 경우.
+    if (ur.pathChange && ur.destinationUrlChange) {
+      if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.newDestinationUrl)) {
+        console.log('url 패턴 통과, path 패턴 통과');
+        ur.enableSaveBtn = true;
+        return;
+      }
+
+      console.log('불통과~');
+      ur.enableSaveBtn = false;
+      return;
+    }
+
+    // path 와 destination url 모두 변경하지 않은 경우는 해당 function 을 사용하지 않는다.
+  }
+
+  public deleteUrlRedirection(ur: UrlRedirection): void {
+    console.log(ur);
+  }
+
+  public updateUrlRedirection(ur: UrlRedirection): void {
+    console.log(ur);
+  }
+
   private makeTouchableAppList(): void{
     const editingShortcutForms = this.shortcutForms.filter(sf => sf.editable).length;
     const editingShortcuts = this.shortcuts.filter(s => s.editable).length;
     const editingUrlRedirectionForms = this.urlRedirectionForms.filter(uf => uf.editable).length;
     const editingUrlRedirections = this.urlRedirections.filter(u => u.editable).length;
-    // TODO : url redirection editing length;
     if (editingShortcutForms === 0 && editingShortcuts === 0 && editingUrlRedirectionForms === 0 && editingUrlRedirections === 0) {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
