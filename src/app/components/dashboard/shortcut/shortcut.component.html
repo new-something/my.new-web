@@ -72,7 +72,8 @@
             <a href="#" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
-              <span class="shortcut-url-with-keyword">{{uf.path}}</span>
+              <span class="shortcut-url-with-keyword"
+                (keyup)="urlRedirectionDestinationUrlCheck($event, uf)">{{uf.path}}</span>
             </a>
           </div>
         </div>

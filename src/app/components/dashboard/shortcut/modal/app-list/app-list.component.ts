@@ -53,6 +53,7 @@ export class AppListComponent implements OnInit, OnDestroy {
   }
 
   public addToUrlRedirection(): void {
+    this.showListModal = false;
     this.modalEventService.publishAddToUrlRedirectionEvent(new AddToUrlRedirectionEvent());
   }
 }

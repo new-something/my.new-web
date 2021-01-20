@@ -17,6 +17,7 @@ import {UrlRedirectionForm} from '../../../models/url-redirection-form';
 })
 export class ShortcutComponent implements OnInit, OnDestroy {
   private pathRegExp = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
+  private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
   }
 
@@ -277,14 +278,26 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     const input = event.target.textContent;
     uf.path = input;
     console.log(input);
-    if (this.pathRegExp.test(input)) {
-      console.log('패턴 통과');
+    if (this.urlRegExp.test(uf.destinationUrl) && this.pathRegExp.test(input)) {
+      console.log('url 패턴 통과, path 패턴 통과');
       uf.enableSaveBtn = true;
       return;
     }
-
     uf.enableSaveBtn = false;
     console.log('패턴 불통과!');
+  }
+
+  public urlRedirectionDestinationUrlCheck(event: any, uf: UrlRedirectionForm): void {
+    const input = event.target.textContent;
+    uf.destinationUrl = input;
+    console.log(input);
+    if (this.urlRegExp.test(input) && this.pathRegExp.test(uf.path)) {
+      console.log('url 패턴 통과, path 패턴 통과');
+      uf.enableSaveBtn = true;
+      return;
+    }
+    uf.enableSaveBtn = false;
+    console.log('불통과!');
   }
 
   public createUrlRedirection(uf: UrlRedirectionForm): void {
