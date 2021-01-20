@@ -24,6 +24,6 @@ export class UrlRedirection {
 
     this.editable = false;
     this.contentEditable = false;
-    this.enableSaveBtn = false;
+    this.enableSaveBtn = true;
   }
 }
