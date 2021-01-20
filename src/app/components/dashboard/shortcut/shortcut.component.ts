@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs';
 import {ShortcutForm} from '../../../models/shortcut-form';
 import {ShortcutService} from '../../../services/shortcut/shortcut.service';
 import {UrlRedirectionForm} from '../../../models/url-redirection-form';
+import {UrlRedirectionService} from '../../../services/url-redirection/url-redirection.service';
 
 @Component({
   selector: 'app-shortcut',
@@ -18,7 +19,8 @@ import {UrlRedirectionForm} from '../../../models/url-redirection-form';
 export class ShortcutComponent implements OnInit, OnDestroy {
   private pathRegExp = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
   private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
-  constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService) {
+  constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService,
+              private urlRedirectionService: UrlRedirectionService) {
   }
 
   @Input()
@@ -302,6 +304,17 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public createUrlRedirection(uf: UrlRedirectionForm): void {
     console.log(uf);
+    this.urlRedirectionService.create(uf.path, uf.destinationUrl).subscribe(
+      resp => {
+        console.log(resp);
+        this.urlRedirections = [resp, ...this.urlRedirections];
+        this.deleteUrlRedirectionForm(uf);
+      },
+      err => {
+        alert(err.error.message);
+        console.log(err);
+      }
+    );
   }
 
   private makeTouchableAppList(): void{
