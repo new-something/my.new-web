@@ -5,6 +5,7 @@ import {CommandAppListModal} from '../../commands/command-app-list-modal';
 import {AppConnectedEvent} from '../../events/app-connected-event';
 import {AppDisconnectedEvent} from '../../events/app-disconnected-event';
 import {AddToShortcutEvent} from '../../events/add-to-shortcut-event';
+import {AddToUrlRedirectionEvent} from '../../events/add-to-url-redirection-event';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ModalEventService {
   private appDisconnectionEventPipe = new Subject<AppDisconnectedEvent>();
 
   private addToShortcutEventPipe = new Subject<AddToShortcutEvent>();
-
+  private addToUrlRedirectionEventPipe = new Subject<AddToUrlRedirectionEvent>();
   constructor() { }
 
   public getOpenAppDetailModal(): Observable<CommandAppDetailModal> {
@@ -59,5 +60,13 @@ export class ModalEventService {
 
   public publishAddToShortcutEvent(event: AddToShortcutEvent): void {
     this.addToShortcutEventPipe.next(event);
+  }
+
+  public getAddToUrlRedirectionEventPipe(): Observable<AddToUrlRedirectionEvent> {
+    return this.addToUrlRedirectionEventPipe.asObservable();
+  }
+
+  public publishAddToUrlRedirectionEvent(event: AddToUrlRedirectionEvent): void {
+    this.addToUrlRedirectionEventPipe.next(event);
   }
 }

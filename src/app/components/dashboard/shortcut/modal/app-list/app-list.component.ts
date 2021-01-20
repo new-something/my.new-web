@@ -4,6 +4,7 @@ import {ProvidedAppService} from '../../../../../services/app/provided-app.servi
 import {ModalEventService} from '../../../../../services/modal/modal-event.service';
 import {CommandAppDetailModal} from '../../../../../commands/command-app-detail-modal';
 import {Subscription} from 'rxjs';
+import {AddToUrlRedirectionEvent} from '../../../../../events/add-to-url-redirection-event';
 
 @Component({
   selector: 'app-app-list',
@@ -15,10 +16,11 @@ export class AppListComponent implements OnInit, OnDestroy {
   public providedApps: ProvidedApp[] = [];
   public subscription: Subscription;
 
-  constructor(private providedAppService: ProvidedAppService, private modalVisibleService: ModalEventService) { }
+  constructor(private providedAppService: ProvidedAppService, private modalEventService: ModalEventService) {
+  }
 
-  ngOnInit(): void {
-    this.subscription = this.modalVisibleService.getOpenAppListModal().subscribe(openCommand => {
+  public ngOnInit(): void {
+    this.subscription = this.modalEventService.getOpenAppListModal().subscribe(openCommand => {
       this.showListModal = openCommand.visible;
       if (this.showListModal) {
         this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => this.providedApps = providedApps);
@@ -26,15 +28,15 @@ export class AppListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscription.unsubscribe(); // onDestroy cancels the subscribe request
   }
 
-  hideAppListModal(): void {
+  public hideAppListModal(): void {
     this.showListModal = false;
   }
 
-  changeAppTag($event): void {
+  public changeAppTag($event): void {
     console.log($event);
     console.log($event.target);
     console.log($event.target.value);
@@ -42,11 +44,15 @@ export class AppListComponent implements OnInit, OnDestroy {
     this.providedAppService.findAllByTag(tag).subscribe(providedApps => this.providedApps = providedApps);
   }
 
-  showAppDetailModal(appCode: number): void {
+  public showAppDetailModal(appCode: number): void {
     this.showListModal = false;
     const providedApp = this.providedApps.filter((pa) => pa.appCode === appCode).pop();
-    this.modalVisibleService.updateOpenAppDetailModal(
+    this.modalEventService.updateOpenAppDetailModal(
       new CommandAppDetailModal(appCode, true, providedApp.connectedId, providedApp.connected)
     );
+  }
+
+  public addToUrlRedirection(): void {
+    this.modalEventService.publishAddToUrlRedirectionEvent(new AddToUrlRedirectionEvent());
   }
 }

@@ -8,6 +8,7 @@ import {CommandAppListModal} from '../../../commands/command-app-list-modal';
 import {Subscription} from 'rxjs';
 import {ShortcutForm} from '../../../models/shortcut-form';
 import {ShortcutService} from '../../../services/shortcut/shortcut.service';
+import {UrlRedirectionForm} from '../../../models/url-redirection-form';
 
 @Component({
   selector: 'app-shortcut',
@@ -30,13 +31,15 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public disableConnectedAppClick = false;
 
   public shortcutForms: ShortcutForm[] = [];
+  public urlRedirectionForms: UrlRedirectionForm[] = [];
 
   public appConnectionSubscription: Subscription;
   public appDisconnectionSubscription: Subscription;
 
   public addToShortcutSubscription: Subscription;
+  public addToUrlRedirectionSubscription: Subscription;
 
-  private static generateShortcutFormId(): string {
+  private static generateFormId(): string {
     let uuidValue = '';
     let k;
     let randomValue;
@@ -78,9 +81,13 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
       console.log(evt);
-      this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateShortcutFormId(),
+      this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateFormId(),
         evt.providedActionId, evt.type, evt.url, evt.description,
         evt.appIcon, false, false, false, '', evt.connectedId));
+    });
+
+    this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(evt => {
+      this.urlRedirectionForms.push(new UrlRedirectionForm(ShortcutComponent.generateFormId()));
     });
   }
 
@@ -88,6 +95,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.appConnectionSubscription.unsubscribe();
     this.appDisconnectionSubscription.unsubscribe();
     this.addToShortcutSubscription.unsubscribe();
+    this.addToUrlRedirectionSubscription.unsubscribe();
   }
 
   public showAppListModal(): void {
@@ -102,7 +110,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, connectedId, true));
   }
 
-  public shortcutFormKeywordCheck(event: any, sf: ShortcutForm): void {
+  public shortcutFormPathCheck(event: any, sf: ShortcutForm): void {
     const input = event.target.textContent;
     sf.shortcutKeyword = input;
     console.log(input);
@@ -224,7 +232,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('update button disabled.');
   }
 
-  public shortcutKeywordCheck(event: any, s: Shortcut): void {
+  public shortcutPathCheck(event: any, s: Shortcut): void {
     const input = event.target.textContent;
     s.newPath = input;
     console.log(input);
@@ -238,11 +246,58 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     console.log('패턴 불통과!');
   }
 
+  public makeUrlRedirectionEditable(ur: UrlRedirection): void {
+    ur.contentEditable = true;
+    ur.editable = true;
+    this.hideAddNewBtn = true;
+    this.disableConnectedAppClick = true;
+  }
+
+  public makeUrlRedirectionFormEditable(uf: UrlRedirectionForm): void {
+    uf.contentEditable = true;
+    uf.editable = true;
+    this.hideAddNewBtn = true;
+    this.disableConnectedAppClick = true;
+  }
+
+  public deleteUrlRedirectionForm(uf: UrlRedirectionForm): void {
+    let removeTargetIdx = 0;
+    for (let idx = 0; idx < this.urlRedirectionForms.length; idx++) {
+      if (uf.id === this.urlRedirectionForms[idx].id) {
+        removeTargetIdx = idx;
+        break;
+      }
+    }
+
+    this.urlRedirectionForms.splice(removeTargetIdx, 1);
+    this.makeTouchableAppList();
+  }
+
+  public urlRedirectionPathCheck(event: any, uf: UrlRedirectionForm): void {
+    const input = event.target.textContent;
+    uf.path = input;
+    console.log(input);
+    if (this.pathRegExp.test(input)) {
+      console.log('패턴 통과');
+      uf.enableSaveBtn = true;
+      return;
+    }
+
+    uf.enableSaveBtn = false;
+    console.log('패턴 불통과!');
+  }
+
+  public createUrlRedirection(uf: UrlRedirectionForm): void {
+    console.log(uf);
+  }
+
   private makeTouchableAppList(): void{
-    const editingForms = this.shortcutForms.filter(f => f.editable).length;
-    const editingShortcuts = this.shortcuts.filter(shortcut => shortcut.editable).length;
+    const editingShortcutForms = this.shortcutForms.filter(sf => sf.editable).length;
+    const editingShortcuts = this.shortcuts.filter(s => s.editable).length;
+    const editingUrlRedirectionForms = this.urlRedirectionForms.filter(uf => uf.editable).length;
+    const editingUrlRedirections = this.urlRedirections.filter(u => u.editable).length;
     // TODO : url redirection editing length;
-    if (editingForms === 0 && editingShortcuts === 0) {
+    if (editingShortcutForms === 0 && editingShortcuts === 0 && editingUrlRedirectionForms === 0 && editingUrlRedirections === 0) {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
     }
