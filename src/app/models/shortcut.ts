@@ -8,10 +8,10 @@ export class Shortcut {
 
   connectedId: number;
 
-  newPath: string;
-  editable: boolean;
-  contentEditable: boolean;
-  enableSaveBtn: boolean;
+  newPath = '';
+  editable = false;
+  contentEditable = false;
+  enableSaveBtn = false;
 
   constructor(shortcutId: number, path: string, destinationUrl: string, type: string, description: string,
               appIcon: string, connectedId: number) {

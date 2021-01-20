@@ -3,14 +3,14 @@ export class UrlRedirection {
   path: string;
   destinationUrl: string;
 
-  newPath: string;
-  newDestinationUrl: string;
-  pathChange: boolean;
-  destinationUrlChange: boolean;
+  newPath = '';
+  newDestinationUrl = '';
+  pathChange = false;
+  destinationUrlChange = false;
 
-  editable: boolean;
-  contentEditable: boolean;
-  enableSaveBtn: boolean;
+  editable = false;
+  contentEditable = false;
+  enableSaveBtn = true;
 
   constructor(urlRedirectionId: number, path: string, destinationUrl: string) {
     this.urlRedirectionId = urlRedirectionId;
