@@ -13,7 +13,7 @@ import {UrlRedirection} from '../models/url-redirection';
 })
 export class MyInfoService {
   private appService: string = environment.appService;
-  private myInfoEndPoint: string = this.appService + '/a/dashboard';
+  private myInfoEndPoint: string = this.appService + '/apis/dashboard';
 
   constructor(private httpClient: HttpClient) { }
 
