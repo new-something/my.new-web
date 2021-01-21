@@ -217,6 +217,13 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public updateShortcut(s: Shortcut): void {
     console.log('update shortcut');
     console.log(s);
+    if (!s.pathChange) {
+      s.contentEditable = false;
+      s.editable = false;
+      this.makeTouchableAppList();
+      return;
+    }
+
     if (s.enableSaveBtn && s.pathChange) {
       this.shortcutService.updateShortcut(s.shortcutId, s.newPath).subscribe(
         resp => {
