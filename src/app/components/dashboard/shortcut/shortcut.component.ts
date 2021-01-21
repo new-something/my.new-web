@@ -217,7 +217,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public updateShortcut(s: Shortcut): void {
     console.log('update shortcut');
     console.log(s);
-    if (s.enableSaveBtn) {
+    if (s.enableSaveBtn && s.pathChange) {
       this.shortcutService.updateShortcut(s.shortcutId, s.newPath).subscribe(
         resp => {
           console.log(resp);
@@ -238,6 +238,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public shortcutPathCheck(event: any, s: Shortcut): void {
     const input = event.target.textContent;
     s.newPath = input;
+    s.pathChange = true;
     console.log(input);
     if (this.pathRegExp.test(input)) {
       console.log('패턴 통과');

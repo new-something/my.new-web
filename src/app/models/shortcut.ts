@@ -9,6 +9,7 @@ export class Shortcut {
   connectedId: number;
 
   newPath = '';
+  pathChange = false;
   editable = false;
   contentEditable = false;
   enableSaveBtn = false;
@@ -24,6 +25,7 @@ export class Shortcut {
     this.connectedId = connectedId;
 
     this.newPath = '';
+    this.pathChange = false;
     this.editable = false;
     this.contentEditable = false;
     this.enableSaveBtn = false;
