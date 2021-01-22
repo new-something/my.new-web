@@ -25,7 +25,8 @@
 <div class="section section-shortcuts">
   <h2>My Shortcuts</h2>
   <!-- Shortcuts List -->
-  <div class="list-shortcuts" [class.hidden]="shortcuts?.length === 0 && urlRedirections?.length === 0">
+  <div class="list-shortcuts" [class.hidden]="shortcutForms.length === 0 && urlRedirectionForms.length === 0
+                                          && shortcuts?.length === 0 && urlRedirections?.length === 0">
     <ng-container *ngFor="let sf of shortcutForms">
       <div class="item-shortcut" [class.is-editing]="sf.editable">
         <div class="shortcut">
@@ -184,7 +185,7 @@
     </ng-container>
   </div>
   <!-- Shortcuts List 상태: Empty -->
-  <div class="list-shortcuts-empty" [class.hidden]="shortcuts?.length > 0 || urlRedirections?.length > 0">
+  <div class="list-shortcuts-empty" [class.hidden]="shortcutForms.length > 0 || urlRedirectionForms.length > 0 && shortcuts?.length > 0 || urlRedirections?.length > 0">
     <img src="/assets/img-twinkle.png" alt="twinkle" />
     <p>
       There are no shortcuts you added.<br />Let’s try to
