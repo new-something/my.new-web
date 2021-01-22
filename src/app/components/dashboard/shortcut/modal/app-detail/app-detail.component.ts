@@ -24,6 +24,9 @@ export class AppDetailComponent implements OnInit, OnDestroy {
 
   public providedAppDetail: ProvidedAppDetail;
 
+  public connectBtnClicked = false;
+  public disconnectBtnClicked = false;
+
   constructor(private modalEventService: ModalEventService, private providedAppService: ProvidedAppService,
               private connectedAppService: ConnectedAppService) {
   }
@@ -62,28 +65,53 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   }
 
   public connectApp(appCode: number): void {
-    this.connectedAppService.connect(appCode).subscribe(resp => {
-      console.log(resp);
-      this.modalEventService.publishAppConnectionEvent(new AppConnectedEvent(
-        resp.appCode,
-        resp.connectedId,
-        resp.appName,
-        resp.appIcon,
-        resp.domain,
-        resp.description)
-      );
-      this.connected = true;
-      this.connectedId = resp.connectedId;
-    });
+    if (this.connectBtnClicked) {
+      console.log('processing to connect app');
+      return;
+    }
+
+    this.connectBtnClicked = true;
+    this.connectedAppService.connect(appCode).subscribe(
+      resp => {
+        console.log(resp);
+        this.modalEventService.publishAppConnectionEvent(new AppConnectedEvent(
+          resp.appCode,
+          resp.connectedId,
+          resp.appName,
+          resp.appIcon,
+          resp.domain,
+          resp.description)
+        );
+        this.connected = true;
+        this.connectedId = resp.connectedId;
+        this.connectBtnClicked = false;
+      },
+      error => {
+        console.log(error);
+        this.connectBtnClicked = false;
+      }
+    );
   }
 
   public disconnectApp(appCode: number): void {
-    this.connectedAppService.disconnect(appCode).subscribe(resp => {
-      console.log(resp);
-      this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
-      this.connected = false;
-      this.connectedId = null;
-    });
+    if (this.disconnectBtnClicked) {
+      console.log('processing to disconnect app');
+      return;
+    }
+
+    this.disconnectBtnClicked = true;
+    this.connectedAppService.disconnect(appCode).subscribe(
+      resp => {
+        console.log(resp);
+        this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
+        this.connected = false;
+        this.connectedId = null;
+        this.disconnectBtnClicked = false;
+      },
+      error => {
+        console.log(error);
+        this.disconnectBtnClicked = false;
+      });
   }
 
   public addToShortcut(providedAction: ProvidedAction, appIcon: string): void {
