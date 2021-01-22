@@ -185,7 +185,7 @@
     </ng-container>
   </div>
   <!-- Shortcuts List 상태: Empty -->
-  <div class="list-shortcuts-empty" [class.hidden]="shortcutForms.length > 0 || urlRedirectionForms.length > 0 && shortcuts?.length > 0 || urlRedirections?.length > 0">
+  <div class="list-shortcuts-empty" [class.hidden]="shortcutForms.length > 0 || urlRedirectionForms.length > 0 || shortcuts?.length > 0 || urlRedirections?.length > 0">
     <img src="/assets/img-twinkle.png" alt="twinkle" />
     <p>
       There are no shortcuts you added.<br />Let’s try to
