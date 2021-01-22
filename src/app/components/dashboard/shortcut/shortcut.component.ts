@@ -129,14 +129,14 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public createShortcut(sf: ShortcutForm): void {
-    if (sf.createBtnClicked) {
-      console.log('processing to create shortcut');
-      return;
-    }
-
-    sf.createBtnClicked = true;
     console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
+      if (sf.createBtnClicked) {
+        console.log('processing to create shortcut');
+        return;
+      }
+
+      sf.createBtnClicked = true;
       this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(
         s => {
           console.log(s);
@@ -232,12 +232,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public updateShortcut(s: Shortcut): void {
-    if (s.updateBtnClicked) {
-      console.log('processing to update shortcut');
-      return;
-    }
-
-    s.updateBtnClicked = true;
     console.log('update shortcut');
     console.log(s);
     if (!s.pathChange) {
@@ -248,6 +242,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     if (s.enableSaveBtn && s.pathChange) {
+      if (s.updateBtnClicked) {
+        console.log('processing to update shortcut');
+        return;
+      }
+
+      s.updateBtnClicked = true;
       this.shortcutService.updateShortcut(s.shortcutId, s.newPath).subscribe(
         resp => {
           console.log(resp);
@@ -481,18 +481,19 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public updateUrlRedirection(ur: UrlRedirection): void {
-    if (ur.updateBtnClicked) {
-      console.log('processing to update url redirection');
-      return;
-    }
-
-    ur.updateBtnClicked = true;
     if (!ur.pathChange && !ur.destinationUrlChange) {
       ur.contentEditable = false;
       ur.editable = false;
       this.makeTouchableAppList();
       return;
     }
+
+    if (ur.updateBtnClicked) {
+      console.log('processing to update url redirection');
+      return;
+    }
+
+    ur.updateBtnClicked = true;
 
     let path = ur.path;
     let destinationUrl = ur.destinationUrl;
