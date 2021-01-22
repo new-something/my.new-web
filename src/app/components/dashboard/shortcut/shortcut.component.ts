@@ -19,6 +19,7 @@ import {UrlRedirectionService} from '../../../services/url-redirection/url-redir
 export class ShortcutComponent implements OnInit, OnDestroy {
   private pathRegExp = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
   private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
+
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService,
               private urlRedirectionService: UrlRedirectionService) {
   }
@@ -128,6 +129,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public createShortcut(sf: ShortcutForm): void {
+    if (sf.createBtnClicked) {
+      console.log('processing to create shortcut');
+      return;
+    }
+
+    sf.createBtnClicked = true;
     console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
       this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(
@@ -147,10 +154,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
           this.shortcutForms.splice(removeTargetIdx, 1);
           this.makeTouchableAppList();
+          sf.createBtnClicked = false;
         },
         err => {
           console.log(err);
           alert(err.error.message);
+          sf.createBtnClicked = false;
         });
       return;
     }
@@ -191,6 +200,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public deleteShortcut(s: Shortcut): void {
+    if (s.deleteBtnClicked) {
+      console.log('processing to delete shortcut');
+      return;
+    }
+
+    s.deleteBtnClicked = true;
     console.log('delete shortcut');
     console.log(s);
     this.shortcutService.deleteShortcut(s.shortcutId).subscribe(
@@ -206,15 +221,23 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
         this.shortcuts.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
+        s.deleteBtnClicked = false;
       },
       err => {
         console.log(err);
         alert(err.error.message);
+        s.deleteBtnClicked = false;
       }
     );
   }
 
   public updateShortcut(s: Shortcut): void {
+    if (s.updateBtnClicked) {
+      console.log('processing to update shortcut');
+      return;
+    }
+
+    s.updateBtnClicked = true;
     console.log('update shortcut');
     console.log(s);
     if (!s.pathChange) {
@@ -232,10 +255,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           s.editable = false;
           s.pathChange = false;
           this.makeTouchableAppList();
+          s.updateBtnClicked = false;
         },
         err => {
           console.log(err);
           alert(err.error.message);
+          s.updateBtnClicked = false
         }
       );
     }
@@ -312,16 +337,24 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public createUrlRedirection(uf: UrlRedirectionForm): void {
+    if (uf.createBtnClicked) {
+      console.log('processing to create url redirection');
+      return;
+    }
+
+    uf.createBtnClicked = true;
     console.log(uf);
     this.urlRedirectionService.create(uf.path, uf.destinationUrl).subscribe(
       resp => {
         console.log(resp);
         this.urlRedirections = [resp, ...this.urlRedirections];
         this.deleteUrlRedirectionForm(uf);
+        uf.createBtnClicked = false;
       },
       err => {
         alert(err.error.message);
         console.log(err);
+        uf.createBtnClicked = false;
       }
     );
   }
@@ -372,7 +405,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     // path 와 destination url 모두 변경하지 않은 경우는 해당 function 을 사용하지 않는다.
   }
 
-  public urlRedirectionDestinationUrlCheck(event: any, ur: UrlRedirection): void{
+  public urlRedirectionDestinationUrlCheck(event: any, ur: UrlRedirection): void {
     const input = event.target.textContent;
     console.log(input);
     ur.newDestinationUrl = input;
@@ -419,6 +452,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public deleteUrlRedirection(ur: UrlRedirection): void {
+    if (ur.deleteBtnClicked) {
+      console.log('processing to delete url redirection');
+      return;
+    }
+
+    ur.deleteBtnClicked = true;
     console.log(ur);
     this.urlRedirectionService.delete(ur.urlRedirectionId).subscribe(
       resp => {
@@ -431,15 +470,23 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         }
         this.urlRedirections.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
+        ur.deleteBtnClicked = false;
       },
       err => {
         console.log(err);
         alert(err.error.message);
+        ur.deleteBtnClicked = false;
       }
     );
   }
 
   public updateUrlRedirection(ur: UrlRedirection): void {
+    if (ur.updateBtnClicked) {
+      console.log('processing to update url redirection');
+      return;
+    }
+
+    ur.updateBtnClicked = true;
     if (!ur.pathChange && !ur.destinationUrlChange) {
       ur.contentEditable = false;
       ur.editable = false;
@@ -466,16 +513,18 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         ur.destinationUrlChange = false;
         ur.pathChange = false;
         this.makeTouchableAppList();
+        ur.updateBtnClicked = false;
       },
       err => {
         console.log(err);
         alert(err.error.message);
+        ur.updateBtnClicked = false;
       }
     );
     console.log(ur);
   }
 
-  private makeTouchableAppList(): void{
+  private makeTouchableAppList(): void {
     const editingShortcutForms = this.shortcutForms.filter(sf => sf.editable).length;
     const editingShortcuts = this.shortcuts.filter(s => s.editable).length;
     const editingUrlRedirectionForms = this.urlRedirectionForms.filter(uf => uf.editable).length;

@@ -7,6 +7,8 @@ export class UrlRedirectionForm {
   contentEditable: boolean;
   enableSaveBtn: boolean;
 
+  createBtnClicked = false;
+
   constructor(id: string) {
     this.id = id;
     this.path = '';
@@ -14,5 +16,6 @@ export class UrlRedirectionForm {
     this.editable = false;
     this.contentEditable = false;
     this.enableSaveBtn = false;
+    this.createBtnClicked = false;
   }
 }

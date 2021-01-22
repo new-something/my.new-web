@@ -11,6 +11,8 @@ export class ShortcutForm {
   shortcutKeyword: string;
   connectedId: number;
 
+  createBtnClicked = false;
+
   constructor(id: string, providedActionId: number, type: string, url: string,
               description: string, appIcon: string, editable: boolean,
               contentEditable: boolean, enableSaveBtn: boolean, shortcutKeyword: string,
@@ -26,5 +28,7 @@ export class ShortcutForm {
     this.enableSaveBtn = enableSaveBtn;
     this.shortcutKeyword = shortcutKeyword;
     this.connectedId = connectedId;
+
+    this.createBtnClicked = false;
   }
 }

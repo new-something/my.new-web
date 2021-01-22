@@ -14,6 +14,9 @@ export class Shortcut {
   contentEditable = false;
   enableSaveBtn = false;
 
+  updateBtnClicked = false;
+  deleteBtnClicked = false;
+
   constructor(shortcutId: number, path: string, destinationUrl: string, type: string, description: string,
               appIcon: string, connectedId: number) {
     this.shortcutId = shortcutId;
@@ -29,5 +32,8 @@ export class Shortcut {
     this.editable = false;
     this.contentEditable = false;
     this.enableSaveBtn = false;
+
+    this.updateBtnClicked = false;
+    this.deleteBtnClicked = false;
   }
 }
