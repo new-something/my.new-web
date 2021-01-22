@@ -230,6 +230,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           console.log(resp);
           s.contentEditable = false;
           s.editable = false;
+          s.pathChange = false;
           this.makeTouchableAppList();
         },
         err => {
@@ -462,6 +463,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         ur.destinationUrl = destinationUrl;
         ur.editable = false;
         ur.contentEditable = false;
+        ur.destinationUrlChange = false;
+        ur.pathChange = false;
         this.makeTouchableAppList();
       },
       err => {
