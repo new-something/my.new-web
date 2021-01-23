@@ -12,6 +12,7 @@ import {AddToUrlRedirectionEvent} from '../../../../../events/add-to-url-redirec
   styleUrls: ['./app-list.component.css']
 })
 export class AppListComponent implements OnInit, OnDestroy {
+  public showLoading = true;
   public showListModal = false;
   public providedApps: ProvidedApp[] = [];
   public subscription: Subscription;
@@ -21,9 +22,13 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscription = this.modalEventService.getOpenAppListModal().subscribe(openCommand => {
+      this.showLoading = true;
       this.showListModal = openCommand.visible;
       if (this.showListModal) {
-        this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => this.providedApps = providedApps);
+        this.providedAppService.findAllByTag(openCommand.tag).subscribe(providedApps => {
+          this.showLoading = false;
+          this.providedApps = providedApps;
+        });
       }
     });
   }
