@@ -119,7 +119,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public shortcutFormPathCheck(event: any, sf: ShortcutForm): void {
     const input = event.target.textContent;
-    sf.shortcutKeyword = input;
+    sf.path = input;
     console.log(input);
     if (this.pathRegExp.test(input)) {
       console.log('패턴 통과');
@@ -140,7 +140,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       }
 
       sf.createBtnClicked = true;
-      this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, sf.shortcutKeyword).subscribe(
+      const path = this.changeBlankToDash(sf.path);
+      this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, path).subscribe(
         s => {
           console.log(s);
           console.log(this.shortcuts);
@@ -259,7 +260,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       }
 
       s.updateBtnClicked = true;
-      this.shortcutService.updateShortcut(s.shortcutId, s.newPath).subscribe(
+      const path = this.changeBlankToDash(s.newPath);
+      this.shortcutService.updateShortcut(s.shortcutId, path).subscribe(
         resp => {
           console.log(resp);
           s.contentEditable = false;
@@ -355,7 +357,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     uf.createBtnClicked = true;
     console.log(uf);
-    this.urlRedirectionService.create(uf.path, uf.destinationUrl).subscribe(
+    const path = this.changeBlankToDash(uf.path);
+    this.urlRedirectionService.create(path, uf.destinationUrl).subscribe(
       resp => {
         console.log(resp);
         this.urlRedirections = [resp, ...this.urlRedirections];
@@ -518,6 +521,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     let destinationUrl = ur.destinationUrl;
     if (ur.pathChange) {
       path = ur.newPath;
+      path = this.changeBlankToDash(path);
     }
 
     if (ur.destinationUrlChange) {
@@ -553,5 +557,9 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
     }
+  }
+
+  private changeBlankToDash(text: string): string{
+    return text.replace(/ /g, '-');
   }
 }
