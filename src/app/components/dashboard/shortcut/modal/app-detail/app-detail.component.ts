@@ -102,19 +102,21 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.disconnectBtnClicked = true;
-    this.connectedAppService.disconnect(appCode).subscribe(
-      resp => {
-        console.log(resp);
-        this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
-        this.connected = false;
-        this.connectedId = null;
-        this.disconnectBtnClicked = false;
-      },
-      error => {
-        console.log(error);
-        this.disconnectBtnClicked = false;
-      });
+    if (confirm('If you disconnect Asana, all the Asana shortcuts will be deleted. Are you sure to continue to disconnect?')) {
+      this.disconnectBtnClicked = true;
+      this.connectedAppService.disconnect(appCode).subscribe(
+        resp => {
+          console.log(resp);
+          this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
+          this.connected = false;
+          this.connectedId = null;
+          this.disconnectBtnClicked = false;
+        },
+        error => {
+          console.log(error);
+          this.disconnectBtnClicked = false;
+        });
+    }
   }
 
   public addToShortcut(providedAction: ProvidedAction, appIcon: string): void {
