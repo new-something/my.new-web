@@ -16,6 +16,7 @@ import {ProvidedAction} from '../../../../../models/provided-action';
   styleUrls: ['./app-detail.component.css']
 })
 export class AppDetailComponent implements OnInit, OnDestroy {
+  public showLoading = true;
   public connectedId = null;
   public connected = false;
   public showDetailModal = false;
@@ -48,6 +49,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
         console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@');
         console.log(this.providedAppDetail);
         console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@');
+        this.showLoading = false;
       });
     });
   }
