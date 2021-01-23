@@ -492,7 +492,15 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public updateUrlRedirection(ur: UrlRedirection): void {
+    // path 와 destinationUrl 모두 변경하지 않은 경우.
     if (!ur.pathChange && !ur.destinationUrlChange) {
+      ur.contentEditable = false;
+      ur.editable = false;
+      this.makeTouchableAppList();
+      return;
+    }
+    // 변경은 했지만, 변경한 path 가 이전 path 와 동일하고, destination url 도 이전 destination url 과 동일할 경우.
+    if (ur.path === ur.newPath && ur.destinationUrl === ur.newDestinationUrl) {
       ur.contentEditable = false;
       ur.editable = false;
       this.makeTouchableAppList();
