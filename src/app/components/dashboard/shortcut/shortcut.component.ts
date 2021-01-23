@@ -17,7 +17,7 @@ import {UrlRedirectionService} from '../../../services/url-redirection/url-redir
   styleUrls: ['./shortcut.component.css']
 })
 export class ShortcutComponent implements OnInit, OnDestroy {
-  private pathRegExp = new RegExp('[a-z]{2,}(/[a-z]+)?(/[a-z]+)?');
+  private pathRegExp = new RegExp('[a-z]{2,}(/[a-z|-]+)?(/[a-z|-]+)?');
   private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
 
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService,

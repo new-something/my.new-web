@@ -13,9 +13,9 @@ export class ShortcutService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public createShortcut(connectedId: number, providedActionId: number, shortcutKeyword: string): Observable<Shortcut> {
+  public createShortcut(connectedId: number, providedActionId: number, path: string): Observable<Shortcut> {
     const url = this.appService + '/apis/shortcuts';
-    return this.httpClient.post<ShortcutCreateResponse>(url, {connectedId, providedActionId, shortcutKeyword}).pipe(
+    return this.httpClient.post<ShortcutCreateResponse>(url, {connectedId, providedActionId, path}).pipe(
       map(resp => new Shortcut(resp.shortcutId,
         resp.path,
         resp.destinationUrl,
