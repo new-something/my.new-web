@@ -237,13 +237,21 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public updateShortcut(s: Shortcut): void {
     console.log('update shortcut');
     console.log(s);
+    // 새로 입력을 한 번도 하지 않고 변경 버튼 클릭
     if (!s.pathChange) {
       s.contentEditable = false;
       s.editable = false;
       this.makeTouchableAppList();
       return;
     }
-
+    // 새로 입력을 했지만, 기존의 path 와 동일할 경우.
+    if (s.path === s.newPath) {
+      s.contentEditable = false;
+      s.editable = false;
+      this.makeTouchableAppList();
+      return;
+    }
+    // 저장 버튼 활성화 및 기존 path 변경을 한 경우.
     if (s.enableSaveBtn && s.pathChange) {
       if (s.updateBtnClicked) {
         console.log('processing to update shortcut');
