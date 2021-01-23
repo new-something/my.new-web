@@ -42,11 +42,20 @@ export class AppListComponent implements OnInit, OnDestroy {
   }
 
   public changeAppTag($event): void {
+    if (this.showLoading) {
+      console.log('processing to load app list by tag, wait to complete previous work.');
+      return;
+    }
+
+    this.showLoading = true;
     console.log($event);
     console.log($event.target);
     console.log($event.target.value);
     const tag = $event.target.value;
-    this.providedAppService.findAllByTag(tag).subscribe(providedApps => this.providedApps = providedApps);
+    this.providedAppService.findAllByTag(tag).subscribe(providedApps => {
+      this.providedApps = providedApps;
+      this.showLoading = false;
+    });
   }
 
   public showAppDetailModal(appCode: number): void {
