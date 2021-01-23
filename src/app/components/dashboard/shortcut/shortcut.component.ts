@@ -17,12 +17,12 @@ import {UrlRedirectionService} from '../../../services/url-redirection/url-redir
   styleUrls: ['./shortcut.component.css']
 })
 export class ShortcutComponent implements OnInit, OnDestroy {
-  private pathRegExp = new RegExp('[a-z]{2,}(/[a-z|-]+)?(/[a-z|-]+)?');
-  private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
 
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService,
               private urlRedirectionService: UrlRedirectionService) {
   }
+  private pathRegExp = new RegExp('[a-z]{2,}(/[a-z|-]+)?(/[a-z|-]+)?');
+  private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
 
   @Input()
   public connectedApps: ConnectedApp[] = [];
@@ -60,13 +60,11 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     return uuidValue;
   }
 
+  private static changeBlankToDash(text: string): string{
+    return text.replace(/ /g, '-');
+  }
+
   public ngOnInit(): void {
-    console.log('ShortcutComponent init!');
-
-    console.log(this.connectedApps);
-    console.log(this.shortcuts);
-    console.log(this.urlRedirections);
-
     this.appConnectionSubscription = this.modalEventService.getAppConnectionEventPipe().subscribe(evt => {
       this.connectedApps.push(new ConnectedApp(evt.connectedId, evt.appCode, evt.appName, evt.appIcon, evt.domain, evt.description));
     });
@@ -87,13 +85,12 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     });
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
-      console.log(evt);
       this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateFormId(),
         evt.providedActionId, evt.type, evt.url, evt.description,
         evt.appIcon, false, false, false, '', evt.connectedId));
     });
 
-    this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(evt => {
+    this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(() => {
       this.urlRedirectionForms.push(new UrlRedirectionForm(ShortcutComponent.generateFormId()));
     });
   }
@@ -113,40 +110,31 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     if (this.disableConnectedAppClick) {
       return;
     }
-    console.log(appCode);
     this.modalEventService.updateOpenAppDetailModal(new CommandAppDetailModal(appCode, false, connectedId, true));
   }
 
   public shortcutFormPathCheck(event: any, sf: ShortcutForm): void {
     const input = event.target.textContent;
     sf.path = input;
-    console.log(input);
     if (this.pathRegExp.test(input)) {
-      console.log('패턴 통과');
       sf.enableSaveBtn = true;
       return;
     }
 
     sf.enableSaveBtn = false;
-    console.log('패턴 불통과!');
   }
 
   public createShortcut(sf: ShortcutForm): void {
-    console.log('save shortcut btn clicked!');
     if (sf.enableSaveBtn) {
       if (sf.createBtnClicked) {
-        console.log('processing to create shortcut');
         return;
       }
 
       sf.createBtnClicked = true;
-      const path = this.changeBlankToDash(sf.path);
+      const path = ShortcutComponent.changeBlankToDash(sf.path);
       this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, path).subscribe(
         s => {
-          console.log(s);
-          console.log(this.shortcuts);
           this.shortcuts = [s, ...this.shortcuts];
-          console.log(this.shortcuts);
           let removeTargetIdx;
           // tslint:disable-next-line:prefer-for-of
           for (let idx = 0; idx < this.shortcutForms.length; idx++) {
@@ -167,8 +155,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         });
       return;
     }
-
-    console.log('비활성화 되어있음.');
   }
 
   public makeFormEditable(sf: ShortcutForm): void {
@@ -210,8 +196,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     s.deleteBtnClicked = true;
-    console.log('delete shortcut');
-    console.log(s);
     this.shortcutService.deleteShortcut(s.shortcutId).subscribe(
       resp => {
         console.log(resp);
@@ -236,8 +220,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public updateShortcut(s: Shortcut): void {
-    console.log('update shortcut');
-    console.log(s);
     // 새로 입력을 한 번도 하지 않고 변경 버튼 클릭
     if (!s.pathChange) {
       s.contentEditable = false;
@@ -260,10 +242,9 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       }
 
       s.updateBtnClicked = true;
-      const path = this.changeBlankToDash(s.newPath);
+      const path = ShortcutComponent.changeBlankToDash(s.newPath);
       this.shortcutService.updateShortcut(s.shortcutId, path).subscribe(
-        resp => {
-          console.log(resp);
+        () => {
           s.path = path;
           s.contentEditable = false;
           s.editable = false;
@@ -278,23 +259,18 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         }
       );
     }
-
-    console.log('update button disabled.');
   }
 
   public shortcutPathCheck(event: any, s: Shortcut): void {
     const input = event.target.textContent;
     s.newPath = input;
     s.pathChange = true;
-    console.log(input);
     if (this.pathRegExp.test(input)) {
-      console.log('패턴 통과');
       s.enableSaveBtn = true;
       return;
     }
 
     s.enableSaveBtn = false;
-    console.log('패턴 불통과!');
   }
 
   public makeUrlRedirectionEditable(ur: UrlRedirection): void {
@@ -327,27 +303,21 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   public urlRedirectionFormPathCheck(event: any, uf: UrlRedirectionForm): void {
     const input = event.target.textContent;
     uf.path = input;
-    console.log(input);
     if (this.urlRegExp.test(uf.destinationUrl) && this.pathRegExp.test(input)) {
-      console.log('url 패턴 통과, path 패턴 통과');
       uf.enableSaveBtn = true;
       return;
     }
     uf.enableSaveBtn = false;
-    console.log('패턴 불통과!');
   }
 
   public urlRedirectionFormDestinationUrlCheck(event: any, uf: UrlRedirectionForm): void {
     const input = event.target.textContent;
     uf.destinationUrl = input;
-    console.log(input);
     if (this.urlRegExp.test(input) && this.pathRegExp.test(uf.path)) {
-      console.log('url 패턴 통과, path 패턴 통과');
       uf.enableSaveBtn = true;
       return;
     }
     uf.enableSaveBtn = false;
-    console.log('불통과!');
   }
 
   public createUrlRedirection(uf: UrlRedirectionForm): void {
@@ -357,11 +327,9 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     uf.createBtnClicked = true;
-    console.log(uf);
-    const path = this.changeBlankToDash(uf.path);
+    const path = ShortcutComponent.changeBlankToDash(uf.path);
     this.urlRedirectionService.create(path, uf.destinationUrl).subscribe(
       resp => {
-        console.log(resp);
         this.urlRedirections = [resp, ...this.urlRedirections];
         this.deleteUrlRedirectionForm(uf);
         uf.createBtnClicked = false;
@@ -375,18 +343,14 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public urlRedirectionPathCheck(event: any, ur: UrlRedirection): void {
-    const input = event.target.textContent;
-    console.log(input);
-    ur.newPath = input;
+    ur.newPath = event.target.textContent;
     ur.pathChange = true;
     // path 만 변경하고 destination 은 변경하지 않은 경우.
     if (ur.pathChange && !ur.destinationUrlChange) {
       if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.destinationUrl)) {
-        console.log('url 패턴 통과, path 패턴 통과');
         ur.enableSaveBtn = true;
         return;
       }
-      console.log('불통과~');
       ur.enableSaveBtn = false;
       return;
     }
@@ -394,12 +358,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     // path 는 변경하지 않고 destination 만 변경한 경우.
     if (!ur.pathChange && ur.destinationUrlChange) {
       if (this.pathRegExp.test(ur.path) && this.urlRegExp.test(ur.newDestinationUrl)) {
-        console.log('url 패턴 통과, path 패턴 통과');
         ur.enableSaveBtn = true;
         return;
       }
 
-      console.log('불통과~');
       ur.enableSaveBtn = false;
       return;
     }
@@ -407,12 +369,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     // path 와 destination url 모두 변경한 경우.
     if (ur.pathChange && ur.destinationUrlChange) {
       if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.newDestinationUrl)) {
-        console.log('url 패턴 통과, path 패턴 통과');
         ur.enableSaveBtn = true;
         return;
       }
 
-      console.log('불통과~');
       ur.enableSaveBtn = false;
       return;
     }
@@ -421,18 +381,14 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public urlRedirectionDestinationUrlCheck(event: any, ur: UrlRedirection): void {
-    const input = event.target.textContent;
-    console.log(input);
-    ur.newDestinationUrl = input;
+    ur.newDestinationUrl = event.target.textContent;
     ur.destinationUrlChange = true;
     // path 만 변경하고 destination 은 변경하지 않은 경우.
     if (ur.pathChange && !ur.destinationUrlChange) {
       if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.destinationUrl)) {
-        console.log('url 패턴 통과, path 패턴 통과');
         ur.enableSaveBtn = true;
         return;
       }
-      console.log('불통과~');
       ur.enableSaveBtn = false;
       return;
     }
@@ -440,12 +396,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     // path 는 변경하지 않고 destination 만 변경한 경우.
     if (!ur.pathChange && ur.destinationUrlChange) {
       if (this.pathRegExp.test(ur.path) && this.urlRegExp.test(ur.newDestinationUrl)) {
-        console.log('url 패턴 통과, path 패턴 통과');
         ur.enableSaveBtn = true;
         return;
       }
 
-      console.log('불통과~');
       ur.enableSaveBtn = false;
       return;
     }
@@ -453,12 +407,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     // path 와 destination url 모두 변경한 경우.
     if (ur.pathChange && ur.destinationUrlChange) {
       if (this.pathRegExp.test(ur.newPath) && this.urlRegExp.test(ur.newDestinationUrl)) {
-        console.log('url 패턴 통과, path 패턴 통과');
         ur.enableSaveBtn = true;
         return;
       }
 
-      console.log('불통과~');
       ur.enableSaveBtn = false;
       return;
     }
@@ -473,9 +425,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     ur.deleteBtnClicked = true;
-    console.log(ur);
     this.urlRedirectionService.delete(ur.urlRedirectionId).subscribe(
-      resp => {
+      () => {
         let removeTargetIdx = 0;
         for (let idx = 0; idx < this.urlRedirections.length; idx++) {
           if (ur.urlRedirectionId === this.urlRedirections[idx].urlRedirectionId) {
@@ -522,7 +473,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     let destinationUrl = ur.destinationUrl;
     if (ur.pathChange) {
       path = ur.newPath;
-      path = this.changeBlankToDash(path);
+      path = ShortcutComponent.changeBlankToDash(path);
     }
 
     if (ur.destinationUrlChange) {
@@ -530,7 +481,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     this.urlRedirectionService.update(ur.urlRedirectionId, path, destinationUrl).subscribe(
-      resp => {
+      () => {
         ur.path = path;
         ur.destinationUrl = destinationUrl;
         ur.editable = false;
@@ -546,7 +497,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         ur.updateBtnClicked = false;
       }
     );
-    console.log(ur);
   }
 
   private makeTouchableAppList(): void {
@@ -558,9 +508,5 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
     }
-  }
-
-  private changeBlankToDash(text: string): string{
-    return text.replace(/ /g, '-');
   }
 }
