@@ -1,23 +1,5 @@
 <!-- IS CONNECTED 클래스 유무로 상태에 따른 화면 확인 가능 -->
 <div id="app-detail-modal" class="popup-overlay" [class.is-active]="showDetailModal" [class.is-connected]="connected">
-  <ng-container *ngIf="showLoading">
-  <div class="loading">
-    <div class="loading-fading-circle">
-      <div class="loading-circle1 loading-circle"></div>
-      <div class="loading-circle2 loading-circle"></div>
-      <div class="loading-circle3 loading-circle"></div>
-      <div class="loading-circle4 loading-circle"></div>
-      <div class="loading-circle5 loading-circle"></div>
-      <div class="loading-circle6 loading-circle"></div>
-      <div class="loading-circle7 loading-circle"></div>
-      <div class="loading-circle8 loading-circle"></div>
-      <div class="loading-circle9 loading-circle"></div>
-      <div class="loading-circle10 loading-circle"></div>
-      <div class="loading-circle11 loading-circle"></div>
-      <div class="loading-circle12 loading-circle"></div>
-    </div>
-  </div>
-  </ng-container>
   <div class="modal-popup">
     <div class="popup-header">
       <div class="popup-navigation">
@@ -31,6 +13,24 @@
       </div>
     </div>
     <div class="popup-body">
+      <ng-container *ngIf="showLoading">
+        <div class="loading">
+          <div class="loading-fading-circle">
+            <div class="loading-circle1 loading-circle"></div>
+            <div class="loading-circle2 loading-circle"></div>
+            <div class="loading-circle3 loading-circle"></div>
+            <div class="loading-circle4 loading-circle"></div>
+            <div class="loading-circle5 loading-circle"></div>
+            <div class="loading-circle6 loading-circle"></div>
+            <div class="loading-circle7 loading-circle"></div>
+            <div class="loading-circle8 loading-circle"></div>
+            <div class="loading-circle9 loading-circle"></div>
+            <div class="loading-circle10 loading-circle"></div>
+            <div class="loading-circle11 loading-circle"></div>
+            <div class="loading-circle12 loading-circle"></div>
+          </div>
+        </div>
+      </ng-container>
       <div class="app-header">
         <div class="app-icon">
           <img id="app-icon-in-detail-modal" src="/assets/{{providedAppDetail?.appIcon}}" width="60" alt="">
