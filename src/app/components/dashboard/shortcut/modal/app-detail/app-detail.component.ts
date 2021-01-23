@@ -37,9 +37,9 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.showLoading = true;
     // set subscribe to message service
     this.subscription = this.modalEventService.getOpenAppDetailModal().subscribe(openCommand => {
+      this.showLoading = true;
       console.log('app detail modal open command app code : ' + openCommand.appCode);
       this.connectedId = openCommand.connectedId;
       this.connected = openCommand.connected;
