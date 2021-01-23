@@ -33,7 +33,7 @@
           <div class="shortcut-keyword" [attr.contenteditable]="sf.contentEditable" data-placeholder="New shortcut here..."
                (keyup)="shortcutFormPathCheck($event, sf)"></div>
           <div class="shortcut-url">
-            <a href="https://my.new/" target="_blank" class="link-outer">
+            <a href="{{'https://my.new/' + sf.path}}" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
               <span class="shortcut-url-with-keyword"></span>
@@ -70,7 +70,7 @@
           <div class="shortcut-keyword" [attr.contenteditable]="uf.contentEditable" data-placeholder="New shortcut here..."
               (keyup)="urlRedirectionFormPathCheck($event, uf)"></div>
           <div class="shortcut-url">
-            <a href="#" target="_blank" class="link-outer">
+            <a href="{{'https://my.new/' + uf.path}}" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
               <span class="shortcut-url-with-keyword">{{uf.path}}</span>
@@ -111,7 +111,7 @@
           <div class="shortcut-keyword" [attr.contenteditable]="s.contentEditable" data-placeholder="New shortcut here..."
                (keyup)="shortcutPathCheck($event, s)">{{s.path}}</div>
           <div class="shortcut-url">
-            <a href="https://my.new/" target="_blank" class="link-outer">
+            <a href="{{'https://my.new/' + s.path}}" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
               <span class="shortcut-url-with-keyword">{{s.path}}</span>
@@ -148,7 +148,7 @@
           <div class="shortcut-keyword" [attr.contenteditable]="ur.contentEditable" data-placeholder="New shortcut here..."
             (keyup)="urlRedirectionPathCheck($event, ur)">{{ur.path}}</div>
           <div class="shortcut-url">
-            <a href="#" target="_blank" class="link-outer">
+            <a href="{{'https://my.new/' + ur.path}}" target="_blank" class="link-outer">
               <span><img src="/assets/logo.svg" alt="outlink" width="12" /></span>
               <span>https://my.new/</span>
               <span class="shortcut-url-with-keyword">{{ur.path}}</span>
