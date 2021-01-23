@@ -74,13 +74,16 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.appDisconnectionSubscription = this.modalEventService.getAppDisconnectionEventPipe().subscribe(evt => {
       // tslint:disable-next-line:prefer-for-of
       let removeTargetIdx = 0;
+      let connectedId = 0;
       for (let idx = 0; idx < this.connectedApps.length; idx++) {
         if (evt.appCode === this.connectedApps[idx].appCode) {
           removeTargetIdx = idx;
+          connectedId = this.connectedApps[idx].connectedId;
           break;
         }
       }
       this.connectedApps.splice(removeTargetIdx, 1);
+      this.shortcuts = this.shortcuts.filter(s => s.connectedId !== connectedId);
     });
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
@@ -260,7 +263,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         err => {
           console.log(err);
           alert(err.error.message);
-          s.updateBtnClicked = false
+          s.updateBtnClicked = false;
         }
       );
     }
