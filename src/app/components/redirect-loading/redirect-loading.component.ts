@@ -22,6 +22,7 @@ export class RedirectLoadingComponent implements OnInit {
 
     if (authenticated) {
       this.router.navigate(['u/dashboard']).catch(e => console.log(e));
+      return;
     }
 
     window.location.href = this.landing;
