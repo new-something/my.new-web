@@ -85,12 +85,14 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     });
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
+      this.makeUntouchableAppList();
       this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateFormId(),
         evt.providedActionId, evt.type, evt.url, evt.description,
-        evt.appIcon, false, false, false, '', evt.connectedId));
+        evt.appIcon, true, true, false, '', evt.connectedId));
     });
 
     this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(() => {
+      this.makeUntouchableAppList();
       this.urlRedirectionForms.push(new UrlRedirectionForm(ShortcutComponent.generateFormId()));
     });
   }
@@ -508,5 +510,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
     }
+  }
+
+  private makeUntouchableAppList(): void {
+    this.hideAddNewBtn = true;
+    this.disableConnectedAppClick = true;
   }
 }

@@ -13,8 +13,8 @@ export class UrlRedirectionForm {
     this.id = id;
     this.path = '';
     this.destinationUrl = '';
-    this.editable = false;
-    this.contentEditable = false;
+    this.editable = true;
+    this.contentEditable = true;
     this.enableSaveBtn = false;
     this.createBtnClicked = false;
   }
