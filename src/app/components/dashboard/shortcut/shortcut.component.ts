@@ -324,6 +324,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       s.contentEditable = false;
       s.editable = false;
       this.makeTouchableAppList();
+      this.makeAllResourceEnable();
+      this.isEditing = false;
       return;
     }
     // 새로 입력을 했지만, 기존의 path 와 동일할 경우.
@@ -331,6 +333,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       s.contentEditable = false;
       s.editable = false;
       this.makeTouchableAppList();
+      this.makeAllResourceEnable();
+      this.isEditing = false;
       return;
     }
     // 저장 버튼 활성화 및 기존 path 변경을 한 경우.
@@ -567,6 +571,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       ur.contentEditable = false;
       ur.editable = false;
       this.makeTouchableAppList();
+      this.makeAllResourceEnable();
+      this.isEditing = false;
       return;
     }
     // 변경은 했지만, 변경한 path 가 이전 path 와 동일하고, destination url 도 이전 destination url 과 동일할 경우.
@@ -574,6 +580,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       ur.contentEditable = false;
       ur.editable = false;
       this.makeTouchableAppList();
+      this.makeAllResourceEnable();
+      this.isEditing = false;
       return;
     }
 
