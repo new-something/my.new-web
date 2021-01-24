@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-redirect-loading',
@@ -8,6 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./redirect-loading.component.css']
 })
 export class RedirectLoadingComponent implements OnInit {
+  private landing = environment.router;
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -22,6 +24,6 @@ export class RedirectLoadingComponent implements OnInit {
       this.router.navigate(['u/dashboard']).catch(e => console.log(e));
     }
 
-    // window.location.href = 'https://github.com/login/oauth/authorize?scope=read:user&client_id=6d91f0584d549619c938';
+    window.location.href = this.landing;
   }
 }
