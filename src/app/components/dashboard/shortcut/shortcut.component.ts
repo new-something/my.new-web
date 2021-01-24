@@ -48,7 +48,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public editEventSubscription: Subscription;
 
-  public editCount = 0;
+  public isEditing = false;
 
   private static generateFormId(): string {
     let uuidValue = '';
@@ -93,7 +93,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
       this.makeUntouchableAppList();
-      this.editCount++;
+      this.isEditing = true;
       this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateFormId(),
         evt.providedActionId, evt.type, evt.url, evt.description,
         evt.appIcon, true, true, false, '', evt.connectedId));
@@ -101,13 +101,13 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(() => {
       this.makeUntouchableAppList();
-      this.editCount++;
+      this.isEditing = true;
       this.urlRedirectionForms.push(new UrlRedirectionForm(ShortcutComponent.generateFormId()));
     });
 
     this.editEventSubscription = this.editEventService.getEditEventPipe().subscribe((evt) => {
       this.makeUntouchableAppList();
-      this.editCount++;
+      this.isEditing = true;
       console.log(evt);
       switch (evt.type) {
         case ResourceType.SHORTCUT:
@@ -230,7 +230,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           this.shortcutForms.splice(removeTargetIdx, 1);
           this.makeTouchableAppList();
           this.makeAllResourceEnable();
-          this.editCount--;
+          this.isEditing = false;
         },
         err => {
           console.log(err);
@@ -242,7 +242,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public makeShortcutFormEditable(sf: ShortcutForm): void {
-    if (this.editCount > 0) {
+    if (this.isEditing) {
       console.log('another resource editing.');
       return;
     }
@@ -270,11 +270,11 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.disableConnectedAppClick = false;
     }
     this.makeAllResourceEnable();
-    this.editCount--;
+    this.isEditing = false;
   }
 
   public makeShortcutEditable(s: Shortcut): void {
-    if (this.editCount > 0) {
+    if (this.isEditing) {
       console.log('another resource editing.');
       return;
     }
@@ -305,7 +305,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           }
         }
 
-        this.editCount--;
+        this.isEditing = false;
         this.shortcuts.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
         this.makeAllResourceEnable();
@@ -351,7 +351,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           s.updateBtnClicked = false;
           this.makeTouchableAppList();
           this.makeAllResourceEnable();
-          this.editCount--;
+          this.isEditing = false;
         },
         err => {
           console.log(err);
@@ -375,7 +375,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public makeUrlRedirectionEditable(ur: UrlRedirection): void {
-    if (this.editCount > 0) {
+    if (this.isEditing) {
       console.log('another resource editing.');
       return;
     }
@@ -387,7 +387,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public makeUrlRedirectionFormEditable(uf: UrlRedirectionForm): void {
-    if (this.editCount > 0) {
+    if (this.isEditing) {
       console.log('another resource editing.');
       return;
     }
@@ -410,7 +410,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.urlRedirectionForms.splice(removeTargetIdx, 1);
     this.makeAllResourceEnable();
     this.makeTouchableAppList();
-    this.editCount--;
+    this.isEditing = false;
   }
 
   public urlRedirectionFormPathCheck(event: any, uf: UrlRedirectionForm): void {
@@ -446,7 +446,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         this.urlRedirections = [resp, ...this.urlRedirections];
         this.deleteUrlRedirectionForm(uf);
         this.makeAllResourceEnable();
-        this.editCount--;
+        this.isEditing = false;
       },
       err => {
         alert(err.error.message);
@@ -551,7 +551,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         this.urlRedirections.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
         this.makeAllResourceEnable();
-        this.editCount--;
+        this.isEditing = false;
       },
       err => {
         console.log(err);
@@ -606,7 +606,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         ur.updateBtnClicked = false;
         this.makeTouchableAppList();
         this.makeAllResourceEnable();
-        this.editCount--;
+        this.isEditing = false;
       },
       err => {
         console.log(err);
