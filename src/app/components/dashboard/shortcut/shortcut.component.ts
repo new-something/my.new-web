@@ -26,6 +26,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
   private pathRegExp = new RegExp('[a-z]{2,}(/[a-z|-]+)?(/[a-z|-]+)?');
   private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
+  private needOrganizationActionIds = [{providedActionId: 40, appName: 'Confluence'}, {providedActionId: 69, appName: 'Jira'}];
 
   @Input()
   public connectedApps: ConnectedApp[] = [];
@@ -214,7 +215,13 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
       sf.createBtnClicked = true;
       const path = ShortcutComponent.changeBlankToDash(sf.path);
-      this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, path).subscribe(
+      const needOrganization = this.needOrganizationActionIds.filter(n => n.providedActionId === sf.providedActionId).pop();
+      let organization;
+      if (needOrganization) {
+        organization = prompt(`Please enter the organization ID of your ${needOrganization.appName} account. \nThe word placed before \'atlassian.net/...\' in the URL.`);
+      }
+
+      this.shortcutService.createShortcut(sf.connectedId, sf.providedActionId, path, organization).subscribe(
         s => {
           this.shortcuts = [s, ...this.shortcuts];
           let removeTargetIdx;
