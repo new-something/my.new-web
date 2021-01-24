@@ -17,6 +17,8 @@ export class Shortcut {
   updateBtnClicked = false;
   deleteBtnClicked = false;
 
+  disabled = false;
+
   constructor(shortcutId: number, path: string, destinationUrl: string, type: string, description: string,
               appIcon: string, connectedId: number) {
     this.shortcutId = shortcutId;
@@ -35,5 +37,7 @@ export class Shortcut {
 
     this.updateBtnClicked = false;
     this.deleteBtnClicked = false;
+
+    this.disabled = false;
   }
 }

@@ -13,6 +13,8 @@ export class ShortcutForm {
 
   createBtnClicked = false;
 
+  disabled = false;
+
   constructor(id: string, providedActionId: number, type: string, url: string,
               description: string, appIcon: string, editable: boolean,
               contentEditable: boolean, enableSaveBtn: boolean, path: string,
@@ -30,5 +32,7 @@ export class ShortcutForm {
     this.connectedId = connectedId;
 
     this.createBtnClicked = false;
+
+    this.disabled = false;
   }
 }

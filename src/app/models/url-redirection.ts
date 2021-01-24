@@ -15,6 +15,8 @@ export class UrlRedirection {
   updateBtnClicked = false;
   deleteBtnClicked = false;
 
+  disabled = false;
+
   constructor(urlRedirectionId: number, path: string, destinationUrl: string) {
     this.urlRedirectionId = urlRedirectionId;
     this.path = path;
@@ -32,5 +34,6 @@ export class UrlRedirection {
     this.updateBtnClicked = false;
     this.deleteBtnClicked = false;
 
+    this.disabled = false;
   }
 }

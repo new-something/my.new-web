@@ -10,6 +10,9 @@ import {ShortcutForm} from '../../../models/shortcut-form';
 import {ShortcutService} from '../../../services/shortcut/shortcut.service';
 import {UrlRedirectionForm} from '../../../models/url-redirection-form';
 import {UrlRedirectionService} from '../../../services/url-redirection/url-redirection.service';
+import {EditEventService} from '../../../services/edit-event.service';
+import {EditEvent} from '../../../events/edit-event';
+import {ResourceType} from '../../../events/resource-type.enum';
 
 @Component({
   selector: 'app-shortcut',
@@ -19,7 +22,7 @@ import {UrlRedirectionService} from '../../../services/url-redirection/url-redir
 export class ShortcutComponent implements OnInit, OnDestroy {
 
   constructor(private modalEventService: ModalEventService, private shortcutService: ShortcutService,
-              private urlRedirectionService: UrlRedirectionService) {
+              private urlRedirectionService: UrlRedirectionService, private editEventService: EditEventService) {
   }
   private pathRegExp = new RegExp('[a-z]{2,}(/[a-z|-]+)?(/[a-z|-]+)?');
   private urlRegExp = new RegExp('^(https?|chrome):\\/\\/[^\\s$.?#].[^\\s]*$');
@@ -42,6 +45,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public addToShortcutSubscription: Subscription;
   public addToUrlRedirectionSubscription: Subscription;
+
+  public editEventSubscription: Subscription;
+
+  public editCount = 0;
 
   private static generateFormId(): string {
     let uuidValue = '';
@@ -86,6 +93,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
       this.makeUntouchableAppList();
+      this.editCount++;
       this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateFormId(),
         evt.providedActionId, evt.type, evt.url, evt.description,
         evt.appIcon, true, true, false, '', evt.connectedId));
@@ -93,7 +101,80 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(() => {
       this.makeUntouchableAppList();
+      this.editCount++;
       this.urlRedirectionForms.push(new UrlRedirectionForm(ShortcutComponent.generateFormId()));
+    });
+
+    this.editEventSubscription = this.editEventService.getEditEventPipe().subscribe((evt) => {
+      this.makeUntouchableAppList();
+      this.editCount++;
+      console.log(evt);
+      switch (evt.type) {
+        case ResourceType.SHORTCUT:
+          this.shortcuts.forEach((s) => {
+            if (s.shortcutId !== evt.id) {
+              s.disabled = true;
+            }
+          });
+          this.shortcutForms.forEach((sf) => {
+            sf.disabled = true;
+          });
+          this.urlRedirections.forEach((u) => {
+            u.disabled = true;
+          });
+          this.urlRedirectionForms.forEach((uf) => {
+            uf.disabled = true;
+          });
+          break;
+        case ResourceType.SHORTCUT_FORM:
+          this.shortcuts.forEach((s) => {
+            s.disabled = true;
+          });
+          this.shortcutForms.forEach((sf) => {
+            if (sf.id !== evt.formId) {
+              sf.disabled = true;
+            }
+          });
+          this.urlRedirections.forEach((u) => {
+            u.disabled = true;
+          });
+          this.urlRedirectionForms.forEach((uf) => {
+            uf.disabled = true;
+          });
+          break;
+        case ResourceType.URL_REDIRECTION:
+          this.shortcuts.forEach((s) => {
+            s.disabled = true;
+          });
+          this.shortcutForms.forEach((sf) => {
+            sf.disabled = true;
+          });
+          this.urlRedirections.forEach((u) => {
+            if (u.urlRedirectionId !== evt.id) {
+              u.disabled = true;
+            }
+          });
+          this.urlRedirectionForms.forEach((uf) => {
+            uf.disabled = true;
+          });
+          break;
+        case ResourceType.URL_REDIRECTION_FORM:
+          this.shortcuts.forEach((s) => {
+            s.disabled = true;
+          });
+          this.shortcutForms.forEach((sf) => {
+            sf.disabled = true;
+          });
+          this.urlRedirections.forEach((u) => {
+            u.disabled = true;
+          });
+          this.urlRedirectionForms.forEach((uf) => {
+            if (uf.id !== evt.formId) {
+              uf.disabled = true;
+            }
+          });
+          break;
+      }
     });
   }
 
@@ -148,6 +229,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
           this.shortcutForms.splice(removeTargetIdx, 1);
           this.makeTouchableAppList();
+          this.makeAllResourceEnable();
           sf.createBtnClicked = false;
         },
         err => {
@@ -159,14 +241,20 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
   }
 
-  public makeFormEditable(sf: ShortcutForm): void {
+  public makeShortcutFormEditable(sf: ShortcutForm): void {
+    if (this.editCount > 0) {
+      console.log('another resource editing.');
+      return;
+    }
+
+    this.editEventService.publishEditEvent(EditEvent.formOf(ResourceType.SHORTCUT_FORM, sf.id));
     sf.editable = true;
     sf.contentEditable = true;
     this.hideAddNewBtn = true;
     this.disableConnectedAppClick = true;
   }
 
-  public deleteForm(sf: ShortcutForm): void {
+  public deleteShortcutForm(sf: ShortcutForm): void {
     let removeTargetIdx = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let idx = 0; idx < this.shortcutForms.length; idx++) {
@@ -181,9 +269,16 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.hideAddNewBtn = false;
       this.disableConnectedAppClick = false;
     }
+    this.makeAllResourceEnable();
   }
 
   public makeShortcutEditable(s: Shortcut): void {
+    if (this.editCount > 0) {
+      console.log('another resource editing.');
+      return;
+    }
+
+    this.editEventService.publishEditEvent(EditEvent.of(ResourceType.SHORTCUT, s.shortcutId));
     s.editable = true;
     s.contentEditable = true;
     s.enableSaveBtn = true;
@@ -211,6 +306,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
         this.shortcuts.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
+        this.makeAllResourceEnable();
         s.deleteBtnClicked = false;
       },
       err => {
@@ -252,6 +348,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           s.editable = false;
           s.pathChange = false;
           this.makeTouchableAppList();
+          this.makeAllResourceEnable();
           s.updateBtnClicked = false;
         },
         err => {
@@ -276,6 +373,11 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public makeUrlRedirectionEditable(ur: UrlRedirection): void {
+    if (this.editCount > 0) {
+      console.log('another resource editing.');
+      return;
+    }
+    this.editEventService.publishEditEvent(EditEvent.of(ResourceType.URL_REDIRECTION, ur.urlRedirectionId));
     ur.contentEditable = true;
     ur.editable = true;
     this.hideAddNewBtn = true;
@@ -283,6 +385,11 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public makeUrlRedirectionFormEditable(uf: UrlRedirectionForm): void {
+    if (this.editCount > 0) {
+      console.log('another resource editing.');
+      return;
+    }
+    this.editEventService.publishEditEvent(EditEvent.formOf(ResourceType.URL_REDIRECTION_FORM, uf.id));
     uf.contentEditable = true;
     uf.editable = true;
     this.hideAddNewBtn = true;
@@ -299,6 +406,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     this.urlRedirectionForms.splice(removeTargetIdx, 1);
+    this.makeAllResourceEnable();
     this.makeTouchableAppList();
   }
 
@@ -335,6 +443,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         this.urlRedirections = [resp, ...this.urlRedirections];
         this.deleteUrlRedirectionForm(uf);
         uf.createBtnClicked = false;
+        this.makeAllResourceEnable();
       },
       err => {
         alert(err.error.message);
@@ -438,6 +547,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         }
         this.urlRedirections.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
+        this.makeAllResourceEnable();
         ur.deleteBtnClicked = false;
       },
       err => {
@@ -491,6 +601,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         ur.destinationUrlChange = false;
         ur.pathChange = false;
         this.makeTouchableAppList();
+        this.makeAllResourceEnable();
         ur.updateBtnClicked = false;
       },
       err => {
@@ -516,4 +627,19 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.hideAddNewBtn = true;
     this.disableConnectedAppClick = true;
   }
-}
+
+  private makeAllResourceEnable(): void {
+    this.shortcuts.forEach((s) => {
+      s.disabled = false;
+    });
+    this.shortcutForms.forEach((sf) => {
+      sf.disabled = false;
+    });
+    this.urlRedirections.forEach((u) => {
+      u.disabled = false;
+    });
+    this.urlRedirectionForms.forEach((uf) => {
+      uf.disabled = false;
+    });
+  }
+ }
