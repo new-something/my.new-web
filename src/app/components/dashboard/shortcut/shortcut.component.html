@@ -28,7 +28,7 @@
   <div class="list-shortcuts" [class.hidden]="shortcutForms.length === 0 && urlRedirectionForms.length === 0
                                           && shortcuts?.length === 0 && urlRedirections?.length === 0">
     <ng-container *ngFor="let sf of shortcutForms">
-      <div class="item-shortcut" [class.is-editing]="sf.editable">
+      <div class="item-shortcut" [class.is-editing]="sf.editable" [class.is-disabled]="sf.disabled">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="sf.contentEditable" data-placeholder="New shortcut here..."
                (keyup)="shortcutFormPathCheck($event, sf)"></div>
@@ -65,7 +65,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let uf of urlRedirectionForms">
-      <div class="item-url-shortcut" [class.is-editing]="uf.editable">
+      <div class="item-url-shortcut" [class.is-editing]="uf.editable" [class.is-disabled]="uf.disabled">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="uf.contentEditable" data-placeholder="New shortcut here..."
               (keyup)="urlRedirectionFormPathCheck($event, uf)"></div>
@@ -106,7 +106,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let s of shortcuts">
-      <div class="item-shortcut" [id]="s.shortcutId" [class.is-editing]="s.editable">
+      <div class="item-shortcut" [id]="s.shortcutId" [class.is-editing]="s.editable" [class.is-disabled]="s.disabled">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="s.contentEditable" data-placeholder="New shortcut here..."
                (keyup)="shortcutPathCheck($event, s)">{{s.path}}</div>
@@ -143,7 +143,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let ur of urlRedirections">
-      <div class="item-url-shortcut" [class.is-editing]="ur.editable" [id]="ur.urlRedirectionId">
+      <div class="item-url-shortcut" [class.is-editing]="ur.editable" [id]="ur.urlRedirectionId" [class.is-disabled]="ur.disabled">
         <div class="shortcut">
           <div class="shortcut-keyword" [attr.contenteditable]="ur.contentEditable" data-placeholder="New shortcut here..."
             (keyup)="urlRedirectionPathCheck($event, ur)">{{ur.path}}</div>

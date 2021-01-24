@@ -230,7 +230,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           this.shortcutForms.splice(removeTargetIdx, 1);
           this.makeTouchableAppList();
           this.makeAllResourceEnable();
-          sf.createBtnClicked = false;
+          this.editCount--;
         },
         err => {
           console.log(err);
@@ -270,6 +270,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       this.disableConnectedAppClick = false;
     }
     this.makeAllResourceEnable();
+    this.editCount--;
   }
 
   public makeShortcutEditable(s: Shortcut): void {
@@ -304,10 +305,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           }
         }
 
+        this.editCount--;
         this.shortcuts.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
         this.makeAllResourceEnable();
-        s.deleteBtnClicked = false;
       },
       err => {
         console.log(err);
@@ -347,9 +348,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
           s.contentEditable = false;
           s.editable = false;
           s.pathChange = false;
+          s.updateBtnClicked = false;
           this.makeTouchableAppList();
           this.makeAllResourceEnable();
-          s.updateBtnClicked = false;
+          this.editCount--;
         },
         err => {
           console.log(err);
@@ -408,6 +410,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.urlRedirectionForms.splice(removeTargetIdx, 1);
     this.makeAllResourceEnable();
     this.makeTouchableAppList();
+    this.editCount--;
   }
 
   public urlRedirectionFormPathCheck(event: any, uf: UrlRedirectionForm): void {
@@ -442,8 +445,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       resp => {
         this.urlRedirections = [resp, ...this.urlRedirections];
         this.deleteUrlRedirectionForm(uf);
-        uf.createBtnClicked = false;
         this.makeAllResourceEnable();
+        this.editCount--;
       },
       err => {
         alert(err.error.message);
@@ -548,7 +551,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         this.urlRedirections.splice(removeTargetIdx, 1);
         this.makeTouchableAppList();
         this.makeAllResourceEnable();
-        ur.deleteBtnClicked = false;
+        this.editCount--;
       },
       err => {
         console.log(err);
@@ -600,9 +603,10 @@ export class ShortcutComponent implements OnInit, OnDestroy {
         ur.contentEditable = false;
         ur.destinationUrlChange = false;
         ur.pathChange = false;
+        ur.updateBtnClicked = false;
         this.makeTouchableAppList();
         this.makeAllResourceEnable();
-        ur.updateBtnClicked = false;
+        this.editCount--;
       },
       err => {
         console.log(err);
