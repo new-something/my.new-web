@@ -40,16 +40,12 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     // set subscribe to message service
     this.subscription = this.modalEventService.getOpenAppDetailModal().subscribe(openCommand => {
       this.showLoading = true;
-      console.log('app detail modal open command app code : ' + openCommand.appCode);
       this.connectedId = openCommand.connectedId;
       this.connected = openCommand.connected;
       this.showDetailModal = true;
       this.hasBackModalStep = openCommand.hasBackModalStep;
       this.providedAppService.findById(openCommand.appCode).subscribe(data => {
         this.providedAppDetail = data;
-        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@');
-        console.log(this.providedAppDetail);
-        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@');
         this.showLoading = false;
       });
     });
@@ -76,7 +72,6 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     this.connectBtnClicked = true;
     this.connectedAppService.connect(appCode).subscribe(
       resp => {
-        console.log(resp);
         this.modalEventService.publishAppConnectionEvent(new AppConnectedEvent(
           resp.appCode,
           resp.connectedId,
@@ -105,8 +100,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     if (confirm('If you disconnect Asana, all the Asana shortcuts will be deleted. Are you sure to continue to disconnect?')) {
       this.disconnectBtnClicked = true;
       this.connectedAppService.disconnect(appCode).subscribe(
-        resp => {
-          console.log(resp);
+        () => {
           this.modalEventService.publishAppDisconnectionEvent(new AppDisconnectedEvent(appCode));
           this.connected = false;
           this.connectedId = null;

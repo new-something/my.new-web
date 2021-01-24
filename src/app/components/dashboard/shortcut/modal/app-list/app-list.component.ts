@@ -48,9 +48,6 @@ export class AppListComponent implements OnInit, OnDestroy {
     }
 
     this.showLoading = true;
-    console.log($event);
-    console.log($event.target);
-    console.log($event.target.value);
     const tag = $event.target.value;
     this.providedAppService.findAllByTag(tag).subscribe(providedApps => {
       this.providedApps = providedApps;

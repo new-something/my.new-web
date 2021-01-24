@@ -108,7 +108,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.editEventSubscription = this.editEventService.getEditEventPipe().subscribe((evt) => {
       this.makeUntouchableAppList();
       this.isEditing = true;
-      console.log(evt);
       switch (evt.type) {
         case ResourceType.SHORTCUT:
           this.shortcuts.forEach((s) => {
@@ -295,8 +294,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
     s.deleteBtnClicked = true;
     this.shortcutService.deleteShortcut(s.shortcutId).subscribe(
-      resp => {
-        console.log(resp);
+      () => {
         let removeTargetIdx = 0;
         for (let idx = 0; idx < this.shortcuts.length; idx++) {
           if (s.shortcutId === this.shortcuts[idx].shortcutId) {
