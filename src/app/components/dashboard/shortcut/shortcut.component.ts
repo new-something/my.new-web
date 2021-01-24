@@ -92,17 +92,17 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     });
 
     this.addToShortcutSubscription = this.modalEventService.getAddToShortcutEventPipe().subscribe(evt => {
-      this.makeUntouchableAppList();
-      this.isEditing = true;
-      this.shortcutForms.push(new ShortcutForm(ShortcutComponent.generateFormId(),
+      const shortcutFormId = ShortcutComponent.generateFormId();
+      this.shortcutForms.push(new ShortcutForm(shortcutFormId,
         evt.providedActionId, evt.type, evt.url, evt.description,
         evt.appIcon, true, true, false, '', evt.connectedId));
+      this.editEventService.publishEditEvent(EditEvent.formOf(ResourceType.SHORTCUT_FORM, shortcutFormId));
     });
 
     this.addToUrlRedirectionSubscription = this.modalEventService.getAddToUrlRedirectionEventPipe().subscribe(() => {
-      this.makeUntouchableAppList();
-      this.isEditing = true;
-      this.urlRedirectionForms.push(new UrlRedirectionForm(ShortcutComponent.generateFormId()));
+      const urlRedirectionId = ShortcutComponent.generateFormId();
+      this.urlRedirectionForms.push(new UrlRedirectionForm(urlRedirectionId));
+      this.editEventService.publishEditEvent(EditEvent.formOf(ResourceType.URL_REDIRECTION_FORM, urlRedirectionId));
     });
 
     this.editEventSubscription = this.editEventService.getEditEventPipe().subscribe((evt) => {
