@@ -443,6 +443,11 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public createUrlRedirection(uf: UrlRedirectionForm): void {
+    if (uf.destinationUrl.includes('my.new')) {
+      alert('You can not use "my.new" in Destination!');
+      return;
+    }
+
     if (uf.createBtnClicked) {
       console.log('processing to create url redirection');
       return;
