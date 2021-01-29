@@ -21,13 +21,8 @@ export class AppListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.showLoading = true;
-    this.showListModal = true;
-    this.providedAppService.findAllByTag('ALL').subscribe(providedApps => {
-      this.showLoading = false;
-      this.providedApps = providedApps;
-    });
-
+    // google .new domain policy.
+    this.showOnInit();
     this.subscription = this.modalEventService.getOpenAppListModal().subscribe(openCommand => {
       this.showLoading = true;
       this.showListModal = openCommand.visible;
@@ -37,6 +32,15 @@ export class AppListComponent implements OnInit, OnDestroy {
           this.providedApps = providedApps;
         });
       }
+    });
+  }
+
+  private showOnInit(): void {
+    this.showLoading = true;
+    this.showListModal = true;
+    this.providedAppService.findAllByTag('ALL').subscribe(providedApps => {
+      this.showLoading = false;
+      this.providedApps = providedApps;
     });
   }
 
