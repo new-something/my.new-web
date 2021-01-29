@@ -73,6 +73,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.showAppListModal();
     this.appConnectionSubscription = this.modalEventService.getAppConnectionEventPipe().subscribe(evt => {
       this.connectedApps.push(new ConnectedApp(evt.connectedId, evt.appCode, evt.appName, evt.appIcon, evt.domain, evt.description));
     });
@@ -183,6 +184,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     this.appDisconnectionSubscription.unsubscribe();
     this.addToShortcutSubscription.unsubscribe();
     this.addToUrlRedirectionSubscription.unsubscribe();
+    this.editEventSubscription.unsubscribe();
   }
 
   public showAppListModal(): void {
