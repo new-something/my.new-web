@@ -21,6 +21,13 @@ export class AppListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.showLoading = true;
+    this.showListModal = true;
+    this.providedAppService.findAllByTag('ALL').subscribe(providedApps => {
+      this.showLoading = false;
+      this.providedApps = providedApps;
+    });
+
     this.subscription = this.modalEventService.getOpenAppListModal().subscribe(openCommand => {
       this.showLoading = true;
       this.showListModal = openCommand.visible;
@@ -58,7 +65,7 @@ export class AppListComponent implements OnInit, OnDestroy {
   public showAppDetailModal(appCode: number): void {
     this.showListModal = false;
     const providedApp = this.providedApps.filter((pa) => pa.appCode === appCode).pop();
-    this.modalEventService.updateOpenAppDetailModal(
+    this.modalEventService.publishOpenAppDetailModal(
       new CommandAppDetailModal(appCode, true, providedApp.connectedId, providedApp.connected)
     );
   }

@@ -26,7 +26,7 @@ export class ModalEventService {
     return this.openAppDetailModal.asObservable();
   }
 
-  public updateOpenAppDetailModal(command: CommandAppDetailModal): void {
+  public publishOpenAppDetailModal(command: CommandAppDetailModal): void {
     this.openAppDetailModal.next(command);
   }
 
@@ -34,7 +34,7 @@ export class ModalEventService {
     return this.openAppListModal.asObservable();
   }
 
-  public updateOpenAppListModal(command: CommandAppListModal): void {
+  public publishOpenAppListModal(command: CommandAppListModal): void {
     this.openAppListModal.next(command);
   }
 
