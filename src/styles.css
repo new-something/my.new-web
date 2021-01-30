@@ -966,10 +966,6 @@ input[name="app-list-tag"]:checked
   width: 48px;
 }
 
-.section-shortcuts .list-shortcuts {
-  padding: 0 0 60px;
-}
-
 .section-shortcuts .list-shortcuts-empty {
   text-align: center;
 }
