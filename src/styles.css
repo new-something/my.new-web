@@ -1506,13 +1506,15 @@ input[name="app-list-tag"]:checked
   }
 
   #app-list-modal .modal-popup .popup-body,
-  #app-list-modal .modal-popup .app-list-items,
+  #app-list-modal .modal-popup .app-list,
   #app-detail-modal .modal-popup .popup-body {
     height: calc(80vh - 70px);
     overflow-y: auto;
     width: 100%;
   }
-
+  #app-list-modal .modal-popup .app-list-items {
+    height: initial;
+  }
   #app-detail-modal .popup-body .app-header {
     -ms-flex-direction: column;
     -webkit-box-direction: normal;
