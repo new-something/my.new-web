@@ -1500,12 +1500,12 @@ input[name="app-list-tag"]:checked
     display: none;
   }
 
-  #app-list-modal .app-list > .btn {
+  #app-list-modal .app-list-items > .btn {
     width: 100%;
   }
 
   #app-list-modal .modal-popup .popup-body,
-  #app-list-modal .modal-popup .app-list,
+  #app-list-modal .modal-popup .app-list-items,
   #app-detail-modal .modal-popup .popup-body {
     max-height: calc(80vh - 70px);
     overflow-y: auto;
