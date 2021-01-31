@@ -292,6 +292,7 @@ a.link-outer:active {
   border-radius: 50%;
   display: inline-block;
   height: 15px;
+  margin: 2px;
   position: relative;
   transform-origin: bottom center;
   width: 15px;
