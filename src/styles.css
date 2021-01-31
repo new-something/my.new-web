@@ -1331,7 +1331,8 @@ input[name="app-list-tag"]:checked
     align-items: flex-end;
   }
 
-  .modal-popup {
+  #app-list-modal .modal-popup,
+  #app-detail-modal .modal-popup {
     border-radius: 12px 12px 0 0;
     width: 100%;
   }
@@ -1513,7 +1514,7 @@ input[name="app-list-tag"]:checked
     width: 100%;
   }
   #app-list-modal .modal-popup .app-list-items {
-    height: initial;
+    max-height: initial;
   }
   #app-detail-modal .popup-body .app-header {
     -ms-flex-direction: column;
