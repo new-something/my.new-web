@@ -16,6 +16,7 @@ export class AppListComponent implements OnInit, OnDestroy {
   public showListModal = false;
   public providedApps: ProvidedApp[] = [];
   public subscription: Subscription;
+  public initializedAppList = false;
 
   constructor(private providedAppService: ProvidedAppService, private modalEventService: ModalEventService) {
   }
@@ -24,6 +25,7 @@ export class AppListComponent implements OnInit, OnDestroy {
     // google .new domain policy.
     this.showOnInit();
     this.subscription = this.modalEventService.getOpenAppListModal().subscribe(openCommand => {
+      this.initializedAppList = true;
       this.showLoading = true;
       this.showListModal = openCommand.visible;
       if (this.showListModal) {
@@ -59,6 +61,7 @@ export class AppListComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.initializedAppList = false;
     this.showLoading = true;
     const tag = $event.target.value;
     this.providedAppService.findAllByTag(tag).subscribe(providedApps => {
@@ -71,7 +74,7 @@ export class AppListComponent implements OnInit, OnDestroy {
     this.showListModal = false;
     const providedApp = this.providedApps.filter((pa) => pa.appCode === appCode).pop();
     this.modalEventService.publishOpenAppDetailModal(
-      new CommandAppDetailModal(appCode, true, providedApp.connectedId, providedApp.connected)
+      new CommandAppDetailModal(appCode, providedApp.connectedId, providedApp.connected)
     );
   }
 

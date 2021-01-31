@@ -20,7 +20,6 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public connectedId = null;
   public connected = false;
   public showDetailModal = false;
-  public hasBackModalStep = false;
   public subscription: Subscription;
 
   public providedAppDetail: ProvidedAppDetail;
@@ -43,7 +42,6 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       this.connectedId = openCommand.connectedId;
       this.connected = openCommand.connected;
       this.showDetailModal = true;
-      this.hasBackModalStep = openCommand.hasBackModalStep;
       this.providedAppService.findById(openCommand.appCode).subscribe(data => {
         this.providedAppDetail = data;
         this.showLoading = false;
@@ -53,9 +51,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
 
   public hideAppDetailModal(): void {
     this.showDetailModal = false;
-    if (this.hasBackModalStep) {
-      this.modalEventService.publishOpenAppListModal(new CommandAppListModal('ALL', true));
-    }
+    this.modalEventService.publishOpenAppListModal(new CommandAppListModal('ALL', true));
     this.showBodyScrollbar()
   }
 
