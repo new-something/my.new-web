@@ -194,7 +194,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     if (this.disableConnectedAppClick) {
       return;
     }
-    this.modalEventService.publishOpenAppDetailModal(new CommandAppDetailModal(appCode, false, connectedId, true));
+    this.modalEventService.publishOpenAppDetailModal(new CommandAppDetailModal(appCode, connectedId, true));
   }
 
   public shortcutFormPathCheck(event: any, sf: ShortcutForm): void {
