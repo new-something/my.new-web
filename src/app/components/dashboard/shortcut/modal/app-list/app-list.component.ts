@@ -24,6 +24,8 @@ export class AppListComponent implements OnInit, OnDestroy {
     // google .new domain policy.
     this.showOnInit();
     this.subscription = this.modalEventService.getOpenAppListModal().subscribe(openCommand => {
+      const appListTagGroup = document.getElementById('appListTagGroup');
+      appListTagGroup.firstElementChild.setAttribute('checked', 'true');
       this.showLoading = true;
       this.showListModal = openCommand.visible;
       if (this.showListModal) {
