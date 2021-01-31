@@ -93,7 +93,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (confirm('If you disconnect Asana, all the Asana shortcuts will be deleted. Are you sure to continue to disconnect?')) {
+    if (confirm('If you disconnect this app, all the shortcuts belong to will be deleted. Are you sure to continue to disconnect?')) {
       this.disconnectBtnClicked = true;
       this.connectedAppService.disconnect(appCode).subscribe(
         () => {
