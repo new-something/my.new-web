@@ -56,11 +56,13 @@ export class AppDetailComponent implements OnInit, OnDestroy {
     if (this.hasBackModalStep) {
       this.modalEventService.publishOpenAppListModal(new CommandAppListModal('ALL', true));
     }
+    this.showBodyScrollbar()
   }
 
   public hideAllModal(): void {
     this.showDetailModal = false;
     this.modalEventService.publishOpenAppListModal(new CommandAppListModal('ALL', false));
+    this.showBodyScrollbar()
   }
 
   public connectApp(appCode: number): void {
@@ -127,5 +129,15 @@ export class AppDetailComponent implements OnInit, OnDestroy {
       appIcon,
       this.connectedId
     ));
+  }
+
+  public hideBodyScrollbar(): void {
+    const body = document.querySelector('body');
+    body.classList.add('no-overflow');
+  }
+
+  public showBodyScrollbar(): void {
+    const body = document.querySelector('body');
+    body.classList.remove('no-overflow');
   }
 }

@@ -188,6 +188,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
 
   public showAppListModal(): void {
     this.modalEventService.publishOpenAppListModal(new CommandAppListModal('ALL', true));
+    this.hideBodyScrollbar();
   }
 
   public cAppClicked(appCode: number, connectedId: number): void {
@@ -195,6 +196,17 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       return;
     }
     this.modalEventService.publishOpenAppDetailModal(new CommandAppDetailModal(appCode, false, connectedId, true));
+    this.hideBodyScrollbar();
+  }
+
+  public hideBodyScrollbar(): void {
+    const body = document.querySelector('body');
+    body.classList.add('no-overflow');
+  }
+
+  public showBodyScrollbar(): void {
+    const body = document.querySelector('body');
+    body.classList.remove('no-overflow');
   }
 
   public shortcutFormPathCheck(event: any, sf: ShortcutForm): void {

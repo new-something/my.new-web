@@ -50,6 +50,7 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   public hideAppListModal(): void {
     this.showListModal = false;
+    this.showBodyScrollbar()
   }
 
   public changeAppTag($event): void {
@@ -77,5 +78,10 @@ export class AppListComponent implements OnInit, OnDestroy {
   public addToUrlRedirection(): void {
     this.showListModal = false;
     this.modalEventService.publishAddToUrlRedirectionEvent(new AddToUrlRedirectionEvent());
+  }
+
+  public showBodyScrollbar(): void {
+    const body = document.querySelector('body');
+    body.classList.remove('no-overflow');
   }
 }
