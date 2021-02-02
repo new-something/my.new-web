@@ -68,8 +68,8 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     return uuidValue;
   }
 
-  private static changeBlankToDash(text: string): string{
-    return text.replace(/ /g, '-');
+  private static makePathToValid(text: string): string {
+    return text.trim().replace(/ /g, '-').replace(/[^A-Za-z0-9_-]/g, '').toLowerCase();
   }
 
   public ngOnInit(): void {
@@ -204,11 +204,6 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     body.classList.add('no-overflow');
   }
 
-  public showBodyScrollbar(): void {
-    const body = document.querySelector('body');
-    body.classList.remove('no-overflow');
-  }
-
   public shortcutFormPathCheck(event: any, sf: ShortcutForm): void {
     const input = event.target.textContent;
     sf.path = input;
@@ -227,7 +222,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       }
 
       sf.createBtnClicked = true;
-      const path = ShortcutComponent.changeBlankToDash(sf.path);
+      const path = ShortcutComponent.makePathToValid(sf.path);
       const needOrganization = this.needOrganizationActionIds.filter(n => n.providedActionId === sf.providedActionId).pop();
       let organization;
       if (needOrganization) {
@@ -363,7 +358,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
       }
 
       s.updateBtnClicked = true;
-      const path = ShortcutComponent.changeBlankToDash(s.newPath);
+      const path = ShortcutComponent.makePathToValid(s.newPath);
       this.shortcutService.updateShortcut(s.shortcutId, path).subscribe(
         () => {
           s.path = path;
@@ -467,7 +462,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     }
 
     uf.createBtnClicked = true;
-    const path = ShortcutComponent.changeBlankToDash(uf.path);
+    const path = ShortcutComponent.makePathToValid(uf.path);
     this.urlRedirectionService.create(path, uf.destinationUrl).subscribe(
       resp => {
         this.urlRedirections = [resp, ...this.urlRedirections];
@@ -619,7 +614,7 @@ export class ShortcutComponent implements OnInit, OnDestroy {
     let destinationUrl = ur.destinationUrl;
     if (ur.pathChange) {
       path = ur.newPath;
-      path = ShortcutComponent.changeBlankToDash(path);
+      path = ShortcutComponent.makePathToValid(path);
     }
 
     if (ur.destinationUrlChange) {

@@ -57,7 +57,7 @@ export class AppDetailComponent implements OnInit, OnDestroy {
   public hideAllModal(): void {
     this.showDetailModal = false;
     this.modalEventService.publishOpenAppListModal(new CommandAppListModal('ALL', false));
-    this.showBodyScrollbar()
+    this.showBodyScrollbar();
   }
 
   public connectApp(appCode: number): void {
