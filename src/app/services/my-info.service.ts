@@ -12,7 +12,7 @@ import {UrlRedirection} from '../models/url-redirection';
   providedIn: 'root'
 })
 export class MyInfoService {
-  private appService: string = environment.appServerlessService;
+  private appService: string = environment.appService;
   private myInfoEndPoint: string = this.appService + '/apis/dashboard';
 
   constructor(private httpClient: HttpClient) { }
