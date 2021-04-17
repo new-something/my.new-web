@@ -7,7 +7,8 @@ export const environment = {
   router: 'http://localhost:4200',
   singleSignOut: 'http://localhost:4200/s/logout',
   userService: 'http://localhost:8080',
-  appService: 'http://localhost:9090'
+  appService: 'http://localhost:9090',
+  appServerlessService: 'https://iktltf58kh.execute-api.us-east-1.amazonaws.com/test',
 };
 
 /*
