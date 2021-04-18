@@ -27,7 +27,7 @@ export class ProvidedAppService {
   }
 
   findById(appCode: number): Observable<ProvidedAppDetail> {
-    const url = this.appService + '/apis/provided-apps/' + appCode;
+    const url = this.appServerlessService + '/apis/provided-apps/' + appCode;
     return this.httpClient.get<ProvidedAppDetailResponse>(url).pipe(
       map(data => new ProvidedAppDetail(data.appCode, data.appName, data.appIcon, data.domain, data.description, data.providedActions))
     );
