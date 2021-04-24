@@ -3,7 +3,6 @@ export const environment = {
   production: true,
   router: 'https://my.new',
   singleSignOut: 'http://my.new/s/logout',
-  userService: 'https://user.my.new',
   appService: 'https://app.my.new',
   appServerlessService: 'https://iktltf58kh.execute-api.us-east-1.amazonaws.com/test',
 };
