@@ -10,7 +10,6 @@ import {ConnectedApp} from '../../models/connected-app';
 })
 export class ConnectedAppService {
   private apiService = environment.appServerlessService;
-  private appService = environment.appService;
 
   constructor(private httpClient: HttpClient) { }
 

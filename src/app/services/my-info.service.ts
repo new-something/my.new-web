@@ -12,8 +12,8 @@ import {UrlRedirection} from '../models/url-redirection';
   providedIn: 'root'
 })
 export class MyInfoService {
-  private appService: string = environment.appServerlessService;
-  private myInfoEndPoint: string = this.appService + '/apis/dashboard';
+  private apiService: string = environment.appServerlessService;
+  private myInfoEndPoint: string = this.apiService + '/apis/dashboard';
 
   constructor(private httpClient: HttpClient) { }
 
