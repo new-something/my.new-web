@@ -22,7 +22,7 @@ export class ConnectedAppService {
   }
 
   disconnect(appCode: number): Observable<void> {
-    const url = this.appService + '/apis/connected-apps/' + appCode;
+    const url = this.apiService + '/apis/connected-apps/' + appCode;
     return this.httpClient.delete<void>(url).pipe();
   }
 }
