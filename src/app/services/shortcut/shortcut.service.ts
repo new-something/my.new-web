@@ -9,12 +9,13 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ShortcutService {
+  private apiService = environment.appServerlessService;
   private appService = environment.appService;
 
   constructor(private httpClient: HttpClient) { }
 
   public createShortcut(connectedId: number, providedActionId: number, path: string, organization: string): Observable<Shortcut> {
-    const url = this.appService + '/apis/shortcuts';
+    const url = this.apiService + '/apis/shortcuts';
     return this.httpClient.post<ShortcutCreateResponse>(url, {connectedId, providedActionId, path, organization}).pipe(
       map(resp => new Shortcut(resp.shortcutId,
         resp.path,
