@@ -27,7 +27,7 @@ export class UrlRedirectionService {
   }
 
   public delete(urlRedirectionId: number): Observable<void> {
-    const url = this.appService + '/apis/url-redirections/' + urlRedirectionId;
+    const url = this.apiService + '/apis/url-redirections/' + urlRedirectionId;
     return this.httpClient.delete<void>(url).pipe();
   }
 }
