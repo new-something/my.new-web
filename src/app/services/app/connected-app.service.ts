@@ -9,12 +9,13 @@ import {ConnectedApp} from '../../models/connected-app';
   providedIn: 'root'
 })
 export class ConnectedAppService {
+  private apiService = environment.appServerlessService;
   private appService = environment.appService;
 
   constructor(private httpClient: HttpClient) { }
 
   connect(appCode: number): Observable<ConnectedApp> {
-    const url = this.appService + '/apis/connected-apps';
+    const url = this.apiService + '/apis/connected-apps';
     return this.httpClient.post<ConnectedAppResponse>(url, {appCode}).pipe(
       map(data => new ConnectedApp(data.connectedId, data.appCode, data.appName, data.appIcon, data.domain, data.description))
     );

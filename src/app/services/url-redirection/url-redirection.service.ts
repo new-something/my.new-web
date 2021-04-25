@@ -10,7 +10,6 @@ import {UrlRedirection} from '../../models/url-redirection';
 })
 export class UrlRedirectionService {
   private apiService = environment.appServerlessService;
-  private appService = environment.appService;
 
   constructor(private httpClient: HttpClient) { }
 
