@@ -22,7 +22,7 @@ export class UrlRedirectionService {
   }
 
   public update(urlRedirectionId: number, path: string, destinationUrl: string): Observable<void> {
-    const url = this.appService + '/apis/url-redirections';
+    const url = this.apiService + '/apis/url-redirections';
     return this.httpClient.put<void>(url, {urlRedirectionId, path, destinationUrl}).pipe();
   }
 
