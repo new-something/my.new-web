@@ -9,12 +9,13 @@ import {UrlRedirection} from '../../models/url-redirection';
   providedIn: 'root'
 })
 export class UrlRedirectionService {
+  private apiService = environment.appServerlessService;
   private appService = environment.appService;
 
   constructor(private httpClient: HttpClient) { }
 
   public create(path: string, destinationUrl: string): Observable<UrlRedirection> {
-    const url = this.appService + '/apis/url-redirections';
+    const url = this.apiService + '/apis/url-redirections';
     return this.httpClient.post<UrlRedirectionResponse>(url, {path, destinationUrl}).pipe(
       map(resp => new UrlRedirection(resp.urlRedirectionId, resp.path, resp.destinationUrl))
     );
