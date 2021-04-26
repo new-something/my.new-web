@@ -9,8 +9,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ShortcutService {
-  private apiService = environment.appServerlessService;
-  private appService = environment.appService;
+  private apiService = environment.apiService;
 
   constructor(private httpClient: HttpClient) { }
 

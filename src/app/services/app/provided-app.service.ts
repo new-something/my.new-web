@@ -10,7 +10,7 @@ import {ProvidedAppDetail} from '../../models/provided-app-detail';
   providedIn: 'root'
 })
 export class ProvidedAppService {
-  private appServerlessService: string = environment.appServerlessService;
+  private appServerlessService: string = environment.apiService;
 
   constructor(private httpClient: HttpClient) {
   }
