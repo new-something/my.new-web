@@ -29,7 +29,7 @@ export class ShortcutService {
   }
 
   public updateShortcut(shortcutId: number, path: string): Observable<void> {
-    const url = this.appService + '/apis/shortcuts';
+    const url = this.apiService + '/apis/shortcuts';
     return this.httpClient.put<void>(url, {shortcutId, path}).pipe();
   }
 
